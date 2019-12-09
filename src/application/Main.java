@@ -44,7 +44,7 @@ public class Main extends Application {
 
 		// Nous allons utiliser nos fichier FXML dans ces deux méthodes
 		initialisationConteneurPrincipal();
-		initialisationContenu();
+		initialisationContenu("../view/PersonView.fxml");
 	}
 
 	private void initialisationConteneurPrincipal() {
@@ -67,16 +67,16 @@ public class Main extends Application {
 		}
 	}
 
-	private void initialisationContenu() {
+	private void initialisationContenu(String ressource) {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("../view/PersonView.fxml"));
+		loader.setLocation(Main.class.getResource(ressource));
 		try {
 			// Nous récupérons notre conteneur qui contiendra les données
 			// Pour rappel, c'est un AnchorPane...
-			AnchorPane conteneurPersonne = (AnchorPane) loader.load();
+			AnchorPane conteneur = (AnchorPane) loader.load();
 			// Qui nous ajoutons à notre conteneur principal
 			// Au centre, puisque'il s'agit d'un BorderPane
-			conteneurPrincipal.setCenter(conteneurPersonne);
+			conteneurPrincipal.setCenter(conteneur);
 
 			// Nous récupérons notre mappeur via l'objet FXMLLoader
 			PersonneMapping controleur = loader.getController();
