@@ -1,0 +1,16 @@
+<Users>
+	<User>
+		<Pseudo>Toto</Pseudo>
+		<Password>12345</Password>
+	</User>
+
+	<User>
+		<Pseudo>titi</Pseudo>
+		<Password>987</Password>
+	</User>
+
+	<User>
+		<Pseudo>Tata</Pseudo>
+		<Password>456</Password>
+	</User>
+</Users>
