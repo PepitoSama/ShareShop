@@ -11,7 +11,7 @@ public class RegisterController {
 
 	public boolean registerForm(String username, String password, String firstname, String lastname, String birthdate,
 			String email) {
-		facade = new ShareShopFacade(username, password, firstname, lastname, birthdate, email);
+		//facade = new ShareShopFacade(username, password, firstname, lastname, birthdate, email);
 		return facade.register();
 	}
 }

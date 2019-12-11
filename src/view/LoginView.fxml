@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
+<fx:root  type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -48,7 +48,7 @@
                      <center>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
-                              <Image url="@../../assets/images/Cart2_Black_Red.png" />
+                              <Image url="@../../ressources/images/Cart2_Black_Red.png" />
                            </image>
                         </ImageView>
                      </center>
@@ -59,7 +59,7 @@
                <bottom>
                   <BorderPane prefHeight="113.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                      <center>
-                        <Button mnemonicParsing="false" text="Register" BorderPane.alignment="BOTTOM_CENTER">
+                        <Button mnemonicParsing="false" onAction="#register" text="Register" BorderPane.alignment="BOTTOM_CENTER">
                            <BorderPane.margin>
                               <Insets bottom="20.0" />
                            </BorderPane.margin></Button>
@@ -110,4 +110,10 @@
          </children>
       </GridPane>
    </children>
-</AnchorPane>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</fx:root>
