@@ -52,6 +52,9 @@ public class UserManager {
         return md.digest(input.getBytes(StandardCharsets.UTF_8));  
     }
 	// End Source
+
+    public UserManager() {
+    }
     
 	
 	public String hashPassword(String password, String username) throws NoSuchAlgorithmException{

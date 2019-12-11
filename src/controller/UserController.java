@@ -27,9 +27,6 @@ import javafx.stage.Stage;
 public class UserController extends GridPane {
     
     @FXML
-    private GridPane loginview;
-    
-    @FXML
     private TextField login;
     
     @FXML
@@ -42,7 +39,6 @@ public class UserController extends GridPane {
     public ObjectProperty<ShareShopFacade> managerProperty() {return manager;}
     
     public UserController(ShareShopFacade manager) throws IOException{
-        System.out.println("A");
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
@@ -61,18 +57,14 @@ public class UserController extends GridPane {
     
     @FXML
     private void register(ActionEvent event) {
-        System.out.println(manager);
-        Stage view = (Stage) loginview.getScene().getWindow();
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/BudgetView.fxml"));
-            Scene scene = new Scene(root);
-            view.setScene(scene);
-            view.show();
-        } catch (IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            super.getChildren().clear();
+            super.getChildren().add(new RegisterController(getManager()));
         }
-        
+        catch (IOException ex){
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
     
 }
