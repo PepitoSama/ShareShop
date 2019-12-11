@@ -1,8 +1,6 @@
 package loginprototype;
 
 
-import java.util.*;
-
 /**
  * 
  */

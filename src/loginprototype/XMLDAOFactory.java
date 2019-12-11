@@ -1,8 +1,6 @@
 package loginprototype;
 
 
-import java.util.*;
-
 /**
  * 
  */
@@ -18,7 +16,7 @@ public class XMLDAOFactory extends AbstractDAOFactory {
     /**
      * @return
      */
-    public DAO getUserDAO() {
+    public DAO<User> getUserDAO() {
         // TODO implement here
         return new UserXMLDAO();
     }

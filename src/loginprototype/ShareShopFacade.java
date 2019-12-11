@@ -22,7 +22,7 @@ public class ShareShopFacade {
     /**
      * 
      */
-    public DAO userDAO;
+    public DAO<User> userDAO;
 
     /**
      * 
@@ -60,6 +60,7 @@ public class ShareShopFacade {
     	ShareShopFacade f = new ShareShopFacade();
     	
     	System.out.println(f.login(pseudo, mdp));
+    	sc.close();
     }
 
 }

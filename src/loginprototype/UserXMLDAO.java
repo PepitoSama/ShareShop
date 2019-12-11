@@ -66,7 +66,6 @@ public class UserXMLDAO implements DAO<User> {
      */
     public User get(Object id) {
         if (id instanceof String) {
-        	String idStr = (String) id;
         	for (User u : users) {
         		if (u.getPseudo().equals(id)) {
         			return u;
