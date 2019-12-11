@@ -1,9 +1,11 @@
 package dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Hashtable;
 
 public class JDBCAccess {
 
@@ -14,10 +16,9 @@ public class JDBCAccess {
 		if (this.getConn() == null) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-				String userName = "ShareShop";
-				String password = "$hAr�Sh0p";
-				String url = "jdbc:mysql://vps414215.ovh.net/ShareShop";
-				this.setConn(DriverManager.getConnection(url, userName, password));
+				Hashtable<String, String> logs = getLog();
+				String url = "jdbc:mysql://" + logs.get("host") + "/ShareShop";
+				this.setConn(DriverManager.getConnection(url, logs.get("username"), logs.get("password")));
 				System.out.println("\nDatabase Connection Established...");
 			} catch (Exception ex) {
 				System.err.println("Cannot connect to database server");
@@ -38,6 +39,20 @@ public class JDBCAccess {
 				System.out.println("Error in connection termination!");
 			}
 		}
+	}
+	
+	private Hashtable<String, String> getLog() {
+		Hashtable<String, String> toGet = new Hashtable<String, String>();
+		toGet.put("username", "");
+		toGet.put("password", "");
+		toGet.put("host", "");
+		try {
+			toGet = ReadPropertyFile.getValues("database", toGet);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return toGet;
 	}
 
 	public Connection getConn() {
