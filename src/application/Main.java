@@ -13,12 +13,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Personne;
 import model.Personne.Sexe;
-import view.PersonneMapping;
+import mapping.PersonneMapping;
 
 public class Main extends Application {
 
-	// Nous créons des variable de classes afin de pouvoir y accéder partout
-	// Ceci afin de pouvoir y positionner les éléments que nous avons fait
+	// Nous crï¿½ons des variable de classes afin de pouvoir y accï¿½der partout
+	// Ceci afin de pouvoir y positionner les ï¿½lï¿½ments que nous avons fait
 	// Il y a un BorderPane car le conteneur principal de notre IHM
 	// est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
@@ -42,23 +42,23 @@ public class Main extends Application {
 		// Ca ne vous rappelle pas une JFrame ?
 		stagePrincipal.setTitle("My Application");
 
-		// Nous allons utiliser nos fichier FXML dans ces deux méthodes
+		// Nous allons utiliser nos fichier FXML dans ces deux mï¿½thodes
 		initialisationConteneurPrincipal();
 		initialisationContenu("../view/PersonView.fxml");
 	}
 
 	private void initialisationConteneurPrincipal() {
-		// On créé un chargeur de FXML
+		// On crï¿½ï¿½ un chargeur de FXML
 		FXMLLoader loader = new FXMLLoader();
-		// On lui spécifie le chemin relatif à notre classe
+		// On lui spï¿½cifie le chemin relatif ï¿½ notre classe
 		// du fichier FXML a charger : dans le sous-dossier view
 		loader.setLocation(Main.class.getResource("../view/ConteneurPrincipal.fxml"));
 		try {
 			// Le chargement nous donne notre conteneur
 			conteneurPrincipal = (BorderPane) loader.load();
-			// On définit une scène principale avec notre conteneur
+			// On dï¿½finit une scï¿½ne principale avec notre conteneur
 			Scene scene = new Scene(conteneurPrincipal);
-			// Que nous affectons à notre Stage
+			// Que nous affectons ï¿½ notre Stage
 			stagePrincipal.setScene(scene);
 			// Pour l'afficher
 			stagePrincipal.show();
@@ -71,17 +71,17 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource(ressource));
 		try {
-			// Nous récupérons notre conteneur qui contiendra les données
+			// Nous rï¿½cupï¿½rons notre conteneur qui contiendra les donnï¿½es
 			// Pour rappel, c'est un AnchorPane...
 			AnchorPane conteneur = (AnchorPane) loader.load();
-			// Qui nous ajoutons à notre conteneur principal
+			// Qui nous ajoutons ï¿½ notre conteneur principal
 			// Au centre, puisque'il s'agit d'un BorderPane
 			conteneurPrincipal.setCenter(conteneur);
 
-			// Nous récupérons notre mappeur via l'objet FXMLLoader
+			// Nous rï¿½cupï¿½rons notre mappeur via l'objet FXMLLoader
 			PersonneMapping controleur = loader.getController();
 			// Nous lui passons notre instance de classe
-			// pour qu'il puisse récupérer notre liste observable
+			// pour qu'il puisse rï¿½cupï¿½rer notre liste observable
 			controleur.setMainApp(this);
 
 		} catch (IOException e) {

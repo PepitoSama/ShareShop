@@ -39,7 +39,7 @@
                         <Button mnemonicParsing="false" text="Back" BorderPane.alignment="CENTER" />
                      </left>
                      <center>
-                        <Label prefHeight="45.0" prefWidth="175.0" text="Favorites" BorderPane.alignment="CENTER">
+                        <Label prefHeight="45.0" prefWidth="175.0" text="Inventory" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri Bold" size="39.0" />
                            </font>
@@ -48,7 +48,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <center>
-                        <Icon content="GRADE" scaleX="4.0" scaleY="4.0" BorderPane.alignment="CENTER" />
+                        <Icon content="HOME" scaleX="4.0" scaleY="4.0" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>
@@ -148,6 +148,26 @@
                         <Icon content="CLEAR" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <Icon content="CLEAR" GridPane.columnIndex="3" />
                         <Icon content="CLEAR" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                           <center>
+                              <Label text="x18" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <center>
+                              <Label text="x12" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <center>
+                              <Label text="x3" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <center>
+                              <Label text="x8" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
                      </children>
                   </GridPane>
                </center>
