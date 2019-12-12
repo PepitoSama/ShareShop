@@ -14,19 +14,18 @@ import javafx.scene.layout.GridPane;
 public class RegisterController extends GridPane{
     
     private final ObjectProperty<ShareShopFacade> facade = new SimpleObjectProperty<>(new ShareShopFacade());
-    public ShareShopFacade getManager() {return facade.get();}
-    public void setManager(ShareShopFacade m){
+    public ShareShopFacade getFacade() {return facade.get();}
+    public void setFacade(ShareShopFacade m){
         facade.set(m);} 
     public ObjectProperty<ShareShopFacade> facadeProperty() {return facade;}
     
 
     public RegisterController(ShareShopFacade facade) throws IOException{
-        System.out.println("A");
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("/view/RegisterView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
-        setManager(facade);                
+        setFacade(facade);                
     }
 
 	public boolean registerForm(String username, String password, String firstname, String lastname, String birthdate,
@@ -39,7 +38,7 @@ public class RegisterController extends GridPane{
     void back(ActionEvent event){
         try{
         super.getChildren().clear();
-        super.getChildren().add(new UserController(getManager()));
+        super.getChildren().add(new UserController(getFacade()));
         }
         catch (IOException ex){
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);

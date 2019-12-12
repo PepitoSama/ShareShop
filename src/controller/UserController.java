@@ -32,18 +32,18 @@ public class UserController extends GridPane {
     @FXML
     private TextField pwd;
     
-    private final ObjectProperty<ShareShopFacade> manager = new SimpleObjectProperty<>(new ShareShopFacade());
-    public ShareShopFacade getManager() {return manager.get();}
-    public void setManager(ShareShopFacade m){
-        manager.set(m);} 
-    public ObjectProperty<ShareShopFacade> managerProperty() {return manager;}
+    private final ObjectProperty<ShareShopFacade> facade = new SimpleObjectProperty<>(new ShareShopFacade());
+    public ShareShopFacade getFacade() {return facade.get();}
+    public void setFacade(ShareShopFacade m){
+        facade.set(m);} 
+    public ObjectProperty<ShareShopFacade> facadeProperty() {return facade;}
     
-    public UserController(ShareShopFacade manager) throws IOException{
+    public UserController(ShareShopFacade facade) throws IOException{
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
-        setManager(manager);                
+        setFacade(facade);                
     }
     
     @FXML
@@ -52,14 +52,14 @@ public class UserController extends GridPane {
         String pass = pwd.getText();
         // On récupère les contenus des champs texte de la vue et on va regarder s'ils sont pas nul avant d'envoyer au controleur
         
-        manager.get().login();
+        facade.get().login();
     }
     
     @FXML
     private void register(ActionEvent event) {
         try{
             super.getChildren().clear();
-            super.getChildren().add(new RegisterController(getManager()));
+            super.getChildren().add(new RegisterController(getFacade()));
         }
         catch (IOException ex){
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
