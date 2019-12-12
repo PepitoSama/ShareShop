@@ -18,6 +18,16 @@ public class User {
 		this.setNickname(username);
 		this.setPassword(password);
 	}
+	
+	public User(String username, String password, String firstname, String lastname, String birthdate, String email, int id) {
+		this.setBirthdate(birthdate);
+		this.setEmail(email);
+		this.setFistname(firstname);
+		this.setLastname(lastname);
+		this.setNickname(username);
+		this.setPassword(password);
+		this.setId(id);
+	}
 
 	public String getNickname() {
 		return nickname;
