@@ -562,7 +562,7 @@
 											"top": 224,
 											"width": 555.9912109375,
 											"height": 13,
-											"text": "+getLists(grp : Group)",
+											"text": "+getLists(grp )",
 											"horizontalAlignment": 0
 										},
 										{
@@ -579,7 +579,7 @@
 											"top": 239,
 											"width": 555.9912109375,
 											"height": 13,
-											"text": "+createList(name : String, type : String, grpList : GroupList)",
+											"text": "+createList(name : String, type : String, grpList )",
 											"horizontalAlignment": 0
 										},
 										{
@@ -736,7 +736,7 @@
 											"font": "Arial;13;3",
 											"left": 1325,
 											"top": 87,
-											"width": 128.58447265625,
+											"width": 209.88525390625,
 											"height": 13,
 											"text": "AbstractDAOFactory"
 										},
@@ -771,7 +771,7 @@
 									"font": "Arial;13;0",
 									"left": 1320,
 									"top": 80,
-									"width": 138.58447265625,
+									"width": 219.88525390625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFu+QaTZv97o0k="
@@ -798,7 +798,7 @@
 									"font": "Arial;13;0",
 									"left": 1320,
 									"top": 105,
-									"width": 138.58447265625,
+									"width": 219.88525390625,
 									"height": 10
 								},
 								{
@@ -823,17 +823,34 @@
 											"font": "Arial;13;0",
 											"left": 1325,
 											"top": 120,
-											"width": 128.58447265625,
+											"width": 209.88525390625,
 											"height": 13,
 											"text": "+getProductDAO()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFu+rzfwWowE6o=",
+											"_parent": {
+												"$ref": "AAAAAAFu+QaTZv+ACSI="
+											},
+											"model": {
+												"$ref": "AAAAAAFu+rzfrmot8BM="
+											},
+											"font": "Arial;13;0",
+											"left": 1325,
+											"top": 135,
+											"width": 209.88525390625,
+											"height": 13,
+											"text": "+getInstance(): AbstractDAOFactory",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1320,
 									"top": 115,
-									"width": 138.58447265625,
-									"height": 23
+									"width": 219.88525390625,
+									"height": 38
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -872,8 +889,8 @@
 							"containerChangeable": true,
 							"left": 1320,
 							"top": 80,
-							"width": 138.58447265625,
-							"height": 73,
+							"width": 219.88525390625,
+							"height": 88,
 							"nameCompartment": {
 								"$ref": "AAAAAAFu+QaTZv96N1c="
 							},
@@ -1430,7 +1447,7 @@
 							"tail": {
 								"$ref": "AAAAAAFu+QaTZ/+nCm8="
 							},
-							"points": "1651:304;1651:224;1389:224;1389:152",
+							"points": "1651:304;1651:224;1389:224;1389:167",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFu+QaTaP+zC4c="
@@ -3330,7 +3347,7 @@
 											"top": 568,
 											"width": 447.64306640625,
 											"height": 13,
-											"text": "+getLists(grp : Group)",
+											"text": "+getLists(grp )",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3347,7 +3364,7 @@
 											"top": 583,
 											"width": 447.64306640625,
 											"height": 13,
-											"text": "+createList(name : String, type : String, grpList : GroupList)",
+											"text": "+createList(name : String, type : String, grpList )",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4404,7 +4421,7 @@
 											"top": 960,
 											"width": 393.427734375,
 											"height": 13,
-											"text": "+moveProductInOtherList(product: GeneralProduct, list: ProductList)",
+											"text": "+moveProductInOtherList(product, list: ProductList)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4421,7 +4438,7 @@
 											"top": 975,
 											"width": 393.427734375,
 											"height": 13,
-											"text": "+addProductInList(product: GeneralProduct, list: ProductList)",
+											"text": "+addProductInList(product, list: ProductList)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4438,7 +4455,7 @@
 											"top": 990,
 											"width": 393.427734375,
 											"height": 13,
-											"text": "+removeProductFromList(product: GeneralProduct, list: ProductList)",
+											"text": "+removeProductFromList(product, list: ProductList)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5239,10 +5256,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFu+ptIyOZggyA="
 									},
-									"name": "grp ",
-									"type": {
-										"$ref": "AAAAAAFus/g5elQ1Hlk="
-									}
+									"name": "grp "
 								}
 							]
 						},
@@ -5278,10 +5292,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFu+QaTawB3C44="
 									},
-									"name": "grpList ",
-									"type": {
-										"$ref": "AAAAAAFutp/Tz/ZdhPI="
-									}
+									"name": "grpList "
 								}
 							]
 						},
@@ -5394,6 +5405,27 @@
 								"$ref": "AAAAAAFu+QaTawB+nI8="
 							},
 							"name": "getProductDAO"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFu+rzfrmot8BM=",
+							"_parent": {
+								"$ref": "AAAAAAFu+QaTawB+nI8="
+							},
+							"name": "getInstance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFu+r0SeGtd4vU=",
+									"_parent": {
+										"$ref": "AAAAAAFu+rzfrmot8BM="
+									},
+									"type": {
+										"$ref": "AAAAAAFu+QaTawB+nI8="
+									},
+									"direction": "return"
+								}
+							]
 						}
 					],
 					"isAbstract": true
@@ -5522,7 +5554,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFu+QaTbACILts="
 									},
-									"name": "int id"
+									"name": "int id",
+									"type": ""
 								}
 							]
 						},
@@ -5733,9 +5766,9 @@
 													},
 													"lineColor": "#2b71ff",
 													"font": "Arial;13;0",
-													"left": 120.72998046875,
+													"left": 119.99365234375,
 													"top": 621,
-													"width": 127.4580078125,
+													"width": 112.92822265625,
 													"height": 13,
 													"text": "mdp equals password"
 												},
@@ -5749,7 +5782,7 @@
 													"font": "Arial;13;1",
 													"left": 101,
 													"top": 621,
-													"width": 14.72998046875,
+													"width": 13.99365234375,
 													"height": 13,
 													"text": "alt"
 												},
@@ -5783,7 +5816,7 @@
 																	"font": "Arial;13;0",
 																	"left": 116,
 																	"top": 654,
-																	"width": 29.62451171875,
+																	"width": 28.869140625,
 																	"height": 13,
 																	"text": "[true]"
 																}
@@ -5818,7 +5851,7 @@
 																	"font": "Arial;13;0",
 																	"left": 116,
 																	"top": 816,
-																	"width": 34.68359375,
+																	"width": 33.1982421875,
 																	"height": 13,
 																	"text": "[false]"
 																}
@@ -9010,10 +9043,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFu+qdd31kqNuw="
 									},
-									"name": "grp ",
-									"type": {
-										"$ref": "AAAAAAFus/g5elQ1Hlk="
-									}
+									"name": "grp "
 								}
 							]
 						},
@@ -9049,10 +9079,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFu+qdke1qh01A="
 									},
-									"name": "grpList ",
-									"type": {
-										"$ref": "AAAAAAFutp/Tz/ZdhPI="
-									}
+									"name": "grpList "
 								}
 							]
 						},
@@ -9203,10 +9230,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFuxi0E5O2ABBI="
 									},
-									"name": "product",
-									"type": {
-										"$ref": "AAAAAAFus/hlGVSJQlY="
-									}
+									"name": "product"
 								},
 								{
 									"_type": "UMLParameter",
@@ -9235,10 +9259,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFuxi0ev/BcRjM="
 									},
-									"name": "product",
-									"type": {
-										"$ref": "AAAAAAFus/hlGVSJQlY="
-									}
+									"name": "product"
 								},
 								{
 									"_type": "UMLParameter",
@@ -9267,10 +9288,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFuxi0vpPM4+Og="
 									},
-									"name": "product",
-									"type": {
-										"$ref": "AAAAAAFus/hlGVSJQlY="
-									}
+									"name": "product"
 								},
 								{
 									"_type": "UMLParameter",
