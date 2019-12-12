@@ -5,6 +5,8 @@
  */
 package ui.launch;
 
+import bl.facade.*;
+
 import java.io.File;
 import java.net.URL;
 
@@ -40,7 +42,7 @@ public class ShareShop extends Application {
 	public static void main(String[] args) {
 
 		launch(args);
-
+		
 	}
 
 }

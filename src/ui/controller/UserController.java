@@ -17,8 +17,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -32,6 +34,9 @@ public class UserController extends GridPane {
 
 	@FXML
 	private TextField pwd;
+	
+	@FXML 
+	private Text txt;
 
 	private final ShareShopFacade facade;
 
@@ -41,7 +46,8 @@ public class UserController extends GridPane {
 		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/LoginView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
-		leLoader.load();
+		leLoader.load();	
+		
 		this.facade = facade;
 	}
 
@@ -51,7 +57,13 @@ public class UserController extends GridPane {
 		String pass = pwd.getText();
 		// On récupère les contenus des champs texte de la vue et on va regarder s'ils
 		// sont pas nul avant d'envoyer au controleur
-		System.out.println(facade.login(id, pass));
+		
+		if(facade.login(id, pass)) {
+			txt.setText("You are connected !");
+		} else {
+			txt.setText("Bad Login or Password !");
+
+		}
 	}
 
 	@FXML

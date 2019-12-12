@@ -26,6 +26,7 @@ src/JDBCAccess.java
 
 /bin
 .classpath
-.classpath
 ressources/config/database.properties
-.classpath
+ressources/config/database.properties
+
+
