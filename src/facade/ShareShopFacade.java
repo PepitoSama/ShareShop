@@ -28,7 +28,8 @@ public class ShareShopFacade {
         this.manager = manager;
     }
     
-    public void login(){
-        
+    public boolean login(){
+        manager = new UserManager();
+        return this.manager.login();
     }
 }

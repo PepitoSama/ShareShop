@@ -3,6 +3,7 @@ package dao;
 import dao.DAO;
 import model.User;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,9 +21,29 @@ public class UserDAO implements DAO<User> {
 		return null;
 	}
 
-	@Override
-	public User get(int id) {
-		// TODO Auto-generated method stub
+        public User get(int id) {
+            return null;
+        }
+	
+	public User get(String id) {
+		String sql = "SELECT * FROM User WHERE nickname=?";
+                int rows = 0;
+                PreparedStatement statement;
+		try {
+			statement = jdbc.prepareStatement(sql);
+                        statement.setString(1, id);
+
+                         ResultSet resultSet = statement.executeQuery();
+                         
+                         if (resultSet != null){
+                             resultSet.next();
+                             
+                             return new User(resultSet.getString("Nickname"), resultSet.getString("password"), null, null,null,null);
+                         }
+                } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

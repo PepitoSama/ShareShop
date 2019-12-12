@@ -51,8 +51,7 @@ public class UserController extends GridPane {
         String id = login.getText();
         String pass = pwd.getText();
         // On récupère les contenus des champs texte de la vue et on va regarder s'ils sont pas nul avant d'envoyer au controleur
-        
-        facade.get().login();
+        System.out.println(facade.get().login());
     }
     
     @FXML
