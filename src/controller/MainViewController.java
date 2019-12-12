@@ -32,19 +32,12 @@ public class MainViewController {
 	@FXML
 	private TextField pwd;
 
-	private final ObjectProperty<ShareShopFacade> manager = new SimpleObjectProperty<>(new ShareShopFacade());
+	private final ShareShopFacade manager = new ShareShopFacade();
 
 	public ShareShopFacade getManager() {
-		return manager.get();
-	}
-
-	public void setManager(ShareShopFacade m) {
-		manager.set(m);
-	}
-
-	public ObjectProperty<ShareShopFacade> managerProperty() {
 		return manager;
 	}
+
 
 	public void initialize() throws IOException {
 		try {
