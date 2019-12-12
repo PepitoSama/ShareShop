@@ -1,5 +1,6 @@
 package bl.manager;
 
+import model.dao.AbstractDAOFactory;
 import model.dao.UserDAO;
 import model.domain.User;
 
@@ -7,6 +8,8 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import model.dao.*;
 
 public class UserManager {
 
@@ -68,7 +71,8 @@ public class UserManager {
 
 	public boolean register(String username, String password, String firstname, String lastname, String birthdate,
 			String email) {
-		UserDAO dao = new UserDAO();
+		
+		DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
 		User u;
 		try {
 			u = new User(username, hashPassword(password, username), firstname, lastname, birthdate, email);
@@ -89,7 +93,9 @@ public class UserManager {
 	}
 
 	public boolean login(String name, String pwd) {
-		UserDAO dao = new UserDAO();
+		 
+		
+		DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
 		User u = dao.get(name);
 
 		try {

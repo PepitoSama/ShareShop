@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements DAO<User> {
+	
 	JDBCAccess jdbc;
 	String tableName;
 	
