@@ -24,28 +24,34 @@ import javafx.stage.Stage;
  *
  * @author fsmag
  */
-public class MainViewController  {
-    
-    @FXML
-    private GridPane elements;
-    
-    
-    @FXML
-    private TextField pwd;
-    
-    private final ObjectProperty<ShareShopFacade> manager = new SimpleObjectProperty<>(new ShareShopFacade());
-    public ShareShopFacade getManager() {return manager.get();}
-    public void setManager(ShareShopFacade m){
-        manager.set(m);} 
-    public ObjectProperty<ShareShopFacade> managerProperty() {return manager;}
-    
-    public void initialize() throws IOException{
-      try{
-            elements.getChildren().add(new UserController(getManager()));
-      }
-        catch (IOException ex){
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+public class MainViewController {
+
+	@FXML
+	private GridPane elements;
+
+	@FXML
+	private TextField pwd;
+
+	private final ObjectProperty<ShareShopFacade> manager = new SimpleObjectProperty<>(new ShareShopFacade());
+
+	public ShareShopFacade getManager() {
+		return manager.get();
+	}
+
+	public void setManager(ShareShopFacade m) {
+		manager.set(m);
+	}
+
+	public ObjectProperty<ShareShopFacade> managerProperty() {
+		return manager;
+	}
+
+	public void initialize() throws IOException {
+		try {
+			elements.getChildren().add(new UserController(getManager()));
+		} catch (IOException ex) {
+			Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 }

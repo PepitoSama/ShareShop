@@ -28,8 +28,8 @@ public class ShareShopFacade {
         this.manager = manager;
     }
     
-    public boolean login(){
+    public boolean login(String name, String pwd){
         manager = new UserManager();
-        return this.manager.login();
+        return this.manager.login(name, pwd);
     }
 }
