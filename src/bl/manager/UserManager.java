@@ -97,14 +97,16 @@ public class UserManager {
 		
 		DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
 		User u = dao.get(name);
-
-		try {
-			if (hashPassword(pwd, name).equals(u.getPassword())) {
-				user = u;
+		
+		if (u != null) {
+			try {
+				if (hashPassword(pwd, name).equals(u.getPassword())) {
+					user = u;
+				}
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
 			}
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		return user != null;
 

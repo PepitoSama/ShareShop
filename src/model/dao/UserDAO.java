@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements DAO<User> {
-	
+
 	JDBCAccess jdbc;
 	String tableName;
-	
+
 	public UserDAO() {
 		this.jdbc = new JDBCAccess();
 		this.jdbc.openConnection();
@@ -65,12 +65,13 @@ public class UserDAO implements DAO<User> {
 			statement.setString(1, nickname);
 			ResultSet resultSet = statement.executeQuery();
 
-			if (resultSet != null) {
-				resultSet.next();
+			while (resultSet.next()) {
 
 				return new User(resultSet.getString("Nickname"), resultSet.getString("password"),
-						resultSet.getString("firstname"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getString("password"), resultSet.getInt("idUser"));
+						resultSet.getString("firstname"), resultSet.getString("lastname"),
+						resultSet.getString("birthdate"), resultSet.getString("password"), resultSet.getInt("idUser"));
 			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,7 +111,8 @@ public class UserDAO implements DAO<User> {
 
 	@Override
 	public boolean update(User user) {
-		String sql = "UPDATE " + this.tableName + " SET nickname=?, firstname=?, lastname=?, email=?, birthdate=?, password=? WHERE idUser=?";
+		String sql = "UPDATE " + this.tableName
+				+ " SET nickname=?, firstname=?, lastname=?, email=?, birthdate=?, password=? WHERE idUser=?";
 
 		PreparedStatement statement = jdbc.prepareStatement(sql);
 
