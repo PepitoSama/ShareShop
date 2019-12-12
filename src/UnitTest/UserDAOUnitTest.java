@@ -1,6 +1,7 @@
 package UnitTest;
-import dao.UserDAO;
-import model.User;
+
+import model.dao.UserDAO;
+import model.domain.User;
 
 public class UserDAOUnitTest {
 	public static void main(String[] args) {
