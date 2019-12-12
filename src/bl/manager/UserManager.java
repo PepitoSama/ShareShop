@@ -24,6 +24,9 @@ public class UserManager {
 		}
 	}
 
+	public UserManager() {
+	}
+
 	// Can be improved
 	// Source : https://www.geeksforgeeks.org/sha-256-hash-in-java/
 	public static String toHexString(byte[] hash) {
@@ -52,9 +55,6 @@ public class UserManager {
 	}
 	// End Source
 
-	public UserManager() {
-	}
-
 	public String hashPassword(String password, String username) throws NoSuchAlgorithmException {
 		String toHash = username + password;
 		String hashed = null;
@@ -66,9 +66,18 @@ public class UserManager {
 		return hashed;
 	}
 
-	public boolean register() {
+	public boolean register(String username, String password, String firstname, String lastname, String birthdate,
+			String email) {
 		UserDAO dao = new UserDAO();
-		return dao.save(this.getUser());
+		User u;
+		try {
+			u = new User(username, hashPassword(password, username), firstname, lastname, birthdate, email);
+			return dao.save(u);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 
 	public User getUser() {
@@ -82,10 +91,10 @@ public class UserManager {
 	public boolean login(String name, String pwd) {
 		UserDAO dao = new UserDAO();
 		User u = dao.get(name);
-		
+
 		try {
 			if (hashPassword(pwd, name).equals(u.getPassword())) {
-				user = u ;
+				user = u;
 			}
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block

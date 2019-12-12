@@ -16,7 +16,6 @@ public class RegisterController extends GridPane {
 
 	private final ShareShopFacade facade;
 
-	
 	public RegisterController(ShareShopFacade facade) throws IOException {
 		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/RegisterView.fxml"));
 		leLoader.setController(this);
@@ -25,11 +24,11 @@ public class RegisterController extends GridPane {
 		this.facade = facade;
 	}
 
-	public boolean registerForm(String username, String password, String firstname, String lastname, String birthdate,
+	public void registerForm(String username, String password, String firstname, String lastname, String birthdate,
 			String email) {
 		// facade = new ShareShopFacade(username, password, firstname, lastname,
 		// birthdate, email);
-		return facade.register();
+		facade.register(username, password, firstname, lastname, birthdate, email);
 	}
 
 	@FXML
