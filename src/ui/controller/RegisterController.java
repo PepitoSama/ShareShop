@@ -48,12 +48,12 @@ public class RegisterController extends GridPane {
 
     private final ShareShopFacade facade;
 
-    public RegisterController(ShareShopFacade facade) throws IOException {
+    public RegisterController() throws IOException {
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/RegisterView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
-        this.facade = facade;
+        this.facade = ShareShopFacade.getInstance();
     }
 
 
@@ -61,7 +61,7 @@ public class RegisterController extends GridPane {
     void back(ActionEvent event) {
         try {
             super.getChildren().clear();
-            super.getChildren().add(new UserController(facade));
+            super.getChildren().add(new UserController());
         } catch (IOException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
 
