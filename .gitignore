@@ -30,3 +30,13 @@ ressources/config/database.properties
 ressources/config/database.properties
 
 
+/nbproject/*
+/build/
+build.xml
+manifest.mf
+.classpath
+
+.classpath
+ressources/config/*
+*.properties
+.settings/org.eclipse.jdt.core.prefs
