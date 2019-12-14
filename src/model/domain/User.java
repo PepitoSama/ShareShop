@@ -1,5 +1,7 @@
 package model.domain;
 
+import java.util.Date;
+
 
 public class User {
 	private int id;
@@ -7,10 +9,10 @@ public class User {
 	private String fistname;
 	private String lastname;
 	private String password;
-	private String birthdate;
+	private Date birthdate;
 	private String email;
 
-	public User(String username, String password, String firstname, String lastname, String birthdate, String email) {
+	public User(String username, String password, String firstname, String lastname, Date birthdate, String email) {
 		this.setBirthdate(birthdate);
 		this.setEmail(email);
 		this.setFistname(firstname);
@@ -19,7 +21,7 @@ public class User {
 		this.setPassword(password);
 	}
 	
-	public User(String username, String password, String firstname, String lastname, String birthdate, String email, int id) {
+	public User(String username, String password, String firstname, String lastname, Date birthdate, String email, int id) {
 		this.setBirthdate(birthdate);
 		this.setEmail(email);
 		this.setFistname(firstname);
@@ -53,11 +55,11 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 

@@ -17,9 +17,6 @@ public class JDBCAccess {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 				Hashtable<String, String> logs = getLog();
-				System.out.println(logs.get("username"));
-				System.out.println(logs.get("password"));
-				System.out.println(logs.get("host"));
 				String url = "jdbc:mysql://" + logs.get("host") + "/ShareShop";
 				this.setConn(DriverManager.getConnection(url, logs.get("username"), logs.get("password")));
 				System.out.println("\nDatabase Connection Established...");

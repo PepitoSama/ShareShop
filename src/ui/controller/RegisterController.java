@@ -5,40 +5,95 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import java.awt.Color;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 
 public class RegisterController extends GridPane {
 
-	private final ShareShopFacade facade;
+    @FXML
+    private PasswordField passwordC;
 
-	public RegisterController(ShareShopFacade facade) throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/RegisterView.fxml"));
-		leLoader.setController(this);
-		leLoader.setRoot(this);
-		leLoader.load();
-		this.facade = facade;
-	}
+    @FXML
+    private PasswordField password;
 
-	public void registerForm(String username, String password, String firstname, String lastname, String birthdate,
-			String email) {
-		// facade = new ShareShopFacade(username, password, firstname, lastname,
-		// birthdate, email);
-		facade.register(username, password, firstname, lastname, birthdate, email);
-	}
+    @FXML
+    private TextField nickname;
 
-	@FXML
-	void back(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new UserController(facade));
-		} catch (IOException ex) {
-			Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+    @FXML
+    private TextField name;
 
-		}
-	}
+    @FXML
+    private TextField mail;
+
+    @FXML
+    private TextField lastname;
+
+    @FXML
+    private DatePicker age;
+
+    @FXML
+    private Text res;
+
+    private final ShareShopFacade facade;
+
+    public RegisterController(ShareShopFacade facade) throws IOException {
+        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/RegisterView.fxml"));
+        leLoader.setController(this);
+        leLoader.setRoot(this);
+        leLoader.load();
+        this.facade = facade;
+    }
+
+
+    @FXML
+    void back(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new UserController(facade));
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    @FXML
+    void register(ActionEvent event) {
+        String nameV = name.getText();
+        String passwordV = password.getText();
+        String passwordCV = passwordC.getText();
+        String mailV = mail.getText();
+        String lastnameV = lastname.getText();
+        String nicknameV = nickname.getText();
+        Date ageV = null;
+        try{
+            LocalDate localDate = age.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            ageV = Date.from(instant);
+        }
+        catch(Exception e){
+            res.setText("Missing age");
+            res.setFill(Paint.valueOf("red"));
+        }
+        try {
+            facade.register(nicknameV, passwordV, nameV, lastnameV, ageV, mailV, passwordCV);
+            res.setText("You are register !");
+            res.setFill(Paint.valueOf("green"));
+        } catch (Exception e) {
+            res.setText(e.getMessage());
+            res.setFill(Paint.valueOf("red"));
+        }
+
+    }
 }

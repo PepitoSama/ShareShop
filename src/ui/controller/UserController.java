@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -60,9 +61,10 @@ public class UserController extends GridPane {
 		
 		if(facade.login(id, pass)) {
 			txt.setText("You are connected !");
+                        txt.setFill(Paint.valueOf("green"));
 		} else {
 			txt.setText("Bad Login or Password !");
-
+                        txt.setFill(Paint.valueOf("red"));
 		}
 	}
 
