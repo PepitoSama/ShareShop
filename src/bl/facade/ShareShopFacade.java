@@ -1,33 +1,41 @@
 package bl.facade;
 
-
 import bl.manager.UserManager;
-
+import java.util.Date;
 
 public class ShareShopFacade {
-    private UserManager manager;
 
-    public ShareShopFacade() {
-        this.manager = null;
-    }
+    private UserManager userManager;
+    private static ShareShopFacade instance = null;
 
-    public void register(String username, String password, String firstname, String lastname, String birthdate,
-	String email) {
-        manager = new UserManager();
-		manager.register(username, password, firstname, lastname, birthdate, email);
-    }
-
-
-    public UserManager getManager() {
-        return manager;
-    }
-
-    public void setManager(UserManager manager) {
-        this.manager = manager;
+    public static ShareShopFacade getInstance() {
+        if (instance == null) {
+            instance = new ShareShopFacade();
+        }
+        return instance;
     }
     
-    public boolean login(String name, String pwd){
-        manager = new UserManager();
-        return this.manager.login(name, pwd);
+    private ShareShopFacade(){
+        userManager = null;
+    }
+
+    public boolean register(String username, String password, String firstname, String lastname, Date birthdate, String email, String passwordC) throws Exception{
+        if (userManager == null) {
+            userManager = new UserManager();
+        }
+        return userManager.register(username, password, firstname, lastname, birthdate, email, passwordC);
+    }
+
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public void setManager(UserManager userManager) {
+        this.userManager = userManager;
+    }
+
+    public boolean login(String name, String pwd) {
+        userManager = new UserManager();
+        return this.userManager.login(name, pwd);
     }
 }

@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -42,13 +43,12 @@ public class UserController extends GridPane {
 
 
 
-	public UserController(ShareShopFacade facade) throws IOException {
+	public UserController() throws IOException {
 		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/LoginView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
 		leLoader.load();	
-		
-		this.facade = facade;
+		this.facade = ShareShopFacade.getInstance();
 	}
 
 	@FXML
@@ -60,9 +60,10 @@ public class UserController extends GridPane {
 		
 		if(facade.login(id, pass)) {
 			txt.setText("You are connected !");
+                        txt.setFill(Paint.valueOf("green"));
 		} else {
 			txt.setText("Bad Login or Password !");
-
+                        txt.setFill(Paint.valueOf("red"));
 		}
 	}
 
@@ -70,7 +71,7 @@ public class UserController extends GridPane {
 	private void register(ActionEvent event) {
 		try {
 			super.getChildren().clear();
-			super.getChildren().add(new RegisterController(facade));
+			super.getChildren().add(new RegisterController());
 		} catch (IOException ex) {
 			Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
 

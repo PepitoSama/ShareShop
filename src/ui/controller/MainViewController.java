@@ -33,16 +33,12 @@ public class MainViewController {
 	@FXML
 	private TextField pwd;
 
-	private final ShareShopFacade manager = new ShareShopFacade();
-
-	public ShareShopFacade getManager() {
-		return manager;
-	}
+	private final ShareShopFacade manager = ShareShopFacade.getInstance();
 
 
 	public void initialize() throws IOException {
 		try {
-			elements.getChildren().add(new UserController(getManager()));
+			elements.getChildren().add(new UserController());
 		} catch (IOException ex) {
 			Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
 		}

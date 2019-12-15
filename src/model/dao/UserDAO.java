@@ -8,13 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserDAO implements DAO<User> {
-	
+
 	JDBCAccess jdbc;
 	String tableName;
-	
+
 	public UserDAO() {
 		this.jdbc = new JDBCAccess();
 		this.jdbc.openConnection();
@@ -38,7 +39,7 @@ public class UserDAO implements DAO<User> {
 					String firstname = result.getString("firstname");
 					String lastname = result.getString("lastname");
 					String email = result.getString("email");
-					String birthdate = result.getString("birthdate");
+					Date birthdate = result.getDate("birthdate");
 					String password = result.getString("password");
 					userList.add(new User(nickname, password, firstname, lastname, birthdate, email, idUser));
 				}
@@ -65,12 +66,13 @@ public class UserDAO implements DAO<User> {
 			statement.setString(1, nickname);
 			ResultSet resultSet = statement.executeQuery();
 
-			if (resultSet != null) {
-				resultSet.next();
+			while (resultSet.next()) {
 
 				return new User(resultSet.getString("Nickname"), resultSet.getString("password"),
-						resultSet.getString("firstname"), resultSet.getString("lastname"), resultSet.getString("birthdate"), resultSet.getString("password"), resultSet.getInt("idUser"));
+						resultSet.getString("firstname"), resultSet.getString("lastname"),
+						resultSet.getDate("birthdate"), resultSet.getString("password"), resultSet.getInt("idUser"));
 			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +94,7 @@ public class UserDAO implements DAO<User> {
 			statement.setString(2, user.getFistname());
 			statement.setString(3, user.getLastname());
 			statement.setString(4, user.getEmail());
-			statement.setDate(5, new java.sql.Date(2009, 12, 11));
+			statement.setDate(5, new java.sql.Date(user.getBirthdate().getTime()));
 			statement.setString(6, user.getPassword());
 
 			rowsInserted = statement.executeUpdate();
@@ -110,7 +112,8 @@ public class UserDAO implements DAO<User> {
 
 	@Override
 	public boolean update(User user) {
-		String sql = "UPDATE " + this.tableName + " SET nickname=?, firstname=?, lastname=?, email=?, birthdate=?, password=? WHERE idUser=?";
+		String sql = "UPDATE " + this.tableName
+				+ " SET nickname=?, firstname=?, lastname=?, email=?, birthdate=?, password=? WHERE idUser=?";
 
 		PreparedStatement statement = jdbc.prepareStatement(sql);
 
@@ -119,7 +122,7 @@ public class UserDAO implements DAO<User> {
 			statement.setString(2, user.getFistname());
 			statement.setString(3, user.getLastname());
 			statement.setString(4, user.getEmail());
-			statement.setString(5, user.getBirthdate());
+			statement.setDate(5, new java.sql.Date(user.getBirthdate().getTime()));
 			statement.setString(6, user.getPassword());
 			statement.setInt(7, user.getId());
 
