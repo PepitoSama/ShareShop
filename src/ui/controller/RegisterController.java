@@ -61,7 +61,7 @@ public class RegisterController extends GridPane {
     void back(ActionEvent event) {
         try {
             super.getChildren().clear();
-            super.getChildren().add(new UserController());
+            super.getChildren().add(new LoginController());
         } catch (IOException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
 

@@ -38,7 +38,7 @@ public class MainViewController {
 
 	public void initialize() throws IOException {
 		try {
-			elements.getChildren().add(new UserController());
+			elements.getChildren().add(new LoginController());
 		} catch (IOException ex) {
 			Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
 		}

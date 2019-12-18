@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  *
  * @author fsmag
  */
-public class UserController extends GridPane {
+public class LoginController extends GridPane {
 
 	@FXML
 	private TextField login;
@@ -43,7 +43,7 @@ public class UserController extends GridPane {
 
 
 
-	public UserController() throws IOException {
+	public LoginController() throws IOException {
 		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/LoginView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
@@ -73,7 +73,7 @@ public class UserController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new RegisterController());
 		} catch (IOException ex) {
-			Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 	}
