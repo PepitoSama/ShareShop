@@ -7,6 +7,6 @@ public interface DAO<T> {
 	public List<T> getAll();
 	public T get(String id);
 	public boolean save(T obj);
-	public boolean update(T obj);
+	public boolean update(T obj) throws SQLException;
 	public boolean delete(T obj);
 }

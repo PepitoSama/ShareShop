@@ -8,6 +8,12 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +22,7 @@ import model.dao.*;
 public class UserManager {
 
     User user = null;
-
+        
     public UserManager(String username, String password, String firstname, String lastname, Date birthdate, String email) {
         String hashed;
         try {
@@ -125,5 +131,79 @@ public class UserManager {
                 throw new Exception("Mail already use");
             }
         }
+    }
+
+    public String getNickname() {
+        return getUser().getNickname();
+    }
+
+    public String getName() {
+        return getUser().getFistname();
+    }
+
+    public String getLastname() {
+        return getUser().getLastname();
+    }
+
+    public String getMail() {
+        return getUser().getEmail();
+    }
+
+    public Date getBirthdate() {
+        return getUser().getBirthdate();
+    }
+
+    public LocalDate getLocalBirthdate() {
+        java.util.Date safeDate;
+        LocalDate date = null;
+        
+        try {
+            safeDate = new Date(this.getBirthdate().getTime());
+
+            date = safeDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        } catch (UnsupportedOperationException e) {
+            System.err.println("ERROR UNSUPPORTED");
+        }
+        
+        return date;
+
+    }
+
+    public String getPassword() {
+        return getUser().getPassword();
+    }
+
+    public boolean updateUser() throws SQLException {
+        DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
+        return dao.update(getUser());
+    }
+
+    public void setName(String text) {
+        getUser().setFistname(text);
+    }
+
+    public void setLastname(String text) {
+        getUser().setLastname(text);
+    }
+
+    public void setNickname(String text) {
+        getUser().setNickname(text);
+    }
+
+    public void setMail(String text) {
+        getUser().setEmail(text);
+    }
+
+    public void setPassword(String text) {
+        try {
+            getUser().setPassword(hashPassword(text, user.getPassword()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setBirthdate(Date date) {
+        getUser().setBirthdate(date);
     }
 }
