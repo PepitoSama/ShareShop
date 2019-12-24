@@ -56,7 +56,6 @@ public class RegisterController extends GridPane {
         this.facade = ShareShopFacade.getInstance();
     }
 
-
     @FXML
     void back(ActionEvent event) {
         try {
@@ -77,19 +76,23 @@ public class RegisterController extends GridPane {
         String lastnameV = lastname.getText();
         String nicknameV = nickname.getText();
         Date ageV = null;
-        try{
+        try {
             LocalDate localDate = age.getValue();
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             ageV = Date.from(instant);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             res.setText("Missing age");
             res.setFill(Paint.valueOf("red"));
         }
         try {
-            facade.register(nicknameV, passwordV, nameV, lastnameV, ageV, mailV, passwordCV);
-            res.setText("You are register !");
-            res.setFill(Paint.valueOf("green"));
+            if (facade.register(nicknameV, passwordV, nameV, lastnameV, ageV, mailV, passwordCV)) {
+                try {
+                    super.getChildren().clear();
+                    super.getChildren().add(new LoginController());
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }
         } catch (Exception e) {
             res.setText(e.getMessage());
             res.setFill(Paint.valueOf("red"));
