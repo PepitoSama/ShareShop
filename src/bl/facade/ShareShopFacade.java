@@ -1,11 +1,15 @@
 package bl.facade;
 
+import bl.manager.StatsManager;
 import bl.manager.UserManager;
 import java.util.Date;
+import java.util.List;
+import model.domain.Stats;
 
 public class ShareShopFacade {
 
     private UserManager userManager;
+    private StatsManager statsManager;
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -30,12 +34,27 @@ public class ShareShopFacade {
         return userManager;
     }
 
-    public void setManager(UserManager userManager) {
+    public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
 
     public boolean login(String name, String pwd) {
         userManager = new UserManager();
         return this.userManager.login(name, pwd);
+    }
+    
+    public List<Stats> consultStats(int id){
+        statsManager = StatsManager.getInstance();
+        return this.statsManager.consultStats(id);
+    }
+    
+    public List<Stats> consultStats(){
+        statsManager = StatsManager.getInstance();
+        return this.statsManager.consultStats();
+    }
+    
+    public int getNumberUserStats(){
+        statsManager = StatsManager.getInstance();
+        return this.statsManager.getNumber();
     }
 }

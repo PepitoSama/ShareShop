@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.domain.Stats;
 import model.domain.User;
 
 /**
@@ -27,5 +28,6 @@ public abstract class AbstractDAOFactory {
      * @return
      */
     public abstract DAO<User> getUserDAO();
+    public abstract DAOStatsInterface<Stats> getStatsDAO();
 
 }

@@ -7,10 +7,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<fx:root fx:id="grid" type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints />
+   </columnConstraints>
    <children>
-      <LineChart layoutX="59.0" layoutY="62.0" prefHeight="276.0" prefWidth="483.0">
+      <LineChart fx:id="chart" GridPane.columnIndex="1">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -18,5 +24,22 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#day" text="Day" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#week" text="Weekly" GridPane.rowIndex="1"  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+            <Button mnemonicParsing="false" onAction="#month" text="Monthly" GridPane.rowIndex="2"  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+            <Button mnemonicParsing="false" onAction="#year" text="Year" GridPane.rowIndex="3"  GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+         </children>
+      </GridPane>
    </children>
-</AnchorPane>
+</fx:root>
