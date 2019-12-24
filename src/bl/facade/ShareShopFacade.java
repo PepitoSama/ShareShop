@@ -1,6 +1,9 @@
 package bl.facade;
 
 import bl.manager.UserManager;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ShareShopFacade {
@@ -14,12 +17,13 @@ public class ShareShopFacade {
         }
         return instance;
     }
-    
-    private ShareShopFacade(){
+
+    private ShareShopFacade() {
         userManager = null;
     }
 
-    public boolean register(String username, String password, String firstname, String lastname, Date birthdate, String email, String passwordC) throws Exception{
+    public boolean register(String username, String password, String firstname, String lastname, Date birthdate,
+            String email, String passwordC) throws Exception {
         if (userManager == null) {
             userManager = new UserManager();
         }
@@ -37,5 +41,61 @@ public class ShareShopFacade {
     public boolean login(String name, String pwd) {
         userManager = new UserManager();
         return this.userManager.login(name, pwd);
+    }
+
+    public String getNickname() {
+        return userManager.getNickname();
+    }
+
+    public String getName() {
+        return userManager.getName();
+    }
+
+    public String getLastname() {
+        return userManager.getLastname();
+    }
+
+    public String getMail() {
+        return userManager.getMail();
+    }
+
+    public Date getBirthdate() {
+        return userManager.getBirthdate();
+    }
+
+    public LocalDate getLocalBirthdate() {
+        return userManager.getLocalBirthdate();
+    }
+
+    public String getPassword() {
+        return userManager.getPassword();
+    }
+
+    public boolean updateUser() throws SQLException {
+        return userManager.updateUser();
+    }
+
+    public void setName(String text) {
+        userManager.setName(text);
+    }
+
+    public void setLastname(String text) {
+        userManager.setLastname(text);
+    }
+
+    public void setNickname(String text) {
+        userManager.setNickname(text);
+    }
+
+    public void setMail(String text) {
+        userManager.setMail(text);
+    }
+
+    public void setPassword(String text) {
+        userManager.setPassword(text);
+    }
+
+    public void setBirthdate(Date date) {
+        userManager.setBirthdate(date);
     }
 }

@@ -6,6 +6,11 @@
 package ui.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +22,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
@@ -30,6 +37,30 @@ import javafx.stage.Stage;
  */
 public class ProfilController extends GridPane {
 
+    @FXML
+    private PasswordField passwordC;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private TextField nickname;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private TextField mail;
+
+    @FXML
+    private TextField lastname;
+
+    @FXML
+    private DatePicker age;
+
+    @FXML
+    private Text res;
+
     private final ShareShopFacade facade;
 
     public ProfilController() throws IOException {
@@ -38,6 +69,11 @@ public class ProfilController extends GridPane {
         leLoader.setRoot(this);
         leLoader.load();
         this.facade = ShareShopFacade.getInstance();
+        nickname.setText(this.facade.getNickname());
+        name.setText(this.facade.getName());
+        lastname.setText(this.facade.getLastname());
+        mail.setText(this.facade.getMail());
+        age.setValue(this.facade.getLocalBirthdate());
     }
 
     @FXML
@@ -50,13 +86,44 @@ public class ProfilController extends GridPane {
         }
     }
 
-    /*
-     * TODO
-     * Il faut update le nouveau user
-     */
     @FXML
     private void modify(ActionEvent event) {
 
-    }
+        if ((password.getText().equals(passwordC.getText())) && (!password.getText().equals(""))) {
+            facade.setName(name.getText());
+            facade.setMail(mail.getText());
+            facade.setLastname(lastname.getText());
+            facade.setNickname(nickname.getText());
+            facade.setPassword(password.getText());
+            System.out.println(password.getText());
+            Date ageV = null;
 
+            try {
+                LocalDate localDate = age.getValue();
+                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                facade.setBirthdate(Date.from(instant));
+            } catch (Exception e) {
+                res.setText("Missing age");
+                res.setFill(Paint.valueOf("red"));
+            }
+            
+            try {
+                try {
+                    facade.updateUser();
+                    super.getChildren().clear();
+                    super.getChildren().add(new MyGroupsController());
+                } catch (SQLException e) {
+                    res.setText(e.getMessage());
+                    res.setFill(Paint.valueOf("red"));
+                }
+            } catch (IOException e) {
+                res.setText(e.getMessage());
+                res.setFill(Paint.valueOf("red"));
+            }
+            
+        } else {
+            res.setText("Entrez un mot de passe valide");
+            res.setFill(Paint.valueOf("red"));
+        }
+    }
 }
