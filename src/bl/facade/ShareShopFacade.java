@@ -57,9 +57,10 @@ public class ShareShopFacade {
         return this.statsManager.consultStats();
     }
     
-    public int getNumberUserStats(){
+    public int getNumberUserStats() {
         statsManager = StatsManager.getInstance();
         return this.statsManager.getNumber();
+    }
 
 
     public String getNickname() {

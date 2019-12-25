@@ -53,7 +53,7 @@ public class LoginController extends GridPane {
     private void login(ActionEvent event) {
         String id = login.getText();
         String pass = pwd.getText();
-        // On rÃ©cupÃ¨re les contenus des champs texte de la vue et on va regarder s'ils
+        // On récupère les contenus des champs texte de la vue et on va regarder s'ils
         // sont pas nul avant d'envoyer au controleur
 
         if (facade.login(id, pass)) {
