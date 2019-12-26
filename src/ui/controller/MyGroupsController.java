@@ -64,5 +64,15 @@ public class MyGroupsController extends GridPane {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    private void mystats(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new StatsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

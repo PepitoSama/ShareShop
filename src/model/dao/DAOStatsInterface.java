@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public interface DAOStatsInterface<T> extends DAO<T>{
     public List<T> getUser(int id);
+    public List<T> getDate(int id,Date d, Date f);
+    public List<T> getDate(Date d, Date f);
     public int getNumber();
     
 }

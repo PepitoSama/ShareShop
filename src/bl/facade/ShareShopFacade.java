@@ -47,14 +47,14 @@ public class ShareShopFacade {
         return this.userManager.login(name, pwd);
     }
     
-    public List<Stats> consultStats(int id){
+    public List<Stats> consultStats(int id,Date dd, Date df){
         statsManager = StatsManager.getInstance();
-        return this.statsManager.consultStats(id);
+        return this.statsManager.consultStats(id, dd, df);
     }
     
-    public List<Stats> consultStats(){
+    public List<Stats> consultStats(Date dd, Date df){
         statsManager = StatsManager.getInstance();
-        return this.statsManager.consultStats();
+        return this.statsManager.consultStats(dd, df);
     }
     
     public int getNumberUserStats() {

@@ -88,8 +88,16 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         return statsList;
     }
 
-    public List<Stats> getDate(int id, Date d) {
-        String sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date=?";
+    public List<Stats> getDate(int id, Date d, Date f) {
+        String sql = "";
+        if (d != null && f != null) {
+            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? and date<=?";
+        } else if (d != null) {
+            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? ";
+        } else {
+            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date<=?";
+        }
+
         int rows = 0;
         PreparedStatement statement;
 
@@ -97,7 +105,57 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         ArrayList<Stats> statsList = new ArrayList<Stats>();
         try {
             statement.setInt(1, id);
-            statement.setDate(2, new java.sql.Date(d.getTime()));
+            if (d != null && f != null) {
+                statement.setDate(2, new java.sql.Date(d.getTime()));
+                statement.setDate(3, new java.sql.Date(f.getTime()));
+            } else if (d != null) {
+                statement.setDate(2, new java.sql.Date(d.getTime()));
+            } else {
+                statement.setDate(2, new java.sql.Date(f.getTime()));
+            }
+            
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int idUser = resultSet.getInt("idUser");
+                Date date = resultSet.getDate("date");
+                float amount = resultSet.getFloat("amount");
+                statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        return statsList;
+    }
+    
+    public List<Stats> getDate( Date d, Date f) {
+        String sql = "";
+        if (d != null && f != null) {
+            sql = "SELECT * FROM " + this.tableName + " WHERE date>=? and date<=?";
+        } else if (d != null) {
+            sql = "SELECT * FROM " + this.tableName + " WHERE date>=? ";
+        } else {
+            sql = "SELECT * FROM " + this.tableName + " WHERE date<=?";
+        }
+
+        int rows = 0;
+        PreparedStatement statement;
+
+        statement = jdbc.prepareStatement(sql);
+        ArrayList<Stats> statsList = new ArrayList<Stats>();
+        try {
+            if (d != null && f != null) {
+                statement.setDate(1, new java.sql.Date(d.getTime()));
+                statement.setDate(2, new java.sql.Date(f.getTime()));
+            } else if (d != null) {
+                statement.setDate(1, new java.sql.Date(d.getTime()));
+            } else {
+                statement.setDate(1, new java.sql.Date(f.getTime()));
+            }
+            
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -201,7 +259,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         ResultSet result;
         try {
             result = statement.executeQuery(sql);
-            while(result.next()){
+            while (result.next()) {
                 res += 1;
             }
         } catch (SQLException e) {

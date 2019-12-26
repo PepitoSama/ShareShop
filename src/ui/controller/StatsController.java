@@ -8,6 +8,9 @@ package ui.controller;
 import bl.facade.ShareShopFacade;
 import java.io.IOException;
 import java.text.DateFormatSymbols;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +25,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import model.domain.Stats;
 
 /**
@@ -32,17 +37,23 @@ import model.domain.Stats;
 public class StatsController extends GridPane {
 
     @FXML
+    private DatePicker datefin;
+
+    @FXML
+    private DatePicker datedebut;
+
+    @FXML
     private LineChart chart;
 
     private final ShareShopFacade facade;
 
     public StatsController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/Stats.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/StatsView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
         this.facade = ShareShopFacade.getInstance();
-
+        valideDate(checkDD(), checkDF());
         chart.setTitle("Monthly Expenses");
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
@@ -50,7 +61,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId());
+        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyMonth(mystats);
             for (String key : m.keySet()) {
@@ -59,7 +70,7 @@ public class StatsController extends GridPane {
         }
         XYChart.Series<String, Double> series2 = new XYChart.Series<String, Double>();
         series2.setName("Average");
-        List<Stats> generalstats = facade.consultStats();
+        List<Stats> generalstats = facade.consultStats(checkDD(), checkDF());
         int numberUser = facade.getNumberUserStats();
         if (generalstats != null) {
             HashMap<String, Double> m = groupbyMonth(generalstats);
@@ -160,7 +171,8 @@ public class StatsController extends GridPane {
 
     @FXML
     void day(ActionEvent event) {
-        chart.getData().removeAll();
+        chart.getData().clear();
+        valideDate(checkDD(), checkDF());
         chart.setTitle("Dayly Expenses");
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
@@ -168,7 +180,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId());
+        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyDay(mystats);
             for (String key : m.keySet()) {
@@ -177,7 +189,7 @@ public class StatsController extends GridPane {
         }
         XYChart.Series<String, Double> series2 = new XYChart.Series<String, Double>();
         series2.setName("Average");
-        List<Stats> generalstats = facade.consultStats();
+        List<Stats> generalstats = facade.consultStats(checkDD(), checkDF());
         int numberUser = facade.getNumberUserStats();
         if (generalstats != null) {
             HashMap<String, Double> m = groupbyDay(generalstats);
@@ -186,14 +198,15 @@ public class StatsController extends GridPane {
                 series2.getData().add(new XYChart.Data(key, value));
             }
         }
-        
+
         chart.getData().addAll(series1, series2);
 
     }
 
     @FXML
     void month(ActionEvent event) {
-        chart.getData().removeAll();
+        chart.getData().clear();
+        valideDate(checkDD(), checkDF());
         chart.setTitle("Monthly Expenses");
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
@@ -201,7 +214,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId());
+        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyMonth(mystats);
             for (String key : m.keySet()) {
@@ -210,7 +223,7 @@ public class StatsController extends GridPane {
         }
         XYChart.Series<String, Double> series2 = new XYChart.Series<String, Double>();
         series2.setName("Average");
-        List<Stats> generalstats = facade.consultStats();
+        List<Stats> generalstats = facade.consultStats(checkDD(), checkDF());
         int numberUser = facade.getNumberUserStats();
         if (generalstats != null) {
             HashMap<String, Double> m = groupbyMonth(generalstats);
@@ -225,7 +238,8 @@ public class StatsController extends GridPane {
 
     @FXML
     void week(ActionEvent event) {
-        chart.getData().removeAll();
+        chart.getData().clear();
+        valideDate(checkDD(), checkDF());
         chart.setTitle("Weekly Expenses");
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
@@ -233,7 +247,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId());
+        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyWeek(mystats);
             for (String key : m.keySet()) {
@@ -242,7 +256,7 @@ public class StatsController extends GridPane {
         }
         XYChart.Series<String, Double> series2 = new XYChart.Series<String, Double>();
         series2.setName("Average");
-        List<Stats> generalstats = facade.consultStats();
+        List<Stats> generalstats = facade.consultStats(checkDD(), checkDF());
         int numberUser = facade.getNumberUserStats();
         if (generalstats != null) {
             HashMap<String, Double> m = groupbyWeek(generalstats);
@@ -251,13 +265,14 @@ public class StatsController extends GridPane {
                 series2.getData().add(new XYChart.Data(key, value));
             }
         }
-        
+
         chart.getData().addAll(series1, series2);
     }
 
     @FXML
     void year(ActionEvent event) {
-        chart.getData().removeAll();
+        chart.getData().clear();
+        valideDate(checkDD(), checkDF());
         chart.setTitle("Year Expenses");
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Date");
@@ -265,7 +280,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId());
+        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyYear(mystats);
             for (String key : m.keySet()) {
@@ -274,7 +289,7 @@ public class StatsController extends GridPane {
         }
         XYChart.Series<String, Double> series2 = new XYChart.Series<String, Double>();
         series2.setName("Average");
-        List<Stats> generalstats = facade.consultStats();
+        List<Stats> generalstats = facade.consultStats(checkDD(), checkDF());
         int numberUser = facade.getNumberUserStats();
         if (generalstats != null) {
             HashMap<String, Double> m = groupbyYear(generalstats);
@@ -284,7 +299,56 @@ public class StatsController extends GridPane {
             }
         }
         chart.getData().addAll(series1, series2);
+    }
 
+    private Date checkDD() {
+        Date date = null;
+        try {
+            LocalDate localDate = datedebut.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            date = Date.from(instant);
+        } catch (Exception e) {
+        }
+        return date;
+    }
+
+    private Date checkDF() {
+        Date date = null;
+        try {
+            LocalDate localDate = datefin.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            date = Date.from(instant);
+        } catch (Exception e) {
+        }
+        return date;
+    }
+
+    private void valideDate(Date dd, Date df) {
+        if (dd != null && df != null) {
+            if (df.compareTo(new Date()) > 0 || dd.compareTo(new Date()) > 0) {
+                datedebut.setValue(null);
+                datefin.setValue(null);
+            } else if (df.compareTo(dd) < 0) {
+                datefin.setValue(null);
+            }
+        }
+        else if (dd != null){
+            if ( dd.compareTo(new Date()) > 0) {
+                datedebut.setValue(null);
+                datefin.setValue(null);
+            } 
+        }
+        else if(df != null){
+            if (df.compareTo(new Date()) > 0 ) {
+                datedebut.setValue(null);
+                datefin.setValue(null);
+            }
+        }
+    }
+    
+    @FXML
+    void refresh(ActionEvent event) {
+        month(event);
     }
 
 }

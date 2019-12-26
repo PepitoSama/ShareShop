@@ -6,6 +6,7 @@
 package bl.manager;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.DAO;
@@ -28,22 +29,31 @@ public class StatsManager {
         return instance;
     }
 
-    public List<Stats> consultStats(int id) {
+    public List<Stats> consultStats(int id, Date dd, Date df) {
         DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
 
         try {
-            return dao.getUser(id);
+            if (dd != null || df != null) {
+                return dao.getDate(id, dd, df);
+            } else {
+                return dao.getUser(id);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public List<Stats> consultStats() {
+    public List<Stats> consultStats(Date dd, Date df) {
         DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
 
         try {
-            return dao.getAll();
+            if (dd != null || df != null) {
+                return dao.getDate(dd, df);
+            } else {
+                return dao.getAll();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
