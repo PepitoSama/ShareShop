@@ -17,6 +17,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -167,6 +170,16 @@ public class StatsController extends GridPane {
             month = months[num];
         }
         return month;
+    }
+    
+    @FXML
+    private void back(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new MyGroupsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
