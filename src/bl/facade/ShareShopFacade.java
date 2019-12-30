@@ -50,22 +50,21 @@ public class ShareShopFacade {
         userManager = new UserManager();
         return this.userManager.login(name, pwd);
     }
-    
-    public List<Stats> consultStats(int id,Date dd, Date df){
+
+    public List<Stats> consultStats(int id, Date dd, Date df) {
         statsManager = StatsManager.getInstance();
         return this.statsManager.consultStats(id, dd, df);
     }
-    
-    public List<Stats> consultStats(Date dd, Date df){
+
+    public List<Stats> consultStats(Date dd, Date df) {
         statsManager = StatsManager.getInstance();
         return this.statsManager.consultStats(dd, df);
     }
-    
+
     public int getNumberUserStats() {
         statsManager = StatsManager.getInstance();
         return this.statsManager.getNumber();
     }
-
 
     public String getNickname() {
         return userManager.getNickname();
@@ -123,19 +122,26 @@ public class ShareShopFacade {
         userManager.setBirthdate(date);
     }
 
-    
-    public ListManager getListManager(){
+    public ListManager getListManager() {
         return ListManager.getInstance();
-    }    
-    
+    }
+
     public List<GroupList> getShoppingList(int id) {
-       listManager = getListManager();
-       return listManager.getShoppingList(id);
+        listManager = getListManager();
+        return listManager.getShoppingList(id);
     }
 
     public boolean addShopList(String name) {
-        return listManager.addShopList(name,1);
+        return listManager.addShopList(name, 1);
     }
 
-    
+    public String getListName() {
+        return listManager.getNameSelected();
+    }
+
+    public GroupList getBoughtProduct() {
+        listManager.getBoughtProducts(listManager.getSelected());
+        return listManager.getSelected();
+    }
+
 }

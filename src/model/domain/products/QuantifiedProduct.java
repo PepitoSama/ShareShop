@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author 
+ * @author
  */
 public class QuantifiedProduct extends GeneralProduct {
 
@@ -17,13 +17,13 @@ public class QuantifiedProduct extends GeneralProduct {
     public int getQuantite() {
         return this.quantite;
     }
-    
+
     public void setQuantite(int quantite) {
-    	this.quantite = quantite;
+        this.quantite = quantite;
     }
 
-	public QuantifiedProduct(int idProduct, String name, Image image, String description, GeneralProduct idFather, int quantite) {
-		super(idProduct, name, image, description, idFather);
-		this.quantite = quantite;
-	}
+    public QuantifiedProduct(int idProduct, String name, Image image, String description, int idFather, int quantite) {
+        super(idProduct, name, image, description, idFather);
+        this.quantite = quantite;
+    }
 }

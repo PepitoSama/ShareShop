@@ -16,12 +16,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.domain.GroupList;
+import model.domain.products.GeneralProduct;
+import model.domain.products.PricedProduct;
 
 /**
  *
@@ -30,23 +33,21 @@ import model.domain.GroupList;
 public class AfficherListController extends GridPane {
 
     private ShareShopFacade facade;
-    
+
     @FXML
-    private Text nameList;
-    
+    private Label nameList;
+
     @FXML
     private VBox shopListe;
-    
+
     @FXML
     private ScrollPane scrollpaneShopList;
-    
+
     @FXML
     private VBox BoughtProductListe;
-    
+
     @FXML
     private ScrollPane scrollpaneBoughtProductList;
-
-
 
     public AfficherListController() throws IOException {
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
@@ -56,15 +57,16 @@ public class AfficherListController extends GridPane {
         this.facade = ShareShopFacade.getInstance();
         shopListe = new VBox();
         BoughtProductListe = new VBox();
-//        shopListe.getChildren().addAll(quantified product list);
-//        shopListe.setAlignment(Pos.CENTER);
-//        scrollpaneShopList.setContent(shopListe);
-//        BoughtProductList.getChildren().addAll(priced product list);
-//        BoughtProductList.setAlignment(Pos.CENTER);
-//        scrollpaneBoughtProductList.setContent(BoughtProductListe);
+        nameList.setText(facade.getListName());
+        initBoughtProduct();
+        //shopListe.getChildren().addAll(quantified product list);
+        //        shopListe.setAlignment(Pos.CENTER);
+        //        scrollpaneShopList.setContent(shopListe);
+        //        BoughtProductList.getChildren().addAll(priced product list);
+        //        BoughtProductList.setAlignment(Pos.CENTER);
+        //        scrollpaneBoughtProductList.setContent(BoughtProductListe);
     }
 
-    
     @FXML
     void back(ActionEvent event) {
         try {
@@ -75,7 +77,7 @@ public class AfficherListController extends GridPane {
 
         }
     }
-    
+
     @FXML
     void ok(ActionEvent event) {
         try {
@@ -86,18 +88,18 @@ public class AfficherListController extends GridPane {
 
         }
     }
-    
+
     @FXML
     void modify(ActionEvent event) {
         try {
             super.getChildren().clear();
-            super.getChildren().add(new UpdateShopListController());
-        } catch (IOException ex) {
+            //super.getChildren().add(new UpdateShopListController());
+        } catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
-    
+
     @FXML
     void validate(ActionEvent event) {
         try {
@@ -107,5 +109,10 @@ public class AfficherListController extends GridPane {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }
+
+    private void initBoughtProduct() {
+        GroupList selected = facade.getBoughtProduct();
+        List<PricedProduct> boughtProducts = selected.getBoughtProducts();
     }
 }

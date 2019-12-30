@@ -17,16 +17,15 @@ public abstract class GeneralProduct {
     private String name;
     private Image image;
     private String description;
-    private GeneralProduct idFather;
+    private int idFather;
 
-    public GeneralProduct(int idProduct, String name, Image image, String description, GeneralProduct idFather) {
+    public GeneralProduct(int idProduct, String name, Image image, String description, int idFather) {
         this.idProduct = idProduct;
         this.name = name;
         this.image = image;
         this.description = description;
         this.idFather = idFather;
     }
-    
 
     public int getIdProduct() {
         return idProduct;
@@ -60,11 +59,11 @@ public abstract class GeneralProduct {
         this.description = description;
     }
 
-    public GeneralProduct getIdFather() {
+    public int getIdFather() {
         return idFather;
     }
 
-    public void setIdFather(GeneralProduct idFather) {
+    public void setIdFather(int idFather) {
         this.idFather = idFather;
     }
 

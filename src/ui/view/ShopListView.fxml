@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -10,8 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root  type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-	<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+	<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
 	  <columnConstraints>
 	    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 	  </columnConstraints>
@@ -28,6 +34,7 @@
 	          <RowConstraints maxHeight="272.39999771118164" minHeight="10.0" prefHeight="169.60000000000002" vgrow="SOMETIMES" />
 	            <RowConstraints maxHeight="216.39999389648438" minHeight="10.0" prefHeight="34.39999999999998" vgrow="SOMETIMES" />
 	          <RowConstraints maxHeight="267.1999816894531" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="267.1999816894531" minHeight="10.0" percentHeight="2.0" prefHeight="258.0" vgrow="SOMETIMES" />
 	        </rowConstraints>
 	         <children>
 	            <GridPane prefHeight="73.0" prefWidth="650.0">
@@ -55,7 +62,7 @@
 	                        <Image url="@../../../../../../Images/logo%20liste.PNG" />
 	                     </image>
 	                  </ImageView>
-	                  <Label prefHeight="22.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+	                  <Label fx:id="nameList" prefHeight="22.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
 	               </children>
 	            </GridPane>
 	            <GridPane GridPane.rowIndex="1">
@@ -120,4 +127,11 @@
 	      </GridPane>
 	   </children>
 	</GridPane>
+        </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </fx:root>

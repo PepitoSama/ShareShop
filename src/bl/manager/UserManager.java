@@ -22,7 +22,7 @@ import model.dao.*;
 public class UserManager {
 
     User user = null;
-        
+
     public UserManager(String username, String password, String firstname, String lastname, Date birthdate, String email) {
         String hashed;
         try {
@@ -156,7 +156,7 @@ public class UserManager {
     public LocalDate getLocalBirthdate() {
         java.util.Date safeDate;
         LocalDate date = null;
-        
+
         try {
             safeDate = new Date(this.getBirthdate().getTime());
 
@@ -165,7 +165,7 @@ public class UserManager {
         } catch (UnsupportedOperationException e) {
             System.err.println("ERROR UNSUPPORTED");
         }
-        
+
         return date;
 
     }

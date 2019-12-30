@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.DAOGroupListInterface;
+import model.dao.DAOProductsInterface;
 import model.domain.GroupList;
+import model.domain.products.PricedProduct;
 
 /**
  *
@@ -37,7 +39,6 @@ public class ListManager {
         DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.getFavoriteList(id);
     }
-
 
     private static ListManager instance = null;
 
@@ -72,6 +73,15 @@ public class ListManager {
     public boolean removeList() {
         DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.delete(selected);
+    }
+
+    public String getNameSelected() {
+        return selected.getName();
+    }
+
+    public void getBoughtProducts(GroupList selected) {
+        DAOProductsInterface<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
+        selected.setBoughtProducts(dao.getProducts(selected.getIdGroupList()));
     }
 
 }

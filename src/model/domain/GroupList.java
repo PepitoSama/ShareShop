@@ -20,7 +20,15 @@ public class GroupList {
     private String name;
     private Date date;
     private char type;
-    
+    private List<PricedProduct> boughtProducts;
+
+    public List<PricedProduct> getBoughtProducts() {
+        return boughtProducts;
+    }
+
+    public void setBoughtProducts(List<PricedProduct> boughtProducts) {
+        this.boughtProducts = boughtProducts;
+    }
 
     public int getIdGroupList() {
         return idGroupList;
@@ -69,6 +77,5 @@ public class GroupList {
     public void setType(char type) {
         this.type = type;
     }
-
 
 }

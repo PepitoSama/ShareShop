@@ -5,10 +5,16 @@
  */
 package model.domain.products;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author fsmag
  */
-public class PricedProductList {
-    
+public class Product extends GeneralProduct {
+
+    public Product(int idProduct, String name, Image image, String description, int idFather) {
+        super(idProduct, name, image, description, idFather);
+    }
+
 }

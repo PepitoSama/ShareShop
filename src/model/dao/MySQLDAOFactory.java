@@ -3,13 +3,12 @@ package model.dao;
 import model.domain.GroupList;
 import model.domain.Stats;
 import model.domain.User;
+import model.domain.products.PricedProduct;
 
 /**
- * 
+ *
  */
 public class MySQLDAOFactory extends AbstractDAOFactory {
-
-
 
     /**
      * @return
@@ -17,7 +16,7 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     public DAO<User> getUserDAO() {
         return new UserDAO();
     }
-    
+
     public DAOStatsInterface<Stats> getStatsDAO() {
         return new StatsDAO();
     }
@@ -25,6 +24,11 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     @Override
     public DAOGroupListInterface<GroupList> getGroupListDAO() {
         return new GroupListDAO();
+    }
+
+    @Override
+    public DAOProductsInterface<PricedProduct> getPricedProductDAO() {
+        return new PricedProductDAO();
     }
 
 }
