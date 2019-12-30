@@ -43,7 +43,7 @@ public class AjoutListController extends GridPane {
 
     @FXML
     void add(ActionEvent event) {
-        if (facade.addShopList(new GroupList(0, 1, name.getText(), new Date(), 'S'))) {
+        if (facade.addShopList(name.getText())) {
             try {
                 super.getChildren().clear();
                 super.getChildren().add(new ShopListController());

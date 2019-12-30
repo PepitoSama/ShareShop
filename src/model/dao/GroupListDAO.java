@@ -47,7 +47,7 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
                     Date date = result.getDate("date");
                     String name = result.getString("name");
                     char type = result.getString("type").charAt(0);
-                    shoppingList.add(new GroupList(idGroupList, idGroup, name, new java.util.Date(date.getTime()),type));
+                    shoppingList.add(new GroupList(idGroupList, idGroup, name, new java.util.Date(date.getTime()), type));
                 }
             } else {
                 return null;
@@ -59,6 +59,37 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
             return null;
         }
         return shoppingList;
+    }
+
+    @Override
+    public GroupList getFavoriteList(int id) {
+        String sql = "SELECT * FROM " + this.tableName + " WHERE idGroup=? and type='F'";
+        int rows = 0;
+        PreparedStatement statement;
+        statement = jdbc.prepareStatement(sql);
+        ArrayList<GroupList> favorite = new ArrayList<GroupList>();
+        try {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result != null) {
+                while (result.next()) {
+                    int idGroupList = result.getInt("idGroupList");
+                    int idGroup = result.getInt("idGroup");
+                    Date date = result.getDate("date");
+                    String name = result.getString("name");
+                    char type = result.getString("type").charAt(0);
+                    favorite.add(new GroupList(idGroupList, idGroup, name, new java.util.Date(date.getTime()), type));
+                }
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        return favorite.get(0);
     }
 
     @Override
@@ -98,12 +129,36 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
 
     @Override
     public boolean update(GroupList obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE " + this.tableName
+                + " SET name=? WHERE idGroup=? and idGroupList=?";
+
+        PreparedStatement statement = jdbc.prepareStatement(sql);
+        statement.setString(1, obj.getName());
+        statement.setInt(2, obj.getIdGroup());
+        statement.setInt(3, obj.getIdGroupList());
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean delete(GroupList obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM " + this.tableName + " WHERE idGroupList=?";
+        PreparedStatement statement = jdbc.prepareStatement(sql);
+        try {
+            statement.setInt(1, obj.getIdGroupList());
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 
 }

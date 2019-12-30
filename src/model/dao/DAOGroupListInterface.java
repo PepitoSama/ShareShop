@@ -7,6 +7,7 @@ package model.dao;
 
 import java.util.Date;
 import java.util.List;
+import model.domain.GroupList;
 
 /**
  *
@@ -14,5 +15,6 @@ import java.util.List;
  */
 public interface DAOGroupListInterface<T> extends DAO<T>{
     public List<T> getShoppingList(int id);
+    public T getFavoriteList(int id);
     
 }

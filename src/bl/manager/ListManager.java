@@ -5,6 +5,8 @@
  */
 package bl.manager;
 
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.DAOGroupListInterface;
@@ -20,7 +22,7 @@ public class ListManager {
         DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.getShoppingList(id);
     }
-    
+
     private GroupList selected;
 
     public GroupList getSelected() {
@@ -31,28 +33,45 @@ public class ListManager {
         this.selected = selected;
     }
 
-
-    public GroupList getFavoriteList() {
-        return null;
+    public GroupList getFavoriteList(int id) {
+        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        return dao.getFavoriteList(id);
     }
 
-    public List<GroupList> getBoughtProductList() {
-        return null;
-    }
 
-    
     private static ListManager instance = null;
-    
-    
-    public static ListManager getInstance(){
+
+    public static ListManager getInstance() {
         if (instance == null) {
             instance = new ListManager();
         }
         return instance;
     }
 
-    public boolean addShopList(GroupList groupList) {
+    public boolean addShopList(String name, int id) {
         DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.save(groupList);
+        return dao.save(new GroupList(0, id, name, new Date(), 'S'));
     }
+
+    public boolean addFavorisList(int id) {
+        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        return dao.save(new GroupList(0, id, "Favoris", new Date(), 'F'));
+    }
+
+    public boolean addSuggestList(int id) {
+        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        return dao.save(new GroupList(0, id, "Suggest", new Date(), 'P'));
+    }
+
+    public boolean updateShopList(String name) throws SQLException {
+        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        selected.setName(name);
+        return dao.update(selected);
+    }
+
+    public boolean removeList() {
+        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        return dao.delete(selected);
+    }
+
 }

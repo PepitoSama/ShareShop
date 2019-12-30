@@ -133,8 +133,8 @@ public class ShareShopFacade {
        return listManager.getShoppingList(id);
     }
 
-    public boolean addShopList(GroupList groupList) {
-        return listManager.addShopList(groupList);
+    public boolean addShopList(String name) {
+        return listManager.addShopList(name,1);
     }
 
     
