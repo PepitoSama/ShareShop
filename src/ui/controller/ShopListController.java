@@ -121,6 +121,13 @@ public class ShopListController extends GridPane {
 
     public void toList(GroupList selectedList) {
         facade.getListManager().setSelected(selectedList);
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new AfficherListController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 
     private void search() {
