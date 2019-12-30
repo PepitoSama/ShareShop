@@ -1,5 +1,6 @@
 package bl.facade;
 
+import bl.manager.ListManager;
 import bl.manager.StatsManager;
 import bl.manager.UserManager;
 
@@ -7,12 +8,15 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import model.domain.GroupList;
 import model.domain.Stats;
+import model.domain.products.GeneralProduct;
 
 public class ShareShopFacade {
 
     private UserManager userManager;
     private StatsManager statsManager;
+    private ListManager listManager;
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -118,4 +122,20 @@ public class ShareShopFacade {
     public void setBirthdate(Date date) {
         userManager.setBirthdate(date);
     }
+
+    
+    public ListManager getListManager(){
+        return ListManager.getInstance();
+    }    
+    
+    public List<GroupList> getShoppingList(int id) {
+       listManager = getListManager();
+       return listManager.getShoppingList(id);
+    }
+
+    public boolean addShopList(GroupList groupList) {
+        return listManager.addShopList(groupList);
+    }
+
+    
 }

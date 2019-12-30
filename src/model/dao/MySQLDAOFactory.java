@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.domain.GroupList;
 import model.domain.Stats;
 import model.domain.User;
 
@@ -19,6 +20,11 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     
     public DAOStatsInterface<Stats> getStatsDAO() {
         return new StatsDAO();
+    }
+
+    @Override
+    public DAOGroupListInterface<GroupList> getGroupListDAO() {
+        return new GroupListDAO();
     }
 
 }

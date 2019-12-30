@@ -8,8 +8,9 @@ package ui.controller;
 import bl.facade.ShareShopFacade;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -20,9 +21,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import model.domain.GroupList;
+
 
 /**
  *
@@ -34,6 +38,9 @@ public class ShopListController extends GridPane {
     private final ObservableList<Button> buttons = FXCollections.observableArrayList();
     @FXML
     private VBox shopListe;
+    
+    @FXML
+    private ScrollPane scrollpane;
 
     @FXML
     private TextField search;
@@ -45,29 +52,28 @@ public class ShopListController extends GridPane {
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
+        this.facade = ShareShopFacade.getInstance();
+        shopListe = new VBox();
         initList();
         search();
         flButton = new FilteredList(buttons, p -> true);
         shopListe.getChildren().addAll(flButton);
-        this.facade = ShareShopFacade.getInstance();
+        shopListe.setAlignment(Pos.CENTER);
+        scrollpane.setContent(shopListe);
     }
 
     private void initList() {
-        List<String> shoopingList = new ArrayList<String>();
-        shoopingList.add("Liste 1");
-        shoopingList.add("ABDDD");
-        shoopingList.add("ZADAZD");
-        shoopingList.add("RRRRRRRRRR");
+        List<GroupList> shoopingList = facade.getShoppingList(1);
         shopListe.getChildren().clear();
-        for (String liste : shoopingList) {
-            Button b = new Button(liste);
-            b.setId(liste);
+        for (GroupList liste : shoopingList) {
+            Button b = new Button(liste.getName());
+            b.setId(Integer.toString(liste.getIdGroupList()));
             b.setStyle("-fx-font-size: 24px; ");
             b.setAlignment(Pos.CENTER);
             b.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    toList(b);
+                    toList(liste);
                 }
             });
             buttons.add(b);
@@ -93,16 +99,28 @@ public class ShopListController extends GridPane {
 
     @FXML
     void back(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new MyGroupsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
+        }
     }
 
     @FXML
     void add(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new AjoutListController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
+        }
     }
 
-    public void toList(Button b) {
-
+    public void toList(GroupList selectedList) {
+        facade.getListManager().setSelected(selectedList);
     }
 
     private void search() {
