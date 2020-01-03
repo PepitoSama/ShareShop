@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -74,5 +75,16 @@ public class MyGroupsController extends GridPane {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    private void addGroup(ActionEvent event) {
+    	try {
+            super.getChildren().clear();
+            super.getChildren().add(new AddGroupController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
 }

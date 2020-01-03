@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.domain.Group;
 import model.domain.Stats;
 import model.domain.User;
 
@@ -29,5 +30,6 @@ public abstract class AbstractDAOFactory {
      */
     public abstract DAO<User> getUserDAO();
     public abstract DAOStatsInterface<Stats> getStatsDAO();
+    public abstract DAO<Group> getGroupDAO();
 
 }

@@ -2,6 +2,7 @@ package bl.facade;
 
 import bl.manager.StatsManager;
 import bl.manager.UserManager;
+import bl.manager.GroupManager;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class ShareShopFacade {
 
     private UserManager userManager;
     private StatsManager statsManager;
+    private GroupManager groupManager;
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -118,4 +120,9 @@ public class ShareShopFacade {
     public void setBirthdate(Date date) {
         userManager.setBirthdate(date);
     }
+
+	public void createGroup(String groupName) {
+		groupManager = GroupManager.getInstance();
+		groupManager.createGroup(groupName);
+	}
 }
