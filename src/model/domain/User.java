@@ -21,6 +21,7 @@ public class User {
 		this.setLastname(lastname);
 		this.setNickname(username);
 		this.setPassword(password);
+		this.setId(-1);
 	}
 	
 	public User(String username, String password, String firstname, String lastname, Date birthdate, String email, int id) {

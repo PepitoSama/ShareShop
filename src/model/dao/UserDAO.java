@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.dao.DAO;
+import model.domain.Group;
 import model.domain.User;
 
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class UserDAO implements DAO<User> {
 	public UserDAO() {
 		this.jdbc = new JDBCAccess();
 		this.jdbc.openConnection();
-		this.tableName = "User";
+		this.tableName = "`User`";
 	}
 
 	@Override
@@ -117,7 +118,6 @@ public class UserDAO implements DAO<User> {
 
 		PreparedStatement statement = jdbc.prepareStatement(sql);
 
-
 		statement.setString(1, user.getNickname());
 		statement.setString(2, user.getFistname());
 		statement.setString(3, user.getLastname());
@@ -131,7 +131,6 @@ public class UserDAO implements DAO<User> {
 		if (rowsUpdated > 0) {
 			return true;
 		}
-
 
 		return false;
 
@@ -155,5 +154,47 @@ public class UserDAO implements DAO<User> {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<User> getWhere(List<Couple> where) {
+		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+		boolean first = true;
+		for (Couple couple : where) {
+			if (first != true) {
+				sql += " AND ";
+			}
+			sql += couple.getName();
+			sql += " LIKE ";
+			sql += couple.getValue();
+			first = false;
+		}
+		Statement statement;
+		ArrayList<User> userList = new ArrayList<User>();
 
+		statement = jdbc.prepareStatement(sql);
+		ResultSet result;
+		try {
+			result = statement.executeQuery(sql);
+			if (result != null) {
+				while (result.next()) {
+					int idUser = result.getInt("idUser");
+					String nickname = result.getString("nickname");
+					String firstname = result.getString("firstname");
+					String lastname = result.getString("lastname");
+					String email = result.getString("email");
+					Date birthdate = result.getDate("birthdate");
+					String password = result.getString("password");
+					userList.add(new User(nickname, password, firstname, lastname, birthdate, email, idUser));
+				}
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return userList;
+	}
 }

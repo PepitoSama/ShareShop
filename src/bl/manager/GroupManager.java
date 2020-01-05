@@ -5,16 +5,13 @@
  */
 package bl.manager;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
+import model.dao.Couple;
 import model.dao.DAO;
-import model.dao.DAOStatsInterface;
-import model.dao.StatsDAO;
 import model.domain.Group;
-import model.domain.Stats;
-import model.domain.User;
+import model.domain.UserGroup;
 
 /**
  *
@@ -23,6 +20,7 @@ import model.domain.User;
 public class GroupManager {
 
     private static GroupManager instance = null;
+    private Group selected;
 
     public static GroupManager getInstance() {
         if (instance == null) {
@@ -32,6 +30,7 @@ public class GroupManager {
     }
 
 	public boolean createGroup(String groupName) {
+		// Create the Group
 		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
 		Group g;
         try {
@@ -47,12 +46,37 @@ public class GroupManager {
 	public void checkExisting(String groupName) throws Exception {
         DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
         List<Group> groups = dao.getAll();
-        boolean res = false;
         for (Group g : groups) {
             if (g.getGroupName().equals(groupName)) {
                 throw new Exception("Group Name already use");
             }
         }
     }
-    
+	
+	public List<Group> getGroupList(List<UserGroup> userGroupList) {
+		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+		List<Group> groupList = new ArrayList<>();
+		for (Group group : dao.getAll()) {
+			for(UserGroup userGroup : userGroupList) {
+				if (group.getId() == userGroup.getIdGroup()) {
+					groupList.add(group);
+				}
+			}
+		}
+		return groupList;
+	}
+
+	public void setSelected(Group group) {
+		this.selected = group;
+	}
+
+	public int getGroupId(String groupName) {
+		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+		Couple where = new Couple("name", groupName);
+		List<Couple> listWhere = new ArrayList<>();
+		listWhere.add(where);
+		List<Group> listGroup = dao.getWhere(listWhere);
+		return listGroup.get(0).getId();
+	}
+	
 }

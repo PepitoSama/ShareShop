@@ -44,13 +44,22 @@ public class AddGroupController extends GridPane {
             super.getChildren().clear();
             super.getChildren().add(new MyGroupsController());
         } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddGroupController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     @FXML
     private void createGroup(ActionEvent event) {
-    	facade.createGroup(groupName.getText());
+    	if (facade.createGroup(groupName.getText())) {
+    		try {
+                super.getChildren().clear();
+                super.getChildren().add(new MyGroupsController());
+            } catch (IOException ex) {
+                Logger.getLogger(AddGroupController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    	} else {
+    		// Afficher message erreur
+    	}
     }
     
     

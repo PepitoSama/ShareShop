@@ -1,5 +1,8 @@
 package model.dao;
 
+import model.dao.DAO;
+import model.domain.UserGroup;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,25 +10,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.domain.Group;
-import model.domain.UserGroup;
+public class UserGroupDAO implements DAO<UserGroup> {
 
-public class GroupDAO implements DAO<Group> {
-	
 	JDBCAccess jdbc;
 	String tableName;
 
-	public GroupDAO() {
+	public UserGroupDAO() {
 		this.jdbc = new JDBCAccess();
 		this.jdbc.openConnection();
-		this.tableName = "`Group`";
+		this.tableName = "`UserGroup`";
 	}
 
 	@Override
-	public List<Group> getAll() {
+	public List<UserGroup> getAll() {
 		String sql = "SELECT * FROM " + this.tableName;
 		Statement statement;
-		ArrayList<Group> groupList = new ArrayList<>();
+		ArrayList<UserGroup> userGroupList = new ArrayList<>();
 
 		statement = jdbc.prepareStatement(sql);
 		ResultSet result;
@@ -33,9 +33,9 @@ public class GroupDAO implements DAO<Group> {
 			result = statement.executeQuery(sql);
 			if (result != null) {
 				while (result.next()) {
+					int idUser = result.getInt("idUser");
 					int idGroup = result.getInt("idGroup");
-					String name = result.getString("name");
-					groupList.add(new Group(idGroup, name));
+					userGroupList.add(new UserGroup(idUser, idGroup));
 				}
 			} else {
 				return null;
@@ -46,25 +46,25 @@ public class GroupDAO implements DAO<Group> {
 			return null;
 		}
 
-		return groupList;
+		return userGroupList;
 	}
-
+	
 	@Override
-	public Group get(String id) {
+	public UserGroup get(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean save(Group group) {
-		String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?)";
+	public boolean save(UserGroup userGroup) {
+		String sql = "INSERT INTO " + this.tableName + " VALUES (?, ?)";
 		int rowsInserted = 0;
 		PreparedStatement statement;
 
 		statement = jdbc.prepareStatement(sql);
 		try {
-			statement.setString(1, group.getGroupName());
-			
+			statement.setInt(1, userGroup.getIdUser());
+			statement.setInt(2, userGroup.getIdGroup());
 			rowsInserted = statement.executeUpdate();
 
 			if (rowsInserted > 0) {
@@ -79,19 +79,19 @@ public class GroupDAO implements DAO<Group> {
 	}
 
 	@Override
-	public boolean update(Group obj) throws SQLException {
+	public boolean update(UserGroup obj) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Group obj) {
+	public boolean delete(UserGroup obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
-	public List<Group> getWhere(List<Couple> where) {
+	public List<UserGroup> getWhere(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {
@@ -104,18 +104,17 @@ public class GroupDAO implements DAO<Group> {
 			first = false;
 		}
 		Statement statement;
-		ArrayList<Group> groupList = new ArrayList<>();
+		ArrayList<UserGroup> userGroupList = new ArrayList<>();
 
 		statement = jdbc.prepareStatement(sql);
-		System.out.println(statement.toString());
 		ResultSet result;
 		try {
 			result = statement.executeQuery(sql);
 			if (result != null) {
 				while (result.next()) {
+					int idUser = result.getInt("idUser");
 					int idGroup = result.getInt("idGroup");
-					String name = result.getString("name");
-					groupList.add(new Group(idGroup, name));
+					userGroupList.add(new UserGroup(idUser, idGroup));
 				}
 			} else {
 				return null;
@@ -126,6 +125,8 @@ public class GroupDAO implements DAO<Group> {
 			return null;
 		}
 
-		return groupList;
+		return userGroupList;
 	}
+
+	
 }

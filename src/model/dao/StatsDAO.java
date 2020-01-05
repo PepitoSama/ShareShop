@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.domain.Stats;
+import model.domain.User;
 
 /**
  *
@@ -26,7 +27,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     public StatsDAO() {
         this.jdbc = JDBCAccess.getInstance();
         this.jdbc.openConnection();
-        this.tableName = "Stats";
+        this.tableName = "`Stats`";
     }
 
     @Override
@@ -268,4 +269,43 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         }
         return res;
     }
+    
+	@Override
+	public List<Stats> getWhere(List<Couple> where) {
+		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+		boolean first = true;
+		for (Couple couple : where) {
+			if (first != true) {
+				sql += " AND ";
+			}
+			sql += couple.getName();
+			sql += " LIKE ";
+			sql += couple.getValue();
+			first = false;
+		}
+        Statement statement;
+        ArrayList<Stats> statsList = new ArrayList<Stats>();
+
+        statement = jdbc.prepareStatement(sql);
+        ResultSet result;
+        try {
+            result = statement.executeQuery(sql);
+            if (result != null) {
+                while (result.next()) {
+                    int idUser = result.getInt("idUser");
+                    Date date = result.getDate("date");
+                    float amount = result.getFloat("amount");
+                    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+                }
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
+        return statsList;
+	}
 }

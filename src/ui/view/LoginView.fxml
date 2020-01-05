@@ -27,11 +27,11 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="295.0" minHeight="10.0" prefHeight="178.20000610351562" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="430.20001220703125" minHeight="10.0" prefHeight="421.3999938964844" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="348.0" minHeight="10.0" prefHeight="269.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="430.20001220703125" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <GridPane>
+            <GridPane prefHeight="230.0" prefWidth="800.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -51,7 +51,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <center>
-                        <ImageView fitHeight="107.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="130.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
                            </image>
@@ -60,76 +60,90 @@
                   </BorderPane>
                </children>
             </GridPane>
-            <GridPane GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            <GridPane prefHeight="321.0" prefWidth="800.0" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="0.0" prefWidth="14.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="682.0" minWidth="10.0" prefWidth="668.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="35.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <Label text="Login" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="35.0" />
-                           </font>
-                        </Label>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <center>
-                        <TextField fx:id="login" prefWidth="800.0" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <center>
-                        <Label text="Password" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="35.0" />
-                           </font>
-                        </Label>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-                     <center>
-                        <PasswordField fx:id="pwd" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-                     <center>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
-                     <center>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#register" text="Register" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
-                     <center>
-                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                     </center>
-                  </BorderPane>
+                  <GridPane GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <Label text="Login" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <center>
+                              <TextField fx:id="login" prefWidth="800.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <center>
+                              <Label text="Password" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                           <center>
+                              <PasswordField fx:id="pwd" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                           <center>
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                           <center>
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#register" text="Register" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                           <center>
+                              <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
          </children>
       </GridPane>
    </children>
 </fx:root>
-

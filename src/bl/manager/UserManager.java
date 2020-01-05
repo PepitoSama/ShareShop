@@ -22,6 +22,7 @@ import model.dao.*;
 public class UserManager {
 
     User user = null;
+    private static UserManager instance = null;
         
     public UserManager(String username, String password, String firstname, String lastname, Date birthdate, String email) {
         String hashed;
@@ -36,6 +37,7 @@ public class UserManager {
 
     public UserManager() {
     }
+    
 
     // Can be improved
     // Source : https://www.geeksforgeeks.org/sha-256-hash-in-java/
@@ -206,4 +208,8 @@ public class UserManager {
     public void setBirthdate(Date date) {
         getUser().setBirthdate(date);
     }
+
+	public int getUserId() {
+		return user.getId();
+	}
 }

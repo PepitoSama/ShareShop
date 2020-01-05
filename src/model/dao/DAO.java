@@ -9,4 +9,5 @@ public interface DAO<T> {
 	public boolean save(T obj);
 	public boolean update(T obj) throws SQLException;
 	public boolean delete(T obj);
+	public List<T> getWhere(List<Couple> where);
 }

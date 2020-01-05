@@ -1,6 +1,7 @@
 package bl.facade;
 
 import bl.manager.StatsManager;
+import bl.manager.UserGroupManager;
 import bl.manager.UserManager;
 import bl.manager.GroupManager;
 
@@ -8,13 +9,17 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import model.domain.Group;
 import model.domain.Stats;
+import model.domain.UserGroup;
 
 public class ShareShopFacade {
 
     private UserManager userManager;
     private StatsManager statsManager;
     private GroupManager groupManager;
+    private UserGroupManager userGroupManager;
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -121,8 +126,31 @@ public class ShareShopFacade {
         userManager.setBirthdate(date);
     }
 
-	public void createGroup(String groupName) {
+	public boolean createGroup(String groupName) {
 		groupManager = GroupManager.getInstance();
+		userGroupManager = userGroupManager.getInstance();
 		groupManager.createGroup(groupName);
+		
+		int newGroupId = groupManager.getGroupId(groupName);
+		
+		return userGroupManager.createUserGroup(getUserId(), newGroupId);
+	}
+	
+	public int getUserId() {
+		return userManager.getUserId();
+	}
+
+	public List<UserGroup> getUserGroupList(int userId) {
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.getUserGroupList(userId);
+	}
+
+	public List<Group> getGroupList(List<UserGroup> userGroupList) {
+		GroupManager groupManager = GroupManager.getInstance();
+		return groupManager.getGroupList(userGroupList);
+	}
+
+	public GroupManager getGroupManager() {
+		return GroupManager.getInstance();
 	}
 }
