@@ -18,7 +18,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.MainViewController">
-   <children>
-           <GridPane fx:id="elements" alignment="CENTER"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-   </children>
+    <children>
+            <GridPane fx:id="elements" alignment="CENTER"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </children>
+    
 </AnchorPane>
