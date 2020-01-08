@@ -1,5 +1,6 @@
 package bl.facade;
 
+import bl.manager.ListManager;
 import bl.manager.StatsManager;
 import bl.manager.UserGroupManager;
 import bl.manager.UserManager;
@@ -9,10 +10,12 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-
 import model.domain.Group;
 import model.domain.Stats;
 import model.domain.UserGroup;
+import model.domain.GroupList;
+import model.domain.products.GeneralProduct;
+
 
 public class ShareShopFacade {
 
@@ -20,6 +23,8 @@ public class ShareShopFacade {
     private StatsManager statsManager;
     private GroupManager groupManager;
     private UserGroupManager userGroupManager;
+    private ListManager listManager;
+
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -53,22 +58,21 @@ public class ShareShopFacade {
         userManager = new UserManager();
         return this.userManager.login(name, pwd);
     }
-    
-    public List<Stats> consultStats(int id,Date dd, Date df){
+
+    public List<Stats> consultStats(int id, Date dd, Date df) {
         statsManager = StatsManager.getInstance();
         return this.statsManager.consultStats(id, dd, df);
     }
-    
-    public List<Stats> consultStats(Date dd, Date df){
+
+    public List<Stats> consultStats(Date dd, Date df) {
         statsManager = StatsManager.getInstance();
         return this.statsManager.consultStats(dd, df);
     }
-    
+
     public int getNumberUserStats() {
         statsManager = StatsManager.getInstance();
         return this.statsManager.getNumber();
     }
-
 
     public String getNickname() {
         return userManager.getNickname();
@@ -153,4 +157,25 @@ public class ShareShopFacade {
 	public GroupManager getGroupManager() {
 		return GroupManager.getInstance();
 	}
+    public ListManager getListManager() {
+        return ListManager.getInstance();
+    }
+
+    public List<GroupList> getShoppingList(int id) {
+        listManager = getListManager();
+        return listManager.getShoppingList(id);
+    }
+
+    public boolean addShopList(String name) {
+        return listManager.addShopList(name, 1);
+    }
+
+    public String getListName() {
+        return listManager.getNameSelected();
+    }
+
+    public GroupList getBoughtProduct() {
+        listManager.getBoughtProducts(listManager.getSelected());
+        return listManager.getSelected();
+    }
 }

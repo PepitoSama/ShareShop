@@ -171,6 +171,7 @@ public class UserDAO implements DAO<User> {
 		Statement statement;
 		ArrayList<User> userList = new ArrayList<User>();
 
+
 		statement = jdbc.prepareStatement(sql);
 		ResultSet result;
 		try {
