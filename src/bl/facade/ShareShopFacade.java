@@ -16,7 +16,6 @@ import model.domain.UserGroup;
 import model.domain.GroupList;
 import model.domain.products.GeneralProduct;
 
-
 public class ShareShopFacade {
 
     private UserManager userManager;
@@ -130,40 +129,41 @@ public class ShareShopFacade {
         userManager.setBirthdate(date);
     }
 
-	public boolean createGroup(String groupName) {
-		groupManager = GroupManager.getInstance();
-		userGroupManager = userGroupManager.getInstance();
-		groupManager.createGroup(groupName);
-		
-		int newGroupId = groupManager.getGroupId(groupName);
-		
-		return userGroupManager.createUserGroup(getUserId(), newGroupId);
-	}
-	
-	public int getUserId() {
-		return userManager.getUserId();
-	}
+    public boolean createGroup(String groupName) {
+        groupManager = GroupManager.getInstance();
+        userGroupManager = userGroupManager.getInstance();
+        groupManager.createGroup(groupName);
 
-	public List<UserGroup> getUserGroupList(int userId) {
-		userGroupManager = UserGroupManager.getInstance();
-		return userGroupManager.getUserGroupList(userId);
-	}
+        int newGroupId = groupManager.getGroupId(groupName);
 
-	public List<Group> getGroupList(List<UserGroup> userGroupList) {
-		GroupManager groupManager = GroupManager.getInstance();
-		return groupManager.getGroupList(userGroupList);
-	}
+        return userGroupManager.createUserGroup(getUserId(), newGroupId);
+    }
 
-	public GroupManager getGroupManager() {
-		return GroupManager.getInstance();
-	}
+    public int getUserId() {
+        return userManager.getUserId();
+    }
+
+    public List<UserGroup> getUserGroupList(int userId) {
+        userGroupManager = UserGroupManager.getInstance();
+        return userGroupManager.getUserGroupList(userId);
+    }
+
+    public List<Group> getGroupList(List<UserGroup> userGroupList) {
+        GroupManager groupManager = GroupManager.getInstance();
+        return groupManager.getGroupList(userGroupList);
+    }
+
+    public GroupManager getGroupManager() {
+        return GroupManager.getInstance();
+    }
+
     public ListManager getListManager() {
         return ListManager.getInstance();
     }
 
-    public List<GroupList> getShoppingList(int id) {
+    public List<GroupList> getShoppingList() {
         listManager = getListManager();
-        return listManager.getShoppingList(id);
+        return listManager.getShoppingList(getGroupManager().getSelected().getId());
     }
 
     public boolean addShopList(String name) {

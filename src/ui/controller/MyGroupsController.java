@@ -41,22 +41,23 @@ import model.domain.UserGroup;
  * @author fsmag
  */
 public class MyGroupsController extends GridPane {
-	private final ObservableList<Button> buttons = FXCollections.observableArrayList();
-	@FXML
-	private VBox shopListe;
 
-	@FXML
-	private ScrollPane scrollpane;
+    private final ObservableList<Button> buttons = FXCollections.observableArrayList();
+    @FXML
+    private VBox shopListe;
 
-	private FilteredList<Button> flButton;
-	
-	private ShareShopFacade facade;
-	
-	public MyGroupsController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/MyGroupsView.fxml"));
-		leLoader.setController(this);
-		leLoader.setRoot(this);
-		leLoader.load();
+    @FXML
+    private ScrollPane scrollpane;
+
+    private FilteredList<Button> flButton;
+
+    private ShareShopFacade facade;
+
+    public MyGroupsController() throws IOException {
+        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/MyGroupsView.fxml"));
+        leLoader.setController(this);
+        leLoader.setRoot(this);
+        leLoader.load();
         this.facade = ShareShopFacade.getInstance();
         shopListe = new VBox();
         initList();
@@ -64,10 +65,10 @@ public class MyGroupsController extends GridPane {
         shopListe.getChildren().addAll(flButton);
         shopListe.setAlignment(Pos.CENTER);
         scrollpane.setContent(shopListe);
-	}
+    }
 
-	private void initList() {
-		int userId = facade.getUserId();
+    private void initList() {
+        int userId = facade.getUserId();
         List<UserGroup> userGroupList = facade.getUserGroupList(userId);
         List<Group> groupList = facade.getGroupList(userGroupList);
         shopListe.getChildren().clear();
@@ -86,63 +87,63 @@ public class MyGroupsController extends GridPane {
         }
         shopListe.setAlignment(Pos.CENTER);
         shopListe.setSpacing(10.0);
-	}
+    }
 
-	/*
+    /*
 	 * TODO Il faut rajouter une fonction pour clear la face des infos du user + de
 	 * la connection JDBC
-	 */
-	@FXML
-	private void disconnect(ActionEvent event) {
+     */
+    @FXML
+    private void disconnect(ActionEvent event) {
 
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new LoginController());
-		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	@FXML
-	private void profil(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new ProfilController());
-		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	@FXML
-	private void mystats(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new StatsController());
-		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	@FXML
-	private void addGroup(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new AddGroupController());
-		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
-	@FXML
-	private void toGroup(Group group) {
-		facade.getGroupManager().setSelected(group);
         try {
             super.getChildren().clear();
-            super.getChildren().add(new MyGroupsController());
+            super.getChildren().add(new LoginController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void profil(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new ProfilController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void mystats(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new StatsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void addGroup(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new AddGroupController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void toGroup(Group group) {
+        facade.getGroupManager().setSelected(group);
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new ShopListController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-	}
+    }
 
 }

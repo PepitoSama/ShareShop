@@ -87,4 +87,9 @@ public class PricedProductDAO implements DAOProductsInterface<PricedProduct> {
     public boolean delete(PricedProduct obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<PricedProduct> getWhere(List<Couple> where) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

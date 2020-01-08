@@ -161,4 +161,9 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
         return false;
     }
 
+    @Override
+    public List<GroupList> getWhere(List<Couple> where) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

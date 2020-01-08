@@ -63,7 +63,7 @@ public class ShopListController extends GridPane {
     }
 
     private void initList() {
-        List<GroupList> shoopingList = facade.getShoppingList(1);
+        List<GroupList> shoopingList = facade.getShoppingList();
         shopListe.getChildren().clear();
         for (GroupList liste : shoopingList) {
             Button b = new Button(liste.getName());

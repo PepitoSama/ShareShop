@@ -22,6 +22,10 @@ public class GroupManager {
     private static GroupManager instance = null;
     private Group selected;
 
+    public Group getSelected() {
+        return selected;
+    }
+
     public static GroupManager getInstance() {
         if (instance == null) {
             instance = new GroupManager();
