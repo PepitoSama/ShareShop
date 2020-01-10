@@ -14,7 +14,6 @@ import model.domain.Group;
 import model.domain.Stats;
 import model.domain.UserGroup;
 import model.domain.GroupList;
-import model.domain.products.GeneralProduct;
 
 public class ShareShopFacade {
 
@@ -163,11 +162,20 @@ public class ShareShopFacade {
 
     public List<GroupList> getShoppingList() {
         listManager = getListManager();
-        return listManager.getShoppingList(getGroupManager().getSelected().getId());
+        return listManager.getShoppingList(getSelectedGroupID());
     }
 
+    public int getSelectedGroupListID(){
+        return this.listManager.getGroupListId();
+    }
+    
+    public int getSelectedGroupID(){
+        groupManager = GroupManager.getInstance();  
+        return this.groupManager.getSelectedGroupId();
+    }
+    
     public boolean addShopList(String name) {
-        return listManager.addShopList(name, 1);
+        return listManager.addShopList(name, this.getSelectedGroupID() );
     }
 
     public String getListName() {

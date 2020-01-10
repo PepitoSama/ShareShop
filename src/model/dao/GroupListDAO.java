@@ -17,27 +17,35 @@ import model.domain.GroupList;
  *
  * @author fsmag
  */
-public class GroupListDAO implements DAOGroupListInterface<GroupList> {
+public class GroupListDAO implements DAO<GroupList> {
 
     JDBCAccess jdbc;
     String tableName;
     String quantified;
 
     public GroupListDAO() {
-    	this.jdbc = JDBCAccess.getInstance();
+        this.jdbc = JDBCAccess.getInstance();
         this.tableName = "GroupList";
         this.quantified = "QuantifiedProductList";
     }
 
     @Override
-    public List<GroupList> getShoppingList(int id) {
-        String sql = "SELECT * FROM " + this.tableName + " WHERE idGroup=? and type='S'";
-        int rows = 0;
+    public List<GroupList> getWhere(List<Couple> where) {
+        String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+        boolean first = true;
+        for (Couple couple : where) {
+            if (first != true) {
+                sql += " AND ";
+            }
+            sql += couple.getName();
+            sql += " LIKE ";
+            sql += couple.getValue();
+            first = false;
+        }
         PreparedStatement statement;
         statement = jdbc.prepareStatement(sql);
         ArrayList<GroupList> shoppingList = new ArrayList<GroupList>();
         try {
-            statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result != null) {
                 while (result.next()) {
@@ -60,36 +68,6 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
         return shoppingList;
     }
 
-    @Override
-    public GroupList getFavoriteList(int id) {
-        String sql = "SELECT * FROM " + this.tableName + " WHERE idGroup=? and type='F'";
-        int rows = 0;
-        PreparedStatement statement;
-        statement = jdbc.prepareStatement(sql);
-        ArrayList<GroupList> favorite = new ArrayList<GroupList>();
-        try {
-            statement.setInt(1, id);
-            ResultSet result = statement.executeQuery();
-            if (result != null) {
-                while (result.next()) {
-                    int idGroupList = result.getInt("idGroupList");
-                    int idGroup = result.getInt("idGroup");
-                    Date date = result.getDate("date");
-                    String name = result.getString("name");
-                    char type = result.getString("type").charAt(0);
-                    favorite.add(new GroupList(idGroupList, idGroup, name, new java.util.Date(date.getTime()), type));
-                }
-            } else {
-                return null;
-            }
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        return favorite.get(0);
-    }
 
     @Override
     public List<GroupList> getAll() {
@@ -158,11 +136,6 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
             return false;
         }
         return false;
-    }
-
-    @Override
-    public List<GroupList> getWhere(List<Couple> where) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

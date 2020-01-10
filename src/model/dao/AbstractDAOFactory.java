@@ -38,8 +38,8 @@ public abstract class AbstractDAOFactory {
     public abstract DAO<Group> getGroupDAO();
     public abstract DAO<UserGroup> getUserGroupDAO();
 
-    public abstract DAOGroupListInterface<GroupList> getGroupListDAO();
+    public abstract DAO<GroupList> getGroupListDAO();
 
-    public abstract DAOProductsInterface<PricedProduct> getPricedProductDAO();
+    public abstract DAO<PricedProduct> getPricedProductDAO();
 
 }

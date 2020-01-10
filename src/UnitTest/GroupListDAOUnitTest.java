@@ -5,7 +5,9 @@
  */
 package UnitTest;
 
+import java.util.ArrayList;
 import java.util.List;
+import model.dao.Couple;
 import model.dao.GroupListDAO;
 import model.domain.GroupList;
 
@@ -14,9 +16,13 @@ import model.domain.GroupList;
  * @author fsmag
  */
 public class GroupListDAOUnitTest {
+
     public static void main(String[] args) {
-		GroupListDAO dao = new GroupListDAO();
-		List<GroupList> liste = dao.getShoppingList(1);
-                System.out.println(liste);
-	}
+        GroupListDAO dao = new GroupListDAO();
+        List<Couple> couple = new ArrayList<Couple>();
+        couple.add(new Couple("idGroup", Integer.toString(1)));
+        couple.add(new Couple("type", "S"));
+        List<GroupList> liste = dao.getWhere(couple);
+        System.out.println(liste);
+    }
 }

@@ -6,11 +6,10 @@
 package bl.manager;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import model.dao.AbstractDAOFactory;
-import model.dao.DAOGroupListInterface;
-import model.dao.DAOProductsInterface;
+import model.dao.*;
 import model.domain.GroupList;
 import model.domain.products.PricedProduct;
 
@@ -21,8 +20,11 @@ import model.domain.products.PricedProduct;
 public class ListManager {
 
     public List<GroupList> getShoppingList(int id) {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.getShoppingList(id);
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idGroup", Integer.toString(id)));
+        liste.add(new Couple("type", "S"));
+        return dao.getWhere(liste);
     }
 
     private GroupList selected;
@@ -36,8 +38,11 @@ public class ListManager {
     }
 
     public GroupList getFavoriteList(int id) {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.getFavoriteList(id);
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idGroup", Integer.toString(id)));
+        liste.add(new Couple("type", "F"));
+        return dao.getWhere(liste).get(0);
     }
 
     private static ListManager instance = null;
@@ -50,28 +55,28 @@ public class ListManager {
     }
 
     public boolean addShopList(String name, int id) {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.save(new GroupList(0, id, name, new Date(), 'S'));
     }
 
     public boolean addFavorisList(int id) {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.save(new GroupList(0, id, "Favoris", new Date(), 'F'));
     }
 
     public boolean addSuggestList(int id) {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.save(new GroupList(0, id, "Suggest", new Date(), 'P'));
     }
 
     public boolean updateShopList(String name) throws SQLException {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         selected.setName(name);
         return dao.update(selected);
     }
 
     public boolean removeList() {
-        DAOGroupListInterface<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         return dao.delete(selected);
     }
 
@@ -80,8 +85,15 @@ public class ListManager {
     }
 
     public void getBoughtProducts(GroupList selected) {
-        DAOProductsInterface<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
-        selected.setBoughtProducts(dao.getProducts(selected.getIdGroupList()));
+        DAO<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
+        List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
+        liste.add(new Couple("p.idProduct", "t.idProduct"));
+        selected.setBoughtProducts(dao.getWhere(liste));
     }
 
+    public int getGroupListId(){
+        return this.selected.getIdGroupList();
+    }
+    
 }

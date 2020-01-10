@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.DAO;
-import model.dao.DAOStatsInterface;
 import model.dao.StatsDAO;
 import model.domain.Group;
 import model.domain.Stats;

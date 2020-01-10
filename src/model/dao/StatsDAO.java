@@ -25,7 +25,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     String tableName;
 
     public StatsDAO() {
-    	this.jdbc = JDBCAccess.getInstance();
+        this.jdbc = JDBCAccess.getInstance();
         this.tableName = "`Stats`";
     }
 
@@ -65,7 +65,6 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         PreparedStatement statement;
         statement = jdbc.prepareStatement(sql);
         ArrayList<Stats> statsList = new ArrayList<Stats>();
-        System.out.println(id);
         try {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -113,7 +112,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
             } else {
                 statement.setDate(2, new java.sql.Date(f.getTime()));
             }
-            
+
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -130,8 +129,8 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         }
         return statsList;
     }
-    
-    public List<Stats> getDate( Date d, Date f) {
+
+    public List<Stats> getDate(Date d, Date f) {
         String sql = "";
         if (d != null && f != null) {
             sql = "SELECT * FROM " + this.tableName + " WHERE date>=? and date<=?";
@@ -155,7 +154,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
             } else {
                 statement.setDate(1, new java.sql.Date(f.getTime()));
             }
-            
+
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -268,20 +267,20 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         }
         return res;
     }
-    
-	@Override
-	public List<Stats> getWhere(List<Couple> where) {
-		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
-		boolean first = true;
-		for (Couple couple : where) {
-			if (first != true) {
-				sql += " AND ";
-			}
-			sql += couple.getName();
-			sql += " LIKE ";
-			sql += couple.getValue();
-			first = false;
-		}
+
+    @Override
+    public List<Stats> getWhere(List<Couple> where) {
+        String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+        boolean first = true;
+        for (Couple couple : where) {
+            if (first != true) {
+                sql += " AND ";
+            }
+            sql += couple.getName();
+            sql += " LIKE ";
+            sql += couple.getValue();
+            first = false;
+        }
         Statement statement;
         ArrayList<Stats> statsList = new ArrayList<Stats>();
 
@@ -306,5 +305,5 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
         }
 
         return statsList;
-	}
+    }
 }

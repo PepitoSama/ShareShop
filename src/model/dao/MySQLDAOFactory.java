@@ -33,12 +33,12 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     }
 
     @Override
-    public DAOGroupListInterface<GroupList> getGroupListDAO() {
+    public DAO<GroupList> getGroupListDAO() {
         return new GroupListDAO();
     }
 
     @Override
-    public DAOProductsInterface<PricedProduct> getPricedProductDAO() {
+    public DAO<PricedProduct> getPricedProductDAO() {
         return new PricedProductDAO();
     }
 

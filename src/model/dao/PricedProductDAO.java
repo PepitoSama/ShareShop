@@ -17,27 +17,36 @@ import model.domain.products.Product;
  *
  * @author fsmag
  */
-public class PricedProductDAO implements DAOProductsInterface<PricedProduct> {
+public class PricedProductDAO implements DAO<PricedProduct> {
 
     JDBCAccess jdbc;
     String tableName;
     String product;
 
     public PricedProductDAO() {
-    	this.jdbc = JDBCAccess.getInstance();
+        this.jdbc = JDBCAccess.getInstance();
         this.tableName = "PricedProductList";
         this.product = "Product";
     }
 
     @Override
-    public List<PricedProduct> getProducts(int id) {
-        String sql = "SELECT * FROM " + this.tableName + " t, " + this.product + " p WHERE idGroupList=? and p.idProduct = t.idProduct";
+    public List<PricedProduct>  getWhere(List<Couple> where) {
+        String sql = "SELECT * FROM " + this.tableName + " t, " + this.product + " p WHERE ";
         int rows = 0;
+        boolean first = true;
+        for (Couple couple : where) {
+            if (first != true) {
+                sql += " AND ";
+            }
+            sql += couple.getName();
+            sql += " LIKE ";
+            sql += couple.getValue();
+            first = false;
+        }
         PreparedStatement statement;
         statement = jdbc.prepareStatement(sql);
         ArrayList<PricedProduct> boughtList = new ArrayList<PricedProduct>();
         try {
-            statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result != null) {
                 while (result.next()) {
@@ -87,8 +96,4 @@ public class PricedProductDAO implements DAOProductsInterface<PricedProduct> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<PricedProduct> getWhere(List<Couple> where) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

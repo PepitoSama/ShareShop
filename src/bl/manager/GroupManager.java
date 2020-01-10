@@ -33,21 +33,21 @@ public class GroupManager {
         return instance;
     }
 
-	public boolean createGroup(String groupName) {
-		// Create the Group
-		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
-		Group g;
+    public boolean createGroup(String groupName) {
+        // Create the Group
+        DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+        Group g;
         try {
-			checkExisting(groupName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            checkExisting(groupName);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         g = new Group(groupName);
-		return dao.save(g);
-	}
-	
-	public void checkExisting(String groupName) throws Exception {
+        return dao.save(g);
+    }
+
+    public void checkExisting(String groupName) throws Exception {
         DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
         List<Group> groups = dao.getAll();
         for (Group g : groups) {
@@ -56,31 +56,35 @@ public class GroupManager {
             }
         }
     }
-	
-	public List<Group> getGroupList(List<UserGroup> userGroupList) {
-		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
-		List<Group> groupList = new ArrayList<>();
-		for (Group group : dao.getAll()) {
-			for(UserGroup userGroup : userGroupList) {
-				if (group.getId() == userGroup.getIdGroup()) {
-					groupList.add(group);
-				}
-			}
-		}
-		return groupList;
-	}
 
-	public void setSelected(Group group) {
-		this.selected = group;
-	}
+    public List<Group> getGroupList(List<UserGroup> userGroupList) {
+        DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+        List<Group> groupList = new ArrayList<>();
+        for (Group group : dao.getAll()) {
+            for (UserGroup userGroup : userGroupList) {
+                if (group.getId() == userGroup.getIdGroup()) {
+                    groupList.add(group);
+                }
+            }
+        }
+        return groupList;
+    }
 
-	public int getGroupId(String groupName) {
-		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
-		Couple where = new Couple("name", groupName);
-		List<Couple> listWhere = new ArrayList<>();
-		listWhere.add(where);
-		List<Group> listGroup = dao.getWhere(listWhere);
-		return listGroup.get(0).getId();
-	}
-	
+    public void setSelected(Group group) {
+        this.selected = group;
+    }
+
+    public int getGroupId(String groupName) {
+        DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+        Couple where = new Couple("name", groupName);
+        List<Couple> listWhere = new ArrayList<>();
+        listWhere.add(where);
+        List<Group> listGroup = dao.getWhere(listWhere);
+        return listGroup.get(0).getId();
+    }
+
+    public int getSelectedGroupId() {
+        return getSelected().getId();
+    }
+
 }

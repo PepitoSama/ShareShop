@@ -62,7 +62,6 @@ public class StatsManager {
 
     public int getNumber() {
         DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
-
         try {
             return dao.getNumber();
         } catch (Exception e) {

@@ -142,7 +142,6 @@ public class MyGroupsController extends GridPane {
             super.getChildren().add(new ShopListController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
 
