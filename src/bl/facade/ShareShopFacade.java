@@ -1,6 +1,7 @@
 package bl.facade;
 
 import bl.manager.ListManager;
+import bl.manager.MessageManager;
 import bl.manager.StatsManager;
 import bl.manager.UserGroupManager;
 import bl.manager.UserManager;
@@ -14,6 +15,7 @@ import model.domain.Group;
 import model.domain.Stats;
 import model.domain.UserGroup;
 import model.domain.GroupList;
+import model.domain.Message;
 
 public class ShareShopFacade {
 
@@ -22,6 +24,7 @@ public class ShareShopFacade {
     private GroupManager groupManager;
     private UserGroupManager userGroupManager;
     private ListManager listManager;
+    private MessageManager messageManager;
 
     private static ShareShopFacade instance = null;
 
@@ -186,4 +189,18 @@ public class ShareShopFacade {
         listManager.getBoughtProducts(listManager.getSelected());
         return listManager.getSelected();
     }
+    
+    public List<Message> getMessages() {
+    	this.messageManager = messageManager.getInstance();
+    	return this.messageManager.getAllMessages();
+    }
+    
+    public MessageManager getMessageManager() {
+    	this.messageManager = messageManager.getInstance();
+    	return this.messageManager;
+    }
+
+	public void setMessageSelected() {
+		this.getMessageManager().setSelected(this.groupManager.getSelected());
+	}
 }

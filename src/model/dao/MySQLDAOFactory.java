@@ -5,6 +5,7 @@ import model.domain.Stats;
 import model.domain.User;
 import model.domain.UserGroup;
 import model.domain.GroupList;
+import model.domain.Message;
 import model.domain.products.PricedProduct;
 
 
@@ -41,5 +42,10 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     public DAO<PricedProduct> getPricedProductDAO() {
         return new PricedProductDAO();
     }
+
+	@Override
+	public DAO<Message> getMessageDAO() {
+		return new MessageDAO();
+	}
 
 }
