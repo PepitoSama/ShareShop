@@ -114,12 +114,12 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <center>
-                              <PasswordField fx:id="pwd" BorderPane.alignment="CENTER" />
+                              <PasswordField fx:id="pwd" onKeyPressed="#login" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <center>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" BorderPane.alignment="CENTER">
+                              <Button fx:id="log" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" onKeyPressed="#login" text="Login" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

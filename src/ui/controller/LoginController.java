@@ -42,7 +42,7 @@ public class LoginController extends GridPane {
 
     @FXML
     private Text txt;
-    
+
     @FXML
     private Button log;
 
@@ -53,11 +53,7 @@ public class LoginController extends GridPane {
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
-        this.addEventFilter(KeyEvent.ANY, keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                    login();
-                }
-        });
+        
         this.facade = ShareShopFacade.getInstance();
     }
 
@@ -65,8 +61,15 @@ public class LoginController extends GridPane {
     private void login(ActionEvent event) {
         login();
     }
-    
-    private void login(){
+
+    @FXML
+    private void login(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            login();
+        }
+    }
+
+    private void login() {
         String id = login.getText();
         String pass = pwd.getText();
         // On r�cup�re les contenus des champs texte de la vue et on va regarder s'ils
@@ -84,7 +87,6 @@ public class LoginController extends GridPane {
             txt.setFill(Paint.valueOf("red"));
         }
     }
-
 
     @FXML
     private void register(ActionEvent event) {
