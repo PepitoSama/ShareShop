@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -78,7 +79,7 @@ public class ShopListController extends GridPane {
                     toList(liste);
                 }
             });
-            Button u = new Button("Update");
+            Button u = new Button("✏");
             u.setId("u" + Integer.toString(liste.getIdGroupList()));
             u.setStyle("-fx-font-size: 24px; ");
             u.setAlignment(Pos.CENTER);
@@ -88,7 +89,7 @@ public class ShopListController extends GridPane {
                     update(liste);
                 }
             });
-            Button r = new Button("Remove");
+            Button r = new Button("❌");
             r.setId("r" + Integer.toString(liste.getIdGroupList()));
             r.setStyle("-fx-font-size: 24px; ");
             r.setAlignment(Pos.CENTER);
@@ -109,18 +110,18 @@ public class ShopListController extends GridPane {
     }
 
     @FXML
-    void favorites(ActionEvent event) {
-
+    void favorites(MouseEvent event) {
+    	System.out.println("TODO");
     }
 
     @FXML
-    void messages(ActionEvent event) {
-
+    void messages(MouseEvent event) {
+    	System.out.println("TODO");
     }
 
     @FXML
-    void inventory(ActionEvent event) {
-
+    void inventory(MouseEvent event) {
+    	System.out.println("TODO");
     }
 
     @FXML
