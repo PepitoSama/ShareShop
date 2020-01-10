@@ -13,12 +13,16 @@ import bl.facade.ShareShopFacade;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -39,6 +43,9 @@ public class LoginController extends GridPane {
     @FXML
     private Text txt;
 
+    @FXML
+    private Button log;
+
     private final ShareShopFacade facade;
 
     public LoginController() throws IOException {
@@ -46,14 +53,26 @@ public class LoginController extends GridPane {
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
+        
         this.facade = ShareShopFacade.getInstance();
     }
 
     @FXML
     private void login(ActionEvent event) {
+        login();
+    }
+
+    @FXML
+    private void login(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            login();
+        }
+    }
+
+    private void login() {
         String id = login.getText();
         String pass = pwd.getText();
-        // On récupère les contenus des champs texte de la vue et on va regarder s'ils
+        // On rï¿½cupï¿½re les contenus des champs texte de la vue et on va regarder s'ils
         // sont pas nul avant d'envoyer au controleur
 
         if (facade.login(id, pass)) {

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dao.*;
 import model.domain.GroupList;
 import model.domain.products.PricedProduct;
@@ -69,10 +71,15 @@ public class ListManager {
         return dao.save(new GroupList(0, id, "Suggest", new Date(), 'P'));
     }
 
-    public boolean updateShopList(String name) throws SQLException {
+    public boolean updateShopList(String name){
         DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         selected.setName(name);
-        return dao.update(selected);
+        try {
+            return dao.update(selected);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public boolean removeList() {

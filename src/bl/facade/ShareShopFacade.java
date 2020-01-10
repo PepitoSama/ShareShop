@@ -171,12 +171,17 @@ public class ShareShopFacade {
     public int getSelectedGroupListID(){
         return this.listManager.getGroupListId();
     }
-    
+
+    public GroupList getSelectedGroupList(){
+        listManager = ListManager.getInstance();
+        return this.listManager.getSelected();
+    }
+
     public int getSelectedGroupID(){
-        groupManager = GroupManager.getInstance();  
+        groupManager = GroupManager.getInstance();
         return this.groupManager.getSelectedGroupId();
     }
-    
+
     public boolean addShopList(String name) {
         return listManager.addShopList(name, this.getSelectedGroupID() );
     }
@@ -194,7 +199,7 @@ public class ShareShopFacade {
     	this.messageManager = messageManager.getInstance();
     	return this.messageManager.getAllMessages();
     }
-    
+
     public MessageManager getMessageManager() {
     	this.messageManager = messageManager.getInstance();
     	return this.messageManager;
@@ -203,4 +208,8 @@ public class ShareShopFacade {
 	public void setMessageSelected() {
 		this.getMessageManager().setSelected(this.groupManager.getSelected());
 	}
+
+    public boolean updateShopList(String name) {
+        return listManager.updateShopList(name);
+    }
 }
