@@ -169,6 +169,11 @@ public class ShareShopFacade {
         return this.listManager.getGroupListId();
     }
     
+    public GroupList getSelectedGroupList(){
+        listManager = ListManager.getInstance();
+        return this.listManager.getSelected();
+    }
+    
     public int getSelectedGroupID(){
         groupManager = GroupManager.getInstance();  
         return this.groupManager.getSelectedGroupId();
@@ -185,5 +190,9 @@ public class ShareShopFacade {
     public GroupList getBoughtProduct() {
         listManager.getBoughtProducts(listManager.getSelected());
         return listManager.getSelected();
+    }
+
+    public boolean updateShopList(String name) {
+        return listManager.updateShopList(name);
     }
 }

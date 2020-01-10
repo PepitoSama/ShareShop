@@ -172,7 +172,7 @@ public class ShopListController extends GridPane {
         facade.getListManager().setSelected(selectedList);
         try {
             super.getChildren().clear();
-            super.getChildren().add(new AfficherListController());
+            super.getChildren().add(new UpdateListController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
