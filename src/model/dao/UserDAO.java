@@ -18,8 +18,7 @@ public class UserDAO implements DAO<User> {
 	String tableName;
 
 	public UserDAO() {
-		this.jdbc = new JDBCAccess();
-		this.jdbc.openConnection();
+		this.jdbc = JDBCAccess.getInstance();
 		this.tableName = "`User`";
 	}
 

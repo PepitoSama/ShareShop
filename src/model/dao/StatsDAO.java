@@ -25,8 +25,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     String tableName;
 
     public StatsDAO() {
-        this.jdbc = JDBCAccess.getInstance();
-        this.jdbc.openConnection();
+    	this.jdbc = JDBCAccess.getInstance();
         this.tableName = "`Stats`";
     }
 

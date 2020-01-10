@@ -15,6 +15,7 @@ public class JDBCAccess {
     public static JDBCAccess getInstance() {
         if (instance == null) {
             instance = new JDBCAccess();
+            instance.openConnection();
         }
         return instance;
     }

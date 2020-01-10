@@ -24,8 +24,7 @@ public class PricedProductDAO implements DAOProductsInterface<PricedProduct> {
     String product;
 
     public PricedProductDAO() {
-        this.jdbc = JDBCAccess.getInstance();
-        this.jdbc.openConnection();
+    	this.jdbc = JDBCAccess.getInstance();
         this.tableName = "PricedProductList";
         this.product = "Product";
     }

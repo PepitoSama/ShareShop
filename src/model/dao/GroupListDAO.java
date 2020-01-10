@@ -24,8 +24,7 @@ public class GroupListDAO implements DAOGroupListInterface<GroupList> {
     String quantified;
 
     public GroupListDAO() {
-        this.jdbc = JDBCAccess.getInstance();
-        this.jdbc.openConnection();
+    	this.jdbc = JDBCAccess.getInstance();
         this.tableName = "GroupList";
         this.quantified = "QuantifiedProductList";
     }

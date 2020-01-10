@@ -16,8 +16,7 @@ public class GroupDAO implements DAO<Group> {
 	String tableName;
 
 	public GroupDAO() {
-		this.jdbc = new JDBCAccess();
-		this.jdbc.openConnection();
+		this.jdbc = JDBCAccess.getInstance();
 		this.tableName = "`Group`";
 	}
 

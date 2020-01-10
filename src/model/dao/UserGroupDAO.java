@@ -16,8 +16,7 @@ public class UserGroupDAO implements DAO<UserGroup> {
 	String tableName;
 
 	public UserGroupDAO() {
-		this.jdbc = new JDBCAccess();
-		this.jdbc.openConnection();
+		this.jdbc = JDBCAccess.getInstance();
 		this.tableName = "`UserGroup`";
 	}
 
