@@ -1,16 +1,19 @@
 package model.domain;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class Message {
 	
-	String sentBy;
+	User sentBy;
+	Group group;
 	String text;
 	private Date date;
 	
-	public Message(String sentBy, String text, Date date) {
+	public Message(User sentBy, Group group, String text) {
 		this.setText(text);
-		this.setDate(date);
+		this.setDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+		this.setGroup(group);
 		this.setSentBy(sentBy);
 	}
 
@@ -30,16 +33,24 @@ public class Message {
 		this.date = date;
 	}
 
-	public String getSentBy() {
+	public User getSentBy() {
 		return sentBy;
 	}
 
-	public void setSentBy(String sentBy) {
-		this.sentBy = sentBy;
+	public void setSentBy(User sentBy2) {
+		this.sentBy = sentBy2;
 	}
 	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
 	public String toString() {
-		return "Message from : " + getSentBy() + ", " + getDate() + "\n" + getText();
+		return "Message from : " + getSentBy().getNickname() + "\n" + getDate() + "\n" + getText();
 	}
 	
 }

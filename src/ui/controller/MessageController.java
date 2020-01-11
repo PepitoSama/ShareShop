@@ -14,6 +14,10 @@ import bl.facade.ShareShopFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -30,11 +34,16 @@ import model.domain.Message;
 public class MessageController extends GridPane {
     
 	@FXML
-	private AnchorPane messageAnchor;
+	private VBox messageList;
 	
-    private ShareShopFacade msg;
+	@FXML
+	private ScrollPane scrollpane;
+
+	@FXML
+	private TextArea message;
     
     private ShareShopFacade facade;
+    
     
     public MessageController() throws IOException {
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/MessageView.fxml"));
@@ -42,35 +51,38 @@ public class MessageController extends GridPane {
         leLoader.setRoot(this);
         leLoader.load();
         this.facade = ShareShopFacade.getInstance();
-        this.messageAnchor = new AnchorPane();
+        this.messageList = new VBox();
         initMessages();
     }
 
 	private void initMessages() {
-		this.messageAnchor.getChildren().clear();
+		this.messageList.getChildren().clear();
 		VBox messageVBox = new VBox();
 		List<Message> msg = facade.getMessages();
 		for (Message message : facade.getMessages()) {
 			HBox messageHBox = new HBox();
 			GridPane messageGrid = new GridPane();
 			messageGrid.setPadding(new Insets(20));
+			
 			// Ajout de l'image avatar a gauche
 			BorderPane borderAvatar = new BorderPane();
-			ImageView avatarView = new ImageView();
-			Image avatar = new Image("https://freeiconshop.com/wp-content/uploads/edd/person-solid.png");
-			avatarView.setImage(avatar);
-			messageGrid.add(avatarView, 0, 0);
-//
-//			messageGrid.add(avatarView, 0, 1);
-//
-//			messageGrid.add(avatarView, 0, 2);
+			Image avatar = new Image("https://freeiconshop.com/wp-content/uploads/edd/person-solid.png", 50, 50, false, true);
+			ImageView avatarView = new ImageView(avatar);
+			borderAvatar.setCenter(avatarView);
+			messageGrid.add(borderAvatar, 0, 0);
 			
-			
-			
-			
+			// Ajout du message
 			BorderPane borderText = new BorderPane();
+			Label messageLabel = new Label(message.toString());
+			borderText.setCenter(messageLabel);
+			messageGrid.add(borderText, 1, 0);
 			
+			// Ajout du Vbox au HBox
+			messageVBox.getChildren().add(messageGrid);
 		}
+		messageList = messageVBox;
+        messageList.setAlignment(Pos.CENTER);
+        scrollpane.setContent(messageList);
 	}
 
 	@FXML
@@ -81,6 +93,23 @@ public class MessageController extends GridPane {
         } catch (IOException ex) {
             Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+	
+	@FXML
+    private void send() {
+		// Save message in DataBase
+		System.out.println(message.getText());
+		if (facade.sendMessage(message.getText())) {
+			// Clear message TextArea
+			message.clear();
+			// Refresh all messages
+			initMessages();
+		} else {
+			// Show error
+			System.out.println("Nupe");
+		}
+		
+		
     }
 
 }

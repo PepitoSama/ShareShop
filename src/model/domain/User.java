@@ -24,6 +24,15 @@ public class User {
 		this.setId(-1);
 	}
 	
+	public User(String username, String firstname, String lastname, Date birthdate, String email, int id) {
+		this.setBirthdate(birthdate);
+		this.setEmail(email);
+		this.setFistname(firstname);
+		this.setLastname(lastname);
+		this.setNickname(username);
+		this.setId(id);
+	}
+	
 	public User(String username, String password, String firstname, String lastname, Date birthdate, String email, int id) {
 		this.setBirthdate(birthdate);
 		this.setEmail(email);

@@ -216,4 +216,8 @@ public class ShareShopFacade {
     public boolean removeSelectedList() {
         return listManager.removeList();
     }
+
+	public boolean sendMessage(String text) {
+		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+	}
 }
