@@ -61,7 +61,7 @@ public class MessageDAO implements DAO<Message> {
 	}
 
 	@Override
-	public boolean update(Message obj) throws SQLException {
+	public boolean update(Message obj) {
 		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
 																		// Tools | Templates.
 	}
@@ -96,7 +96,6 @@ public class MessageDAO implements DAO<Message> {
 		statement = jdbc.prepareStatement(sql);
 		ResultSet result;
 		try {
-			System.out.println(statement.toString());
 			result = statement.executeQuery(sql);
 			if (result != null) {
 				while (result.next()) {

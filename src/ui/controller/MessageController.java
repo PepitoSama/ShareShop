@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
+
 import bl.facade.ShareShopFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,23 +62,39 @@ public class MessageController extends GridPane {
 		VBox messageVBox = new VBox();
 		List<Message> msg = facade.getMessages();
 		for (Message message : facade.getMessages()) {
-			HBox messageHBox = new HBox();
+			HBox messageHBox = new HBox(5);
+			messageHBox.setPadding(new Insets(5));
 			GridPane messageGrid = new GridPane();
+			messageGrid.setHgap(20);
 			messageGrid.setPadding(new Insets(20));
 			
 			// Ajout de l'image avatar a gauche
 			BorderPane borderAvatar = new BorderPane();
-			Image avatar = new Image("https://freeiconshop.com/wp-content/uploads/edd/person-solid.png", 50, 50, false, true);
+			Image avatar = new Image("https://freeiconshop.com/wp-content/uploads/edd/person-solid.png", 30, 30, false, true);
 			ImageView avatarView = new ImageView(avatar);
 			borderAvatar.setCenter(avatarView);
-			messageGrid.add(borderAvatar, 0, 0);
+			
 			
 			// Ajout du message
 			BorderPane borderText = new BorderPane();
 			Label messageLabel = new Label(message.toString());
+			messageLabel.setPrefWidth(500);
+			messageLabel.setWrapText(true);
 			borderText.setCenter(messageLabel);
-			messageGrid.add(borderText, 1, 0);
 			
+			if(message.getSentBy().getId() == facade.getUserId()) {
+				// User
+				messageGrid.add(borderAvatar, 1, 0);
+				messageGrid.add(borderText, 0, 0);
+				String style = "-fx-background-color: rgba(66, 135, 245, 0.5); -fx-border-radius: 18 18 18 18; -fx-background-radius: 18 18 18 18;";
+				messageGrid.setStyle(style);
+			} else {
+				// Others
+				messageGrid.add(borderAvatar, 0, 0);
+				messageGrid.add(borderText, 1, 0);
+				String style = "-fx-background-color: rgba(130, 130, 130, 0.5); -fx-border-radius: 18 18 18 18; -fx-background-radius: 18 18 18 18;";
+				messageGrid.setStyle(style);
+			}
 			// Ajout du Vbox au HBox
 			messageVBox.getChildren().add(messageGrid);
 		}
