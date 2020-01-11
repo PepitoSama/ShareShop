@@ -17,34 +17,76 @@ public class Stats {
     private Date date;
     private float amount;
 
+    /**
+     *
+     * getter for attribut idUser
+     *
+     * @return int
+     */
     public int getIdUser() {
-        return idUser;
+	return idUser;
     }
 
+    /**
+     *
+     * setter for attribut idUser
+     *
+     * @param idUser
+     */
     public void setIdUser(int idUser) {
-        this.idUser = idUser;
+	this.idUser = idUser;
     }
 
+    /**
+     *
+     * getter for attribut date
+     *
+     * @return Date
+     */
     public Date getDate() {
-        return date;
+	return date;
     }
 
+    /**
+     *
+     * setter for attribut date
+     *
+     * @param date
+     */
     public void setDate(Date date) {
-        this.date = date;
+	this.date = date;
     }
 
+    /**
+     * getter for attribut amount
+     *
+     * @return float
+     */
     public float getAmount() {
-        return amount;
+	return amount;
     }
 
+    /**
+     *
+     * setter for attribut amount
+     *
+     * @param amount
+     */
     public void setAmount(float amount) {
-        this.amount = amount;
+	this.amount = amount;
     }
 
+    /**
+     * Stat constructor
+     *
+     * @param idUser
+     * @param date
+     * @param amount
+     */
     public Stats(int idUser, Date date, float amount) {
-        this.idUser = idUser;
-        this.date = date;
-        this.amount = amount;
+	this.idUser = idUser;
+	this.date = date;
+	this.amount = amount;
     }
-    
+
 }

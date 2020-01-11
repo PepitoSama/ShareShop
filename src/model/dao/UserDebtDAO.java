@@ -24,16 +24,31 @@ public class UserDebtDAO implements DAO<UserDebt> {
     JDBCAccess jdbc;
     String tableName;
 
+    /**
+     * UserDebtDAO constructor
+     */
     public UserDebtDAO() {
 	this.jdbc = JDBCAccess.getInstance();
 	this.tableName = "`UserDebt`";
     }
 
+    /**
+     *
+     * Not implemented
+     *
+     * @return List<UserDebt>
+     */
     @Override
     public List<UserDebt> getAll() {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * save an UserDebt in DataBase
+     *
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean save(UserDebt obj) {
 	String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?, ?, ?)";
@@ -58,6 +73,12 @@ public class UserDebtDAO implements DAO<UserDebt> {
 	return false;
     }
 
+    /**
+     * update an UserDebt in database
+     *
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean update(UserDebt obj) {
 	try {
@@ -78,6 +99,12 @@ public class UserDebtDAO implements DAO<UserDebt> {
 	return false;
     }
 
+    /**
+     * delete an userdebt in database
+     *
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean delete(UserDebt obj) {
 	String sql = "DELETE FROM " + this.tableName + " WHERE idDebt=?";
@@ -96,6 +123,12 @@ public class UserDebtDAO implements DAO<UserDebt> {
 	return false;
     }
 
+    /**
+     * Make a where in the database
+     *
+     * @param where
+     * @return List<UserDebt>
+     */
     @Override
     public List<UserDebt> get(List<Couple> where) {
 	String sql = "SELECT * FROM " + this.tableName + " WHERE ";

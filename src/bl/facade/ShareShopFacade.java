@@ -34,7 +34,6 @@ public class ShareShopFacade {
     private ProductManager productManager;
     private DebtManager debtManager;
 
-
     private static ShareShopFacade instance = null;
 
     public static ShareShopFacade getInstance() {
@@ -225,41 +224,45 @@ public class ShareShopFacade {
     public boolean removeSelectedList() {
 	return listManager.removeList();
     }
-    
+
     /**
      * @return all the products in the database
      */
     public List<GeneralProduct> getAllProducts() {
-    	return null;
+	return null;
     }
-    
+
     /**
-     * Add a Custom product. This product will be linked to the currently selected group in the groupManager
-     * @param name			The name of the product
-     * @param image			The image of the product
+     * Add a Custom product. This product will be linked to the currently
+     * selected group in the groupManager
+     *
+     * @param name	The name of the product
+     * @param image	The image of the product
      * @param description	The description of the product
-     * @param idFather		The id of the Parent Product. Give a negative number or 0 if this product doen't have a parent Product
+     * @param idFather	The id of the Parent Product. Give a negative number or 0
+     * if this product doen't have a parent Product
      * @return true if the product has been created
      */
     public boolean addProduct(String name, Image image, String description, int idFather) {
-    	this.productManager = ProductManager.getInstance();
-    	return this.productManager.addCustomProduct(name, image, description, idFather, groupManager.getSelected());
+	this.productManager = ProductManager.getInstance();
+	return this.productManager.addCustomProduct(name, image, description, idFather, groupManager.getSelected());
     }
-    
+
     /**
-     * Search products whose name is like the string given in parameter or is a child product of the former.
+     * Search products whose name is like the string given in parameter or is a
+     * child product of the former.
+     *
      * @param name	The name or part of the name of the product or parent product
      * @return	the List of products found
      */
     public List<GeneralProduct> searchProducts(String name) {
-    	this.productManager = ProductManager.getInstance();
-    	return this.productManager.searchProducts(name);
+	this.productManager = ProductManager.getInstance();
+	return this.productManager.searchProducts(name);
     }
 
-
-	public boolean sendMessage(String text) {
-		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
-	}
+    public boolean sendMessage(String text) {
+	return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+    }
 
     public List<UserDebt> getMyDebt() {
 	debtManager = DebtManager.getInstance();
@@ -285,10 +288,11 @@ public class ShareShopFacade {
 	return debtManager.getSelectedDebt();
     }
 
+    /*
     public boolean sendMessage(String text) {
 	return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
     }
-
+     */
     public boolean updateDebt() {
 	debtManager = DebtManager.getInstance();
 	return debtManager.updateDebt(getSelectedDebt());

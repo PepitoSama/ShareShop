@@ -67,6 +67,11 @@ public class PayDebtController extends GridPane {
 
     private Double re;
 
+    /**
+     * PayDebtController constructor Display view to pay a Debt in the Main View
+     *
+     * @throws IOException
+     */
     public PayDebtController() throws IOException {
 	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/PayDebtView.fxml"));
 	leLoader.setController(this);
@@ -80,6 +85,11 @@ public class PayDebtController extends GridPane {
 	p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
     }
 
+    /**
+     * FXML function back, return previous view
+     *
+     * @param event
+     */
     @FXML
     void back(ActionEvent event) {
 	try {
@@ -90,6 +100,12 @@ public class PayDebtController extends GridPane {
 	}
     }
 
+    /**
+     * FXML function pay that pay the Debt with the amount entered by user and
+     * turn back to Debt View
+     *
+     * @param event
+     */
     @FXML
     public void pay(ActionEvent event) {
 	Double val = select.getAmount() - Double.parseDouble(amount.getText());
@@ -102,9 +118,14 @@ public class PayDebtController extends GridPane {
 		Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	}
-	rest.setText(rest.getText()+"\n"+"Fail to pay debt");
+	rest.setText(rest.getText() + "\n" + "Fail to pay debt");
     }
 
+    /**
+     * FXML function that checkinkg amount entered by the user
+     *
+     * @param event
+     */
     @FXML
     private void check(KeyEvent event) {
 	String am = amount.getText();

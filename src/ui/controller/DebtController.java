@@ -61,6 +61,11 @@ public class DebtController extends GridPane {
     @FXML
     private ScrollPane scrollpaneAD;
 
+    /**
+     * DebtController constructor Display view Debt in the Main View
+     *
+     * @throws IOException
+     */
     public DebtController() throws IOException {
 	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/DebtView.fxml"));
 	leLoader.setController(this);
@@ -79,6 +84,9 @@ public class DebtController extends GridPane {
 	scrollpaneAD.setContent(amountDue);
     }
 
+    /**
+     * private function to init My Debt
+     */
     private void initDebt() {
 	List<UserDebt> debt = facade.getMyDebt();
 	myDebt.getChildren().clear();
@@ -105,6 +113,9 @@ public class DebtController extends GridPane {
 	myDebt.setSpacing(10.0);
     }
 
+    /**
+     * private function to init Amount Due
+     */
     private void initDue() {
 	List<UserDebt> debt = facade.getMyDue();
 	amountDue.getChildren().clear();
@@ -142,6 +153,11 @@ public class DebtController extends GridPane {
 	amountDue.setSpacing(10.0);
     }
 
+    /**
+     * FXML function back, return previous view
+     *
+     * @param event
+     */
     @FXML
     void back(ActionEvent event) {
 	try {
@@ -153,6 +169,11 @@ public class DebtController extends GridPane {
 	}
     }
 
+    /**
+     * public function to pay a Debt
+     *
+     * @param debt
+     */
     public void pay(UserDebt debt) {
 	facade.setSelectedDebt(debt);
 	try {

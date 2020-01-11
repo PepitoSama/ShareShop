@@ -35,12 +35,16 @@ public class MainViewController {
 
     private final ShareShopFacade manager = ShareShopFacade.getInstance();
 
+    /**
+     * initialize main controller that give control to LoginController
+     * @throws IOException 
+     */
     public void initialize() throws IOException {
-        try {
-            elements.getChildren().add(new LoginController());
-        } catch (IOException ex) {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+	try {
+	    elements.getChildren().add(new LoginController());
+	} catch (IOException ex) {
+	    Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 
 }

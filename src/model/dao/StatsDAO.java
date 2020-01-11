@@ -24,281 +24,339 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     JDBCAccess jdbc;
     String tableName;
 
+    /**
+     * StatsDAO constructor
+     */
     public StatsDAO() {
-        this.jdbc = JDBCAccess.getInstance();
-        this.tableName = "`Stats`";
+	this.jdbc = JDBCAccess.getInstance();
+	this.tableName = "`Stats`";
     }
 
+    /**
+     * get all Stats in database
+     *
+     * @return List<Stats>
+     */
     @Override
     public List<Stats> getAll() {
-        String sql = "SELECT * FROM " + this.tableName;
-        Statement statement;
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
+	String sql = "SELECT * FROM " + this.tableName;
+	Statement statement;
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
 
-        statement = jdbc.prepareStatement(sql);
-        ResultSet result;
-        try {
-            result = statement.executeQuery(sql);
-            if (result != null) {
-                while (result.next()) {
-                    int idUser = result.getInt("idUser");
-                    Date date = result.getDate("date");
-                    float amount = result.getFloat("amount");
-                    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
-                }
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
+	statement = jdbc.prepareStatement(sql);
+	ResultSet result;
+	try {
+	    result = statement.executeQuery(sql);
+	    if (result != null) {
+		while (result.next()) {
+		    int idUser = result.getInt("idUser");
+		    Date date = result.getDate("date");
+		    float amount = result.getFloat("amount");
+		    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+		}
+	    } else {
+		return null;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
 
-        return statsList;
+	return statsList;
     }
 
+    /**
+     * get all user's stats
+     *
+     * @param id
+     * @return List<Stats>
+     */
     @Override
     public List<Stats> getUser(int id) {
-        String sql = "SELECT * FROM " + this.tableName + " WHERE idUser=?";
-        int rows = 0;
-        PreparedStatement statement;
-        statement = jdbc.prepareStatement(sql);
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
-        try {
-            statement.setInt(1, id);
-            ResultSet result = statement.executeQuery();
-            if (result != null) {
-                while (result.next()) {
-                    int idUser = result.getInt("idUser");
-                    Date date = result.getDate("date");
-                    float amount = result.getFloat("amount");
-                    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
-                }
-            } else {
-                return null;
-            }
+	String sql = "SELECT * FROM " + this.tableName + " WHERE idUser=?";
+	int rows = 0;
+	PreparedStatement statement;
+	statement = jdbc.prepareStatement(sql);
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
+	try {
+	    statement.setInt(1, id);
+	    ResultSet result = statement.executeQuery();
+	    if (result != null) {
+		while (result.next()) {
+		    int idUser = result.getInt("idUser");
+		    Date date = result.getDate("date");
+		    float amount = result.getFloat("amount");
+		    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+		}
+	    } else {
+		return null;
+	    }
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        return statsList;
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
+	return statsList;
     }
 
+    /**
+     * get all user's stats between two date
+     *
+     * @param id
+     * @param d
+     * @param f
+     * @return List<Stats>
+     */
     public List<Stats> getDate(int id, Date d, Date f) {
-        String sql = "";
-        if (d != null && f != null) {
-            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? and date<=?";
-        } else if (d != null) {
-            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? ";
-        } else {
-            sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date<=?";
-        }
+	String sql = "";
+	if (d != null && f != null) {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? and date<=?";
+	} else if (d != null) {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date>=? ";
+	} else {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE idUser=? and date<=?";
+	}
 
-        int rows = 0;
-        PreparedStatement statement;
+	int rows = 0;
+	PreparedStatement statement;
 
-        statement = jdbc.prepareStatement(sql);
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
-        try {
-            statement.setInt(1, id);
-            if (d != null && f != null) {
-                statement.setDate(2, new java.sql.Date(d.getTime()));
-                statement.setDate(3, new java.sql.Date(f.getTime()));
-            } else if (d != null) {
-                statement.setDate(2, new java.sql.Date(d.getTime()));
-            } else {
-                statement.setDate(2, new java.sql.Date(f.getTime()));
-            }
+	statement = jdbc.prepareStatement(sql);
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
+	try {
+	    statement.setInt(1, id);
+	    if (d != null && f != null) {
+		statement.setDate(2, new java.sql.Date(d.getTime()));
+		statement.setDate(3, new java.sql.Date(f.getTime()));
+	    } else if (d != null) {
+		statement.setDate(2, new java.sql.Date(d.getTime()));
+	    } else {
+		statement.setDate(2, new java.sql.Date(f.getTime()));
+	    }
 
-            ResultSet resultSet = statement.executeQuery();
+	    ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
-                Date date = resultSet.getDate("date");
-                float amount = resultSet.getFloat("amount");
-                statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
-            }
+	    while (resultSet.next()) {
+		int idUser = resultSet.getInt("idUser");
+		Date date = resultSet.getDate("date");
+		float amount = resultSet.getFloat("amount");
+		statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+	    }
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        return statsList;
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
+	return statsList;
     }
 
+    /**
+     * get all stats between two date
+     *
+     * @param d
+     * @param f
+     * @return List<Stats>
+     */
     public List<Stats> getDate(Date d, Date f) {
-        String sql = "";
-        if (d != null && f != null) {
-            sql = "SELECT * FROM " + this.tableName + " WHERE date>=? and date<=?";
-        } else if (d != null) {
-            sql = "SELECT * FROM " + this.tableName + " WHERE date>=? ";
-        } else {
-            sql = "SELECT * FROM " + this.tableName + " WHERE date<=?";
-        }
+	String sql = "";
+	if (d != null && f != null) {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE date>=? and date<=?";
+	} else if (d != null) {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE date>=? ";
+	} else {
+	    sql = "SELECT * FROM " + this.tableName + " WHERE date<=?";
+	}
 
-        int rows = 0;
-        PreparedStatement statement;
+	int rows = 0;
+	PreparedStatement statement;
 
-        statement = jdbc.prepareStatement(sql);
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
-        try {
-            if (d != null && f != null) {
-                statement.setDate(1, new java.sql.Date(d.getTime()));
-                statement.setDate(2, new java.sql.Date(f.getTime()));
-            } else if (d != null) {
-                statement.setDate(1, new java.sql.Date(d.getTime()));
-            } else {
-                statement.setDate(1, new java.sql.Date(f.getTime()));
-            }
+	statement = jdbc.prepareStatement(sql);
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
+	try {
+	    if (d != null && f != null) {
+		statement.setDate(1, new java.sql.Date(d.getTime()));
+		statement.setDate(2, new java.sql.Date(f.getTime()));
+	    } else if (d != null) {
+		statement.setDate(1, new java.sql.Date(d.getTime()));
+	    } else {
+		statement.setDate(1, new java.sql.Date(f.getTime()));
+	    }
 
-            ResultSet resultSet = statement.executeQuery();
+	    ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
-                Date date = resultSet.getDate("date");
-                float amount = resultSet.getFloat("amount");
-                statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
-            }
+	    while (resultSet.next()) {
+		int idUser = resultSet.getInt("idUser");
+		Date date = resultSet.getDate("date");
+		float amount = resultSet.getFloat("amount");
+		statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+	    }
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
-        return statsList;
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
+	return statsList;
     }
 
+    /**
+     * add a Stat in the database
+     *
+     * @param stat
+     * @return boolean
+     */
     @Override
     public boolean save(Stats stat) {
 
-        String sql = "INSERT INTO " + this.tableName + " VALUES ( ?, ?, ?)";
-        int rowsInserted = 0;
-        PreparedStatement statement;
+	String sql = "INSERT INTO " + this.tableName + " VALUES ( ?, ?, ?)";
+	int rowsInserted = 0;
+	PreparedStatement statement;
 
-        statement = jdbc.prepareStatement(sql);
-        try {
-            statement.setInt(1, stat.getIdUser());
-            statement.setDate(2, new java.sql.Date(stat.getDate().getTime()));
-            statement.setFloat(3, stat.getAmount());
-            rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-        return false;
+	statement = jdbc.prepareStatement(sql);
+	try {
+	    statement.setInt(1, stat.getIdUser());
+	    statement.setDate(2, new java.sql.Date(stat.getDate().getTime()));
+	    statement.setFloat(3, stat.getAmount());
+	    rowsInserted = statement.executeUpdate();
+	    if (rowsInserted > 0) {
+		return true;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return false;
+	}
+	return false;
     }
 
+    /**
+     * update a stat in database
+     *
+     * @param stat
+     * @return
+     */
     @Override
     public boolean update(Stats stat) {
-        String sql = "UPDATE " + this.tableName
-                + " SET amount=? WHERE idUser=? and date=?";
+	String sql = "UPDATE " + this.tableName
+		+ " SET amount=? WHERE idUser=? and date=?";
 
-        PreparedStatement statement = jdbc.prepareStatement(sql);
+	PreparedStatement statement = jdbc.prepareStatement(sql);
 
-        try {
-            statement.setDate(3, new java.sql.Date(stat.getDate().getTime()));
-            statement.setFloat(1, stat.getAmount());
-            statement.setInt(2, stat.getIdUser());
+	try {
+	    statement.setDate(3, new java.sql.Date(stat.getDate().getTime()));
+	    statement.setFloat(1, stat.getAmount());
+	    statement.setInt(2, stat.getIdUser());
 
-            int rowsUpdated = statement.executeUpdate();
+	    int rowsUpdated = statement.executeUpdate();
 
-            if (rowsUpdated > 0) {
-                return true;
-            }
+	    if (rowsUpdated > 0) {
+		return true;
+	    }
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return false;
+	}
 
-        return false;
+	return false;
 
     }
 
+    /**
+     * delete a stat in database
+     *
+     * @param stat
+     * @return boolean
+     */
     public boolean delete(Stats stat) {
-        String sql = "DELETE FROM " + this.tableName + " WHERE idUser=? and date=?";
+	String sql = "DELETE FROM " + this.tableName + " WHERE idUser=? and date=?";
 
-        PreparedStatement statement = jdbc.prepareStatement(sql);
-        try {
-            statement.setInt(1, stat.getIdUser());
-            statement.setDate(2, new java.sql.Date(stat.getDate().getTime()));
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-        return false;
+	PreparedStatement statement = jdbc.prepareStatement(sql);
+	try {
+	    statement.setInt(1, stat.getIdUser());
+	    statement.setDate(2, new java.sql.Date(stat.getDate().getTime()));
+	    int rowsDeleted = statement.executeUpdate();
+	    if (rowsDeleted > 0) {
+		return true;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return false;
+	}
+	return false;
     }
 
+    /**
+     * get number of users with a stat or more
+     *
+     * @return int
+     */
     @Override
     public int getNumber() {
-        String sql = "SELECT DISTINCT(idUser) FROM " + this.tableName;
-        Statement statement;
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
-        int res = 0;
-        statement = jdbc.prepareStatement(sql);
-        ResultSet result;
-        try {
-            result = statement.executeQuery(sql);
-            while (result.next()) {
-                res += 1;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return res;
+	String sql = "SELECT DISTINCT(idUser) FROM " + this.tableName;
+	Statement statement;
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
+	int res = 0;
+	statement = jdbc.prepareStatement(sql);
+	ResultSet result;
+	try {
+	    result = statement.executeQuery(sql);
+	    while (result.next()) {
+		res += 1;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return res;
     }
 
+    /**
+     * Make a where in the database
+     *
+     * @param where
+     * @return List<Stats>
+     */
     @Override
     public List<Stats> get(List<Couple> where) {
-        String sql = "SELECT * FROM " + this.tableName + " WHERE ";
-        boolean first = true;
-        for (Couple couple : where) {
-            if (first != true) {
-                sql += " AND ";
-            }
-            sql += couple.getName();
-            sql += " LIKE ";
-            sql += couple.getValue();
-            first = false;
-        }
-        Statement statement;
-        ArrayList<Stats> statsList = new ArrayList<Stats>();
+	String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+	boolean first = true;
+	for (Couple couple : where) {
+	    if (first != true) {
+		sql += " AND ";
+	    }
+	    sql += couple.getName();
+	    sql += " LIKE ";
+	    sql += couple.getValue();
+	    first = false;
+	}
+	Statement statement;
+	ArrayList<Stats> statsList = new ArrayList<Stats>();
 
-        statement = jdbc.prepareStatement(sql);
-        ResultSet result;
-        try {
-            result = statement.executeQuery(sql);
-            if (result != null) {
-                while (result.next()) {
-                    int idUser = result.getInt("idUser");
-                    Date date = result.getDate("date");
-                    float amount = result.getFloat("amount");
-                    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
-                }
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
+	statement = jdbc.prepareStatement(sql);
+	ResultSet result;
+	try {
+	    result = statement.executeQuery(sql);
+	    if (result != null) {
+		while (result.next()) {
+		    int idUser = result.getInt("idUser");
+		    Date date = result.getDate("date");
+		    float amount = result.getFloat("amount");
+		    statsList.add(new Stats(idUser, new java.util.Date(date.getTime()), amount));
+		}
+	    } else {
+		return null;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
 
-        return statsList;
+	return statsList;
     }
 }
