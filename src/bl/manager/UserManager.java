@@ -221,6 +221,6 @@ public class UserManager {
 	DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
 	List<Couple> liste = new ArrayList<Couple>();
         liste.add(new Couple("idUser", Integer.toString(id)));
-        return dao.getWhere(liste).get(0);
+        return dao.get(liste).get(0);
     }
 }

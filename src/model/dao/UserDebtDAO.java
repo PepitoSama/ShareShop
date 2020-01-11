@@ -35,11 +35,6 @@ public class UserDebtDAO implements DAO<UserDebt> {
     }
 
     @Override
-    public UserDebt get(String id) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean save(UserDebt obj) {
 	String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?, ?, ?)";
 	int rowsInserted = 0;
@@ -102,7 +97,7 @@ public class UserDebtDAO implements DAO<UserDebt> {
     }
 
     @Override
-    public List<UserDebt> getWhere(List<Couple> where) {
+    public List<UserDebt> get(List<Couple> where) {
 	String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 	boolean first = true;
 	for (Couple couple : where) {

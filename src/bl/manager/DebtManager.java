@@ -40,14 +40,14 @@ public class DebtManager {
 	DAO<UserDebt> dao = AbstractDAOFactory.getInstance().getUserDebtDAO();
 	List<Couple> liste = new ArrayList<Couple>();
 	liste.add(new Couple("idFrom", Integer.toString(id)));
-	return dao.getWhere(liste);
+	return dao.get(liste);
     }
 
     public List<UserDebt> getMyDebt(int id) {
 	DAO<UserDebt> dao = AbstractDAOFactory.getInstance().getUserDebtDAO();
 	List<Couple> liste = new ArrayList<Couple>();
 	liste.add(new Couple("idTo", Integer.toString(id)));
-	return dao.getWhere(liste);
+	return dao.get(liste);
     }
 
     public void addDebt(int idFrom, int idTo, Double value) {
@@ -55,12 +55,12 @@ public class DebtManager {
 	List<Couple> liste = new ArrayList<Couple>();
 	liste.add(new Couple("idFrom", Integer.toString(idFrom)));
 	liste.add(new Couple("idTo", Integer.toString(idTo)));
-	List<UserDebt> res = dao.getWhere(liste);
+	List<UserDebt> res = dao.get(liste);
 	if (res.size() == 0) {
 	    List<Couple> liste2 = new ArrayList<Couple>();
 	    liste2.add(new Couple("idTo", Integer.toString(idFrom)));
 	    liste2.add(new Couple("idFrom", Integer.toString(idTo)));
-	    res = dao.getWhere(liste2);
+	    res = dao.get(liste2);
 	}
 	if (res.size() == 0) {
 	    dao.save(new UserDebt(0, value, idFrom, idTo));
