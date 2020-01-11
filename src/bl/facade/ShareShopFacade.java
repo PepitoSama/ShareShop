@@ -5,6 +5,7 @@ import bl.manager.MessageManager;
 import bl.manager.StatsManager;
 import bl.manager.UserGroupManager;
 import bl.manager.UserManager;
+import javafx.scene.image.Image;
 import bl.manager.GroupManager;
 
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
 import model.domain.Group;
 import model.domain.Stats;
 import model.domain.UserGroup;
+import model.domain.products.GeneralProduct;
 import model.domain.GroupList;
 import model.domain.Message;
 
@@ -215,5 +217,18 @@ public class ShareShopFacade {
 
     public boolean removeSelectedList() {
         return listManager.removeList();
+    }
+    
+    
+    public List<GeneralProduct> getAllProducts() {
+    	return null;
+    }
+    
+    public boolean addProduct(String name, Image image, String description, int idFather, Group group) {
+    	return false;
+    }
+    
+    public List<GeneralProduct> searchProducts(String name) {
+    	return null;
     }
 }
