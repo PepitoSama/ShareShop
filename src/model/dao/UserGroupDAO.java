@@ -78,7 +78,7 @@ public class UserGroupDAO implements DAO<UserGroup> {
 	}
 
 	@Override
-	public boolean update(UserGroup obj) throws SQLException {
+	public boolean update(UserGroup obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

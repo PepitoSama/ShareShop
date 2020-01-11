@@ -74,12 +74,7 @@ public class ListManager {
     public boolean updateShopList(String name){
         DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         selected.setName(name);
-        try {
-            return dao.update(selected);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+        return dao.update(selected);
     }
 
     public boolean removeList() {
