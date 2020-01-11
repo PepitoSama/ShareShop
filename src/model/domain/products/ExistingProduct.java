@@ -3,14 +3,20 @@ package model.domain.products;
 import javafx.scene.image.Image;
 
 public class ExistingProduct extends SpecificProduct {
-	
+
 	private String barcode;
-	
-	private String marque;
+
+	private double estimatedPrice;
 
 	public ExistingProduct(int idProduct, String name, Image image, String description, int idFather) {
 		super(idProduct, name, image, description, idFather);
-		// TODO Auto-generated constructor stub
+	}
+
+	public ExistingProduct(int idProduct, String name, Image image, String description, int idFather, String barcode,
+			double estimatedPrice) {
+		super(idProduct, name, image, description, idFather);
+		setBarcode(barcode);
+		setEstimatedPrice(estimatedPrice);
 	}
 
 	public String getBarcode() {
@@ -20,15 +26,22 @@ public class ExistingProduct extends SpecificProduct {
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
-	
-	public String getMarque() {
-		return marque;
+
+	public double getEstimatedPrice() {
+		return estimatedPrice;
 	}
 
-	public void setMarque(String marque) {
-		this.marque = marque;
+	public void setEstimatedPrice(double estimatedPrice) {
+		this.estimatedPrice = estimatedPrice;
 	}
 
-
+	@Override
+	public String toString() {
+		return "ExistingProduct [barcode=" + barcode + ", estimatedPrice=" + estimatedPrice + ", getBarcode()="
+				+ getBarcode() + ", getEstimatedPrice()=" + getEstimatedPrice() + ", getIdProduct()=" + getIdProduct()
+				+ ", getName()=" + getName() + ", getImage()=" + getImage() + ", getDescription()=" + getDescription()
+				+ ", getIdFather()=" + getIdFather() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
 
 }

@@ -87,7 +87,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
     }
 
     @Override
-    public boolean update(PricedProduct obj) throws SQLException {
+    public boolean update(PricedProduct obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
