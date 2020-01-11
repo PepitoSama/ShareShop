@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -212,4 +213,11 @@ public class UserManager {
 	public int getUserId() {
 		return user.getId();
 	}
+
+    public User getUserById(int id) {
+	DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idUser", Integer.toString(id)));
+        return dao.getWhere(liste).get(0);
+    }
 }
