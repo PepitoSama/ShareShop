@@ -11,67 +11,66 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.geometry.Insets;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import model.domain.Group;
-import model.domain.GroupList;
 import model.domain.Message;
-import model.domain.UserGroup;
 
 /**
  *
  * @author pepito
  */
 public class MessageController extends GridPane {
-
-    @FXML
-    private ScrollPane scrollpane;
     
-    @FXML
-	private VBox messageList;
+	@FXML
+	private AnchorPane messageAnchor;
+	
+    private ShareShopFacade msg;
     
     private ShareShopFacade facade;
-
+    
     public MessageController() throws IOException {
         FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/MessageView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
         this.facade = ShareShopFacade.getInstance();
-        messageList = new VBox();
-        initMessageList();
-        messageList.setAlignment(Pos.CENTER);
-		scrollpane.setContent(messageList);
+        this.messageAnchor = new AnchorPane();
+        initMessages();
     }
 
-    private void initMessageList() {
-    	
-    	List<Message> messageList = facade.getMessages();
-    	this.messageList.getChildren().clear();
-    	for(Message message : messageList) {
-    		// Ajouter les messages ici
-    	}
+	private void initMessages() {
+		this.messageAnchor.getChildren().clear();
+		VBox messageVBox = new VBox();
+		List<Message> msg = facade.getMessages();
+		for (Message message : facade.getMessages()) {
+			HBox messageHBox = new HBox();
+			GridPane messageGrid = new GridPane();
+			messageGrid.setPadding(new Insets(20));
+			// Ajout de l'image avatar a gauche
+			BorderPane borderAvatar = new BorderPane();
+			ImageView avatarView = new ImageView();
+			Image avatar = new Image("https://freeiconshop.com/wp-content/uploads/edd/person-solid.png");
+			avatarView.setImage(avatar);
+			messageGrid.add(avatarView, 0, 0);
+//
+//			messageGrid.add(avatarView, 0, 1);
+//
+//			messageGrid.add(avatarView, 0, 2);
+			
+			
+			
+			
+			BorderPane borderText = new BorderPane();
+			
+		}
 	}
 
 	@FXML
