@@ -203,7 +203,7 @@ public class UserManager {
 
     public void setPassword(String text) {
         try {
-            getUser().setPassword(hashPassword(text, user.getPassword()));
+            getUser().setPassword(hashPassword(text, user.getNickname()));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -216,4 +216,11 @@ public class UserManager {
 	public int getUserId() {
 		return user.getId();
 	}
+
+    public User getUserById(int id) {
+	DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idUser", Integer.toString(id)));
+        return dao.get(liste).get(0);
+    }
 }

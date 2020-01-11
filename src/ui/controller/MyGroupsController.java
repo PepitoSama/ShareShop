@@ -28,7 +28,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -42,7 +44,7 @@ import model.domain.UserGroup;
  */
 public class MyGroupsController extends GridPane {
 
-    private final ObservableList<Button> buttons = FXCollections.observableArrayList();
+    private final ObservableList<BorderPane> buttons = FXCollections.observableArrayList();
     @FXML
     private VBox shopListe;
 
@@ -83,7 +85,10 @@ public class MyGroupsController extends GridPane {
                     toGroup(liste);
                 }
             });
-            buttons.add(b);
+            b.setPrefWidth(500);
+            BorderPane border = new BorderPane();
+            border.setCenter(b);
+            buttons.add(border);
         }
         shopListe.setAlignment(Pos.CENTER);
         shopListe.setSpacing(10.0);
@@ -119,6 +124,16 @@ public class MyGroupsController extends GridPane {
         try {
             super.getChildren().clear();
             super.getChildren().add(new StatsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void debt(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new DebtController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
