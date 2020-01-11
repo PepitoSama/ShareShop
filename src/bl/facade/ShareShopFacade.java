@@ -245,7 +245,12 @@ public class ShareShopFacade {
 	return debtManager.getSelectedDebt();
     }
 
-	public boolean sendMessage(String text) {
-		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
-	}
+    public boolean sendMessage(String text) {
+	return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+    }
+
+    public boolean updateDebt() {
+	debtManager = DebtManager.getInstance();
+	return debtManager.updateDebt(getSelectedDebt());
+    }
 }

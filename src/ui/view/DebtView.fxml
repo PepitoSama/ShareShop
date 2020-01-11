@@ -94,7 +94,7 @@
 	                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 	               </rowConstraints>
 	               <children>
-	                  <ScrollPane fx:id="scrollpane1" prefHeight="90.0" prefWidth="505.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	                  <ScrollPane fx:id="scrollpaneAD" prefHeight="90.0" prefWidth="505.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Amount due" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="26.0" />

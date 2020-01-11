@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.domain.UserDebt;
 
 /**
@@ -62,16 +64,21 @@ public class UserDebtDAO implements DAO<UserDebt> {
     }
 
     @Override
-    public boolean update(UserDebt obj) throws SQLException {
-	String sql = "UPDATE " + this.tableName
-		+ " SET amount=? WHERE idDebt = ?";
+    public boolean update(UserDebt obj) {
+	try {
+	    String sql = "UPDATE " + this.tableName
+		    + " SET amount=? WHERE idDebt = ?";
 
-	PreparedStatement statement = jdbc.prepareStatement(sql);
-	statement.setDouble(1, obj.getAmount());
-	statement.setInt(2, obj.getIdDebt());
-	int rowsUpdated = statement.executeUpdate();
-	if (rowsUpdated > 0) {
-	    return true;
+	    PreparedStatement statement = jdbc.prepareStatement(sql);
+	    statement.setDouble(1, obj.getAmount());
+	    statement.setInt(2, obj.getIdDebt());
+	    int rowsUpdated = statement.executeUpdate();
+	    if (rowsUpdated > 0) {
+		return true;
+	    }
+	    return false;
+	} catch (SQLException ex) {
+	    Logger.getLogger(UserDebtDAO.class.getName()).log(Level.SEVERE, null, ex);
 	}
 	return false;
     }
@@ -79,19 +86,19 @@ public class UserDebtDAO implements DAO<UserDebt> {
     @Override
     public boolean delete(UserDebt obj) {
 	String sql = "DELETE FROM " + this.tableName + " WHERE idDebt=?";
-        PreparedStatement statement = jdbc.prepareStatement(sql);
-        try {
-            statement.setInt(1, obj.getIdDebt());
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-        return false;
+	PreparedStatement statement = jdbc.prepareStatement(sql);
+	try {
+	    statement.setInt(1, obj.getIdDebt());
+	    int rowsDeleted = statement.executeUpdate();
+	    if (rowsDeleted > 0) {
+		return true;
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return false;
+	}
+	return false;
     }
 
     @Override

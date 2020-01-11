@@ -86,17 +86,17 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="name" text="Label" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label fx:id="name" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <Label fx:id="rest" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Label fx:id="rest" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="amount" maxWidth="-Infinity" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <TextField fx:id="amount" maxWidth="-Infinity" onKeyReleased="#check" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

@@ -9,10 +9,13 @@ import bl.facade.ShareShopFacade;
 import java.util.Optional;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -57,8 +60,12 @@ public class PayDebtController extends GridPane {
 
     @FXML
     private Label rest;
-    
+
     private UserDebt select;
+
+    private Pattern p;
+
+    private Double re;
 
     public PayDebtController() throws IOException {
 	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/PayDebtView.fxml"));
@@ -69,6 +76,8 @@ public class PayDebtController extends GridPane {
 	select = facade.getSelectedDebt();
 	User u = facade.getUserById(select.getIdTo());
 	name.setText("Pay " + u.getFistname());
+	rest.setText("Amount due: " + select.getAmount() + " €");
+	p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
     }
 
     @FXML
@@ -78,30 +87,54 @@ public class PayDebtController extends GridPane {
 	    super.getChildren().add(new DebtController());
 	} catch (IOException ex) {
 	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
-	}
-    }
-
-    public void pay(UserDebt debt) {
-	facade.setSelectedDebt(debt);
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherListController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
 	}
     }
 
     @FXML
-    private void check(KeyEvent event) {
-	if (!"-0123456789".contains(event.getCharacter())) {
-	    event.consume();
-	    Double val = Double.parseDouble(amount.getText());
-	    if(val > select.getAmount()){
-		amount.setText(Double.toString(select.getAmount()));
+    public void pay(ActionEvent event) {
+	Double val = select.getAmount() - Double.parseDouble(amount.getText());
+	facade.getSelectedDebt().setAmount(val);
+	if (facade.updateDebt()) {
+	    try {
+		super.getChildren().clear();
+		super.getChildren().add(new DebtController());
+	    } catch (IOException ex) {
+		Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	}
+	rest.setText(rest.getText()+"\n"+"Fail to pay debt");
+    }
+
+    @FXML
+    private void check(KeyEvent event) {
+	String am = amount.getText();
+	Matcher m = p.matcher(am);
+	if (am == "" | am == null) {
+	    rest.setText("Amount due: " + select.getAmount() + " €");
+	} else {
+	    if (m.matches()) {
+		try {
+		    Double val = Double.parseDouble(am);
+		    if (val > select.getAmount()) {
+			amount.setText(Double.toString(select.getAmount()));
+			rest.setText("Amount due : 0€");
+		    } else {
+			re = select.getAmount() - val;
+			DecimalFormat df = new DecimalFormat("#.##");
+			String aff = (df.format(re)).replace(",", ".");
+			rest.setText("Amount due : " + aff + " €");
+		    }
+		} catch (Exception e) {
+		    amount.setText("");
+		    rest.setText("Amount due : " + select.getAmount() + " €");
+		}
+	    } else {
+		DecimalFormat df = new DecimalFormat("#.##");
+		String aff = (df.format(select.getAmount() - re)).replace(",", ".");
+		amount.setText(aff);
+	    }
+	}
+
     }
 
 }

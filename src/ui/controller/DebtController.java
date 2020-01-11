@@ -68,6 +68,7 @@ public class DebtController extends GridPane {
 	leLoader.load();
 	this.facade = ShareShopFacade.getInstance();
 	myDebt = new VBox();
+	amountDue = new VBox();
 	initDebt();
 	initDue();
 	myDebt.getChildren().addAll(cellsMB);
@@ -82,21 +83,23 @@ public class DebtController extends GridPane {
 	List<UserDebt> debt = facade.getMyDebt();
 	myDebt.getChildren().clear();
 	for (UserDebt ud : debt) {
-	    HBox h = new HBox();
-	    h.setId(Integer.toString(ud.getIdDebt()) + "b");
-	    ImageView i = new ImageView("/../ressources/images/avatar.jpg");
-	    User u = facade.getUserById(ud.getIdFrom());
-	    Label l = new Label(u.getFistname());
-	    l.setStyle("-fx-font-size: 24px; ");
-	    l.setAlignment(Pos.CENTER);
-	    Label amount = new Label(Double.toString(ud.getAmount()) + " €");
-	    amount.setStyle("-fx-font-size: 24px; ");
-	    amount.setAlignment(Pos.CENTER);
-	    h.setSpacing(20);
-	    h.getChildren().add(i);
-	    h.getChildren().add(l);
-	    h.getChildren().add(amount);
-	    cellsMB.add(h);
+	    if (ud.getAmount() > 0) {
+		HBox h = new HBox();
+		h.setId(Integer.toString(ud.getIdDebt()) + "b");
+		Label i = new Label("👤");
+		User u = facade.getUserById(ud.getIdFrom());
+		Label l = new Label(u.getFistname());
+		l.setStyle("-fx-font-size: 24px; ");
+		l.setAlignment(Pos.CENTER);
+		Label amount = new Label(Double.toString(ud.getAmount()) + " €");
+		amount.setStyle("-fx-font-size: 24px; ");
+		amount.setAlignment(Pos.CENTER);
+		h.setSpacing(20);
+		h.getChildren().add(i);
+		h.getChildren().add(l);
+		h.getChildren().add(amount);
+		cellsMB.add(h);
+	    }
 	}
 	myDebt.setAlignment(Pos.CENTER);
 	myDebt.setSpacing(10.0);
@@ -106,32 +109,34 @@ public class DebtController extends GridPane {
 	List<UserDebt> debt = facade.getMyDue();
 	amountDue.getChildren().clear();
 	for (UserDebt ud : debt) {
-	    HBox h = new HBox();
-	    h.setId(Integer.toString(ud.getIdDebt()) + "b");
-	    ImageView i = new ImageView("/../ressources/images/avatar.jpg");
-	    User u = facade.getUserById(ud.getIdTo());
-	    Label l = new Label(u.getFistname());
-	    l.setStyle("-fx-font-size: 24px; ");
-	    l.setAlignment(Pos.CENTER);
-	    Label amount = new Label(Double.toString(ud.getAmount()) + " €");
-	    amount.setStyle("-fx-font-size: 24px; ");
-	    amount.setAlignment(Pos.CENTER);
-	    Button pay = new Button("Pay");
-	    pay.setId(Integer.toString(ud.getIdDebt()));
-	    pay.setStyle("-fx-font-size: 24px; ");
-	    pay.setAlignment(Pos.CENTER);
-	    pay.setOnAction(new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent e) {
-		    pay(ud);
-		}
-	    });
-	    h.setSpacing(20);
-	    h.getChildren().add(i);
-	    h.getChildren().add(l);
-	    h.getChildren().add(amount);
-	    h.getChildren().add(pay);
-	    cellsAD.add(h);
+	    if (ud.getAmount() > 0) {
+		HBox h = new HBox();
+		h.setId(Integer.toString(ud.getIdDebt()) + "b");
+		Label i = new Label("👤");
+		User u = facade.getUserById(ud.getIdTo());
+		Label l = new Label(u.getFistname());
+		l.setStyle("-fx-font-size: 24px; ");
+		l.setAlignment(Pos.CENTER);
+		Label amount = new Label(Double.toString(ud.getAmount()) + " €");
+		amount.setStyle("-fx-font-size: 24px; ");
+		amount.setAlignment(Pos.CENTER);
+		Button pay = new Button("Pay");
+		pay.setId(Integer.toString(ud.getIdDebt()));
+		pay.setStyle("-fx-font-size: 24px; ");
+		pay.setAlignment(Pos.CENTER);
+		pay.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+			pay(ud);
+		    }
+		});
+		h.setSpacing(20);
+		h.getChildren().add(i);
+		h.getChildren().add(l);
+		h.getChildren().add(amount);
+		h.getChildren().add(pay);
+		cellsAD.add(h);
+	    }
 	}
 	amountDue.setAlignment(Pos.CENTER);
 	amountDue.setSpacing(10.0);
@@ -152,7 +157,7 @@ public class DebtController extends GridPane {
 	facade.setSelectedDebt(debt);
 	try {
 	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherListController());
+	    super.getChildren().add(new PayDebtController());
 	} catch (IOException ex) {
 	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
