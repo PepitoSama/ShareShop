@@ -244,11 +244,6 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     }
 
     @Override
-    public Stats get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public int getNumber() {
         String sql = "SELECT DISTINCT(idUser) FROM " + this.tableName;
         Statement statement;
@@ -269,7 +264,7 @@ public class StatsDAO implements DAOStatsInterface<Stats> {
     }
 
     @Override
-    public List<Stats> getWhere(List<Couple> where) {
+    public List<Stats> get(List<Couple> where) {
         String sql = "SELECT * FROM " + this.tableName + " WHERE ";
         boolean first = true;
         for (Couple couple : where) {

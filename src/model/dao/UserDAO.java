@@ -55,31 +55,31 @@ public class UserDAO implements DAO<User> {
 		return userList;
 	}
 
-	@Override
-	public User get(String nickname) {
-		String sql = "SELECT * FROM " + this.tableName + " WHERE nickname=?";
-		int rows = 0;
-		PreparedStatement statement;
-
-		statement = jdbc.prepareStatement(sql);
-		try {
-			statement.setString(1, nickname);
-			ResultSet resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-
-				return new User(resultSet.getString("Nickname"), resultSet.getString("password"),
-						resultSet.getString("firstname"), resultSet.getString("lastname"),
-						resultSet.getDate("birthdate"), resultSet.getString("email"), resultSet.getInt("idUser"));
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		return null;
-	}
+//	@Override
+//	public User get(String nickname) {
+//		String sql = "SELECT * FROM " + this.tableName + " WHERE nickname=?";
+//		int rows = 0;
+//		PreparedStatement statement;
+//
+//		statement = jdbc.prepareStatement(sql);
+//		try {
+//			statement.setString(1, nickname);
+//			ResultSet resultSet = statement.executeQuery();
+//
+//			while (resultSet.next()) {
+//
+//				return new User(resultSet.getString("Nickname"), resultSet.getString("password"),
+//						resultSet.getString("firstname"), resultSet.getString("lastname"),
+//						resultSet.getDate("birthdate"), resultSet.getString("email"), resultSet.getInt("idUser"));
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+//		return null;
+//	}
 
 	@Override
 	public boolean save(User user) {
@@ -160,7 +160,7 @@ public class UserDAO implements DAO<User> {
 	}
 
 	@Override
-	public List<User> getWhere(List<Couple> where) {
+	public List<User> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {

@@ -30,12 +30,6 @@ public class MessageDAO implements DAO<Message> {
 	}
 
 	@Override
-	public Message get(String id) {
-		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-																		// Tools | Templates.
-	}
-
-	@Override
 	public boolean save(Message message) {
 		String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?, ?, ?, ?)";
 		int rowsInserted = 0;
@@ -73,7 +67,7 @@ public class MessageDAO implements DAO<Message> {
 	}
 
 	@Override
-	public List<Message> getWhere(List<Couple> where) {
+	public List<Message> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + ", `User`, `Group` WHERE ";
 
 		// JOINS

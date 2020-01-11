@@ -30,7 +30,7 @@ public class GroupListDAO implements DAO<GroupList> {
 	}
 
 	@Override
-	public List<GroupList> getWhere(List<Couple> where) {
+	public List<GroupList> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {
@@ -71,12 +71,6 @@ public class GroupListDAO implements DAO<GroupList> {
 
 	@Override
 	public List<GroupList> getAll() {
-		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-																		// Tools | Templates.
-	}
-
-	@Override
-	public GroupList get(String id) {
 		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
 																		// Tools | Templates.
 	}

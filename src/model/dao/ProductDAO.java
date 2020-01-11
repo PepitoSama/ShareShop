@@ -26,25 +26,25 @@ public class ProductDAO implements DAO<GeneralProduct> {
 		return null;
 	}
 
-	@Override
-	public GeneralProduct get(String id) {
-		String sql = "SELECT * FROM " + this.tableName + " WHERE idProduct=?";
-		PreparedStatement statement;
-
-		statement = jdbc.prepareStatement(sql);
-		try {
-			statement.setString(1, id);
-			ResultSet resultSet = statement.executeQuery();
-
-			return makeProducts(resultSet).get(0);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-
-	}
+//	@Override
+//	public GeneralProduct get(String id) {
+//		String sql = "SELECT * FROM " + this.tableName + " WHERE idProduct=?";
+//		PreparedStatement statement;
+//
+//		statement = jdbc.prepareStatement(sql);
+//		try {
+//			statement.setString(1, id);
+//			ResultSet resultSet = statement.executeQuery();
+//
+//			return makeProducts(resultSet).get(0);
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+//
+//	}
 
 	@Override
 	public boolean save(GeneralProduct obj) {
@@ -177,7 +177,7 @@ public class ProductDAO implements DAO<GeneralProduct> {
 	}
 
 	@Override
-	public List<GeneralProduct> getWhere(List<Couple> where) {
+	public List<GeneralProduct> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {
@@ -232,7 +232,10 @@ public class ProductDAO implements DAO<GeneralProduct> {
 
 			GeneralProduct p;
 			if (idGroup > 0) { // Custom
-				Group g = new GroupDAO().get(String.valueOf(idGroup));
+				Couple where = new Couple("idProduct", String.valueOf(idGroup));
+				List<Couple> listWhere = new ArrayList<>();
+				listWhere.add(where);
+				Group g = new GroupDAO().get(listWhere).get(0);
 				p = new CustomProduct(id, name, null, description, idFather, g);
 			} else if (barcode != null) { // Existing
 				p = new ExistingProduct(id, name, null, description, idFather, barcode, estimatedPrice);
@@ -266,16 +269,19 @@ public class ProductDAO implements DAO<GeneralProduct> {
 		Couple c = new Couple("name", "Existing");
 		List<Couple> l = new ArrayList<>();
 		l.add(c);
-		System.out.println(dao.getWhere(l));
+		System.out.println(dao.get(l));
 
 		c = new Couple("idFather", "1");
 		l = new ArrayList<>();
 		l.add(c);
-		for (GeneralProduct p : dao.getWhere(l)) {
+		for (GeneralProduct p : dao.get(l)) {
 			System.out.println(p);
 		}
 		
-		GeneralProduct prod = dao.get("13");
+		Couple where = new Couple("idProduct", "13");
+		List<Couple> listWhere = new ArrayList<>();
+		listWhere.add(where);
+		GeneralProduct prod = dao.get(listWhere).get(0);
 		prod.setDescription("Une description");
 		
 		System.out.println(dao.update(prod));

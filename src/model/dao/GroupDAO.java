@@ -49,48 +49,7 @@ public class GroupDAO implements DAO<Group> {
 	}
 
 	@Override
-	public Group get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean save(Group group) {
-		String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?)";
-		int rowsInserted = 0;
-		PreparedStatement statement;
-
-		statement = jdbc.prepareStatement(sql);
-		try {
-			statement.setString(1, group.getGroupName());
-			
-			rowsInserted = statement.executeUpdate();
-
-			if (rowsInserted > 0) {
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean update(Group obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(Group obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public List<Group> getWhere(List<Couple> where) {
+	public List<Group> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {
@@ -126,5 +85,40 @@ public class GroupDAO implements DAO<Group> {
 		}
 
 		return groupList;
+	}
+
+	@Override
+	public boolean save(Group group) {
+		String sql = "INSERT INTO " + this.tableName + " VALUES (default, ?)";
+		int rowsInserted = 0;
+		PreparedStatement statement;
+
+		statement = jdbc.prepareStatement(sql);
+		try {
+			statement.setString(1, group.getGroupName());
+			
+			rowsInserted = statement.executeUpdate();
+
+			if (rowsInserted > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean update(Group obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Group obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

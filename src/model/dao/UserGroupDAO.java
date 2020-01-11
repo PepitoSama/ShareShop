@@ -49,12 +49,6 @@ public class UserGroupDAO implements DAO<UserGroup> {
 	}
 	
 	@Override
-	public UserGroup get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean save(UserGroup userGroup) {
 		String sql = "INSERT INTO " + this.tableName + " VALUES (?, ?)";
 		int rowsInserted = 0;
@@ -90,7 +84,7 @@ public class UserGroupDAO implements DAO<UserGroup> {
 	}
 
 	@Override
-	public List<UserGroup> getWhere(List<Couple> where) {
+	public List<UserGroup> get(List<Couple> where) {
 		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
 		boolean first = true;
 		for (Couple couple : where) {
