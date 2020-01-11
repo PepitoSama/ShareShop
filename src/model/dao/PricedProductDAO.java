@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.products.PricedProduct;
-import model.domain.products.Product;
+import model.domain.products.SubGeneralProduct;
 
 /**
  *
@@ -57,7 +57,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
                     String name = result.getString("name");
                     int idFather = result.getInt("idFather");
                     String description = result.getString("description");
-                    boughtList.add(new PricedProduct(price, new Product(idProduct, name, null, description, idFather), quantity));
+                    boughtList.add(new PricedProduct(price, new SubGeneralProduct(idProduct, name, null, description, idFather), quantity));
                 }
             } else {
                 return null;
