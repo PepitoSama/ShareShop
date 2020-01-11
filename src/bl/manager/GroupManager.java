@@ -79,7 +79,7 @@ public class GroupManager {
         Couple where = new Couple("name", groupName);
         List<Couple> listWhere = new ArrayList<>();
         listWhere.add(where);
-        List<Group> listGroup = dao.getWhere(listWhere);
+        List<Group> listGroup = dao.get(listWhere);
         return listGroup.get(0).getId();
     }
 

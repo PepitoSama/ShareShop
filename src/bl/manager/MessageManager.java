@@ -13,6 +13,7 @@ import model.dao.Couple;
 import model.dao.DAO;
 import model.domain.Group;
 import model.domain.Message;
+import model.domain.User;
 
 /**
  *
@@ -40,11 +41,17 @@ public class MessageManager {
 
     public List<Message> getAllMessages() {
     	DAO<Message> dao = AbstractDAOFactory.getInstance().getMessageDAO();
-    	Couple condition1 = new Couple("idGroup", Integer.toString(selected.getId()));
+    	Couple condition1 = new Couple("`MessageSent`.`idGroup`", Integer.toString(selected.getId()));
     	List<Couple> listCondition = new ArrayList<>();
     	listCondition.add(condition1);
-    	List<Message> messageList = dao.getWhere(listCondition);
+    	List<Message> messageList = dao.get(listCondition);
     	return messageList;
     }
+
+	public boolean sendMessage(String message, User sentBy, Group group) {
+		DAO<Message> dao = AbstractDAOFactory.getInstance().getMessageDAO();
+		Message toSend = new Message(sentBy, group, message);
+		return dao.save(toSend);
+	}
     
 }

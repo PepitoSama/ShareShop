@@ -219,7 +219,6 @@ public class ShareShopFacade {
         return listManager.removeList();
     }
     
-    
     public List<GeneralProduct> getAllProducts() {
     	return null;
     }
@@ -231,4 +230,9 @@ public class ShareShopFacade {
     public List<GeneralProduct> searchProducts(String name) {
     	return null;
     }
+
+	public boolean sendMessage(String text) {
+		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+	}
+
 }
