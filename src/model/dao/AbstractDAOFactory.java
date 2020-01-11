@@ -6,6 +6,7 @@ import model.domain.User;
 import model.domain.UserGroup;
 import model.domain.GroupList;
 import model.domain.Message;
+import model.domain.products.GeneralProduct;
 import model.domain.products.PricedProduct;
 
 
@@ -44,5 +45,7 @@ public abstract class AbstractDAOFactory {
     public abstract DAO<PricedProduct> getPricedProductDAO();
     
     public abstract DAO<Message> getMessageDAO();
+    
+    public abstract DAO<GeneralProduct> getProductDAO();
 
 }

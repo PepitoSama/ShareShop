@@ -74,7 +74,6 @@ public class AfficherListController extends GridPane {
             super.getChildren().add(new ShopListController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }
 
@@ -114,5 +113,17 @@ public class AfficherListController extends GridPane {
     private void initBoughtProduct() {
         GroupList selected = facade.getBoughtProduct();
         List<PricedProduct> boughtProducts = selected.getBoughtProducts();
+    }
+    
+    @FXML
+    void addProduct(ActionEvent event) {
+    	 try {
+             super.getChildren().clear();
+             super.getChildren().add(new SearchProductsController());
+
+         } catch (Exception ex) {
+             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+
+         }
     }
 }

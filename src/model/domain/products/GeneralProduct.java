@@ -66,6 +66,14 @@ public abstract class GeneralProduct {
     public void setIdFather(int idFather) {
         this.idFather = idFather;
     }
+
+	@Override
+	public boolean equals(Object arg0) {
+		
+		return this.getIdProduct() == ((GeneralProduct) arg0).getIdProduct();
+	}
+    
+    
    
 
 }

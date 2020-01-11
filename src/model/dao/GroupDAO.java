@@ -65,7 +65,6 @@ public class GroupDAO implements DAO<Group> {
 		ArrayList<Group> groupList = new ArrayList<>();
 
 		statement = jdbc.prepareStatement(sql);
-		System.out.println(statement.toString());
 		ResultSet result;
 		try {
 			result = statement.executeQuery(sql);

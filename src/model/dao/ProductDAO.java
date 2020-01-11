@@ -159,7 +159,7 @@ public class ProductDAO implements DAO<GeneralProduct> {
 
 	@Override
 	public boolean delete(GeneralProduct obj) {
-		String sql = "DELETE FROM " + this.tableName + " WHERE idProduct=?";
+		String sql = "DELETE FROM " + this.tableName + " WHERE idProduct=`?`";
 
         PreparedStatement statement = jdbc.prepareStatement(sql);
         try {
@@ -208,10 +208,10 @@ public class ProductDAO implements DAO<GeneralProduct> {
 	}
 
 	/**
-	 * Make the list of GeneralProduct based on the data the object has on the base
-	 * : - If there is an group id, then the Object is a CustomProduct - If there is
-	 * a barcode, the Object is an ExistingProduct - Else, the Object is a
-	 * subGeneralProduct
+	 * Make the list of GeneralProduct based on the data the object has on the base : 
+	 * - If there is an group id, then the Object is a CustomProduct 
+	 * - If there is a barcode, the Object is an ExistingProduct 
+	 * - Else, the Object is a subGeneralProduct
 	 * 
 	 * @param rs
 	 *            The ResultSet of the query
@@ -232,7 +232,7 @@ public class ProductDAO implements DAO<GeneralProduct> {
 
 			GeneralProduct p;
 			if (idGroup > 0) { // Custom
-				Couple where = new Couple("idProduct", String.valueOf(idGroup));
+				Couple where = new Couple("idGroup", String.valueOf(idGroup));
 				List<Couple> listWhere = new ArrayList<>();
 				listWhere.add(where);
 				Group g = new GroupDAO().get(listWhere).get(0);

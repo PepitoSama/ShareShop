@@ -2,6 +2,7 @@ package bl.facade;
 
 import bl.manager.ListManager;
 import bl.manager.MessageManager;
+import bl.manager.ProductManager;
 import bl.manager.StatsManager;
 import bl.manager.UserGroupManager;
 import bl.manager.UserManager;
@@ -27,6 +28,7 @@ public class ShareShopFacade {
     private UserGroupManager userGroupManager;
     private ListManager listManager;
     private MessageManager messageManager;
+    private ProductManager productManager;
 
     private static ShareShopFacade instance = null;
 
@@ -219,16 +221,34 @@ public class ShareShopFacade {
         return listManager.removeList();
     }
     
+    /**
+     * @return all the products in the database
+     */
     public List<GeneralProduct> getAllProducts() {
     	return null;
     }
     
-    public boolean addProduct(String name, Image image, String description, int idFather, Group group) {
-    	return false;
+    /**
+     * Add a Custom product. This product will be linked to the currently selected group in the groupManager
+     * @param name			The name of the product
+     * @param image			The image of the product
+     * @param description	The description of the product
+     * @param idFather		The id of the Parent Product. Give a negative number or 0 if this product doen't have a parent Product
+     * @return true if the product has been created
+     */
+    public boolean addProduct(String name, Image image, String description, int idFather) {
+    	this.productManager = ProductManager.getInstance();
+    	return this.productManager.addCustomProduct(name, image, description, idFather, groupManager.getSelected());
     }
     
+    /**
+     * Search products whose name is like the string given in parameter or is a child product of the former.
+     * @param name	The name or part of the name of the product or parent product
+     * @return	the List of products found
+     */
     public List<GeneralProduct> searchProducts(String name) {
-    	return null;
+    	this.productManager = ProductManager.getInstance();
+    	return this.productManager.searchProducts(name);
     }
 
 	public boolean sendMessage(String text) {
