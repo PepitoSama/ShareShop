@@ -119,7 +119,7 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <center>
-                              <Button fx:id="log" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" onKeyPressed="#login" text="Login" BorderPane.alignment="CENTER">
+                              <Button fx:id="log" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginb"  text="Login" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

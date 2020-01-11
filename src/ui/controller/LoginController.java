@@ -53,12 +53,11 @@ public class LoginController extends GridPane {
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();
-        
         this.facade = ShareShopFacade.getInstance();
     }
 
     @FXML
-    private void login(ActionEvent event) {
+    private void loginb(ActionEvent event) {
         login();
     }
 
