@@ -78,7 +78,7 @@ public class GroupDAO implements DAO<Group> {
 	}
 
 	@Override
-	public boolean update(Group obj) throws SQLException {
+	public boolean update(Group obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

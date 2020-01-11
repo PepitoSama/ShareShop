@@ -66,5 +66,6 @@ public abstract class GeneralProduct {
     public void setIdFather(int idFather) {
         this.idFather = idFather;
     }
+   
 
 }

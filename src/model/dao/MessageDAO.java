@@ -78,7 +78,7 @@ public class MessageDAO implements DAO<Message> {
 
 		// JOINS
 		sql += " `User`.`idUser` = `MessageSent`.`idUser` ";
-		sql += " AND `MessageSent`.`idGroup` = `Group`.`idGroup` ";		
+		sql += " AND `MessageSent`.`idGroup` = `Group`.`idGroup` ";
 
 		for (Couple couple : where) {
 			sql += " AND ";
