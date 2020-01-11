@@ -195,4 +195,8 @@ public class ShareShopFacade {
     public boolean updateShopList(String name) {
         return listManager.updateShopList(name);
     }
+
+    public boolean removeSelectedList() {
+        return listManager.removeList();
+    }
 }
