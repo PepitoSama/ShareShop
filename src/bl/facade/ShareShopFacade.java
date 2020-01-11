@@ -244,4 +244,8 @@ public class ShareShopFacade {
 	debtManager = DebtManager.getInstance();
 	return debtManager.getSelectedDebt();
     }
+
+	public boolean sendMessage(String text) {
+		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+	}
 }
