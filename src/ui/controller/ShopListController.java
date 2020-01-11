@@ -39,6 +39,7 @@ import model.domain.GroupList;
  */
 public class ShopListController extends GridPane {
 
+
     private ShareShopFacade facade;
     private final ObservableList<HBox> buttons = FXCollections.observableArrayList();
     @FXML
@@ -215,5 +216,6 @@ public class ShopListController extends GridPane {
 	    }
 	});
     }
+
 
 }
