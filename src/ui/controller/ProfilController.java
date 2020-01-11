@@ -95,7 +95,6 @@ public class ProfilController extends GridPane {
             facade.setLastname(lastname.getText());
             facade.setNickname(nickname.getText());
             facade.setPassword(password.getText());
-            System.out.println(password.getText());
             Date ageV = null;
 
             try {

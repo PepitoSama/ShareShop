@@ -203,7 +203,7 @@ public class UserManager {
 
     public void setPassword(String text) {
         try {
-            getUser().setPassword(hashPassword(text, user.getPassword()));
+            getUser().setPassword(hashPassword(text, user.getNickname()));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
