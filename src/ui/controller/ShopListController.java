@@ -25,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +39,6 @@ import model.domain.GroupList;
  * @author fsmag
  */
 public class ShopListController extends GridPane {
-
 
     private ShareShopFacade facade;
     private final ObservableList<HBox> buttons = FXCollections.observableArrayList();
@@ -164,7 +164,6 @@ public class ShopListController extends GridPane {
 
     public void remove(GroupList selectedList) {
 	facade.getListManager().setSelected(selectedList);
-
 	showConfirmation(selectedList);
     }
 
@@ -191,15 +190,13 @@ public class ShopListController extends GridPane {
 	if (option.get() == null) {
 	} else if (option.get() == ButtonType.OK) {
 	    facade.removeSelectedList();
+	    buttons.clear();
 	    initList();
 	    shopListe.getChildren().clear();
 	    flButton = new FilteredList(buttons, p -> true);
 	    shopListe.getChildren().addAll(flButton);
 	    shopListe.setAlignment(Pos.CENTER);
 	    scrollpane.setContent(shopListe);
-	} else if (option.get() == ButtonType.CANCEL) {
-	} else {
-
 	}
     }
 
@@ -216,6 +213,5 @@ public class ShopListController extends GridPane {
 	    }
 	});
     }
-
 
 }
