@@ -77,7 +77,6 @@ public class StatsManager {
 	java.sql.Date d = new java.sql.Date(date.getTime());
 	liste.add(new Couple("date", d.toString()));
 	liste.add(new Couple("idUser", Integer.toString(id)));
-	liste.add(new Couple("amount", Float.toString(amount)));
 	List<Stats> s = dao.get(liste);
 	if(s.size()>0){
 	    Stats stat = s.get(0);
