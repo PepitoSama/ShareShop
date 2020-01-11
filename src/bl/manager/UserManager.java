@@ -1,7 +1,5 @@
 package bl.manager;
 
-import model.dao.AbstractDAOFactory;
-import model.dao.UserDAO;
 import model.domain.User;
 
 import java.math.BigInteger;
@@ -107,7 +105,12 @@ public class UserManager {
     public boolean login(String name, String pwd) {
 
         DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
-        User u = dao.get(name);
+        
+        Couple where = new Couple("nickname", name);
+		List<Couple> listWhere = new ArrayList<>();
+		listWhere.add(where);
+		
+        User u = dao.get(listWhere).get(0);
 
         if (u != null) {
             try {
@@ -200,7 +203,7 @@ public class UserManager {
 
     public void setPassword(String text) {
         try {
-            getUser().setPassword(hashPassword(text, user.getPassword()));
+            getUser().setPassword(hashPassword(text, user.getNickname()));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

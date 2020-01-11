@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `MessageSent` (
   `idMessage` int(10) NOT NULL AUTO_INCREMENT,
   `idUser` int(10) NOT NULL,
   `idGroup` int(10) NOT NULL,
-  `text` varchar(2048) NOT NULL,
+  `text` varchar(32768) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`idMessage`),
   KEY `MessageSent_idGroup` (`idGroup`)

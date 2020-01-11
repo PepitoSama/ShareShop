@@ -30,7 +30,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
     }
 
     @Override
-    public List<PricedProduct>  getWhere(List<Couple> where) {
+    public List<PricedProduct>  get(List<Couple> where) {
         String sql = "SELECT * FROM " + this.tableName + " t, " + this.product + " p WHERE ";
         int rows = 0;
         boolean first = true;
@@ -73,11 +73,6 @@ public class PricedProductDAO implements DAO<PricedProduct> {
 
     @Override
     public List<PricedProduct> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public PricedProduct get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

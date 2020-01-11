@@ -44,7 +44,7 @@ public class MessageManager {
     	Couple condition1 = new Couple("`MessageSent`.`idGroup`", Integer.toString(selected.getId()));
     	List<Couple> listCondition = new ArrayList<>();
     	listCondition.add(condition1);
-    	List<Message> messageList = dao.getWhere(listCondition);
+    	List<Message> messageList = dao.get(listCondition);
     	return messageList;
     }
 
