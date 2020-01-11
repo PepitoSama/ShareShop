@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -29,6 +30,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -73,6 +75,9 @@ public class ShopListController extends GridPane {
 		shopListe.getChildren().clear();
 		for (GroupList liste : shoopingList) {
 			HBox h = new HBox();
+			GridPane boutonGrid = new GridPane();
+			boutonGrid.setHgap(20);
+			boutonGrid.setPadding(new Insets(20));
 			h.setId(liste.getName());
 			Button b = new Button(liste.getName());
 			b.setId("b" + Integer.toString(liste.getIdGroupList()));
@@ -84,6 +89,7 @@ public class ShopListController extends GridPane {
 					toList(liste);
 				}
 			});
+			b.setPrefWidth(250);
 			Button u = new Button("✏");
 			u.setId("u" + Integer.toString(liste.getIdGroupList()));
 			u.setStyle("-fx-font-size: 24px; ");
@@ -105,9 +111,21 @@ public class ShopListController extends GridPane {
 				}
 			});
 			h.setSpacing(20);
-			h.getChildren().add(b);
-			h.getChildren().add(u);
-			h.getChildren().add(r);
+			
+			// Mettre les boutons dans la GridPane
+			BorderPane leftBorder = new BorderPane();
+			leftBorder.setCenter(b);
+			boutonGrid.add(leftBorder, 0, 0);
+			BorderPane centerBorder = new BorderPane();
+			centerBorder.setCenter(u);
+			boutonGrid.add(centerBorder, 1, 0);
+			BorderPane rightBorder = new BorderPane();
+			rightBorder.setCenter(r);
+			boutonGrid.add(rightBorder, 2, 0);
+			
+			
+			// Ajouter la GridPane a la VBox
+			h.getChildren().add(boutonGrid);
 			buttons.add(h);
 		}
 		shopListe.setAlignment(Pos.CENTER);

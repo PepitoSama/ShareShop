@@ -61,6 +61,7 @@ public class MessageController extends GridPane {
 	private void initMessages() {
 		this.messageList.getChildren().clear();
 		VBox messageVBox = new VBox();
+		messageVBox.setSpacing(8);
 		List<Message> msg = facade.getMessages();
 		Image avatar = new Image("https://i.kym-cdn.com/entries/icons/original/000/012/448/tumblr_mfpwn7pBuf1rzi1ugo1_500.png", 50, 50, false, true);
 		for (Message message : facade.getMessages()) {
