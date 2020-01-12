@@ -25,47 +25,62 @@ import model.domain.GroupList;
  */
 public class AjoutListController extends GridPane {
 
-    private ShareShopFacade facade;
+	private ShareShopFacade facade;
 
-    @FXML
-    private TextField name;
+	@FXML
+	private TextField name;
 
-    @FXML
-    private Text res;
+	@FXML
+	private Text res;
 
-    public AjoutListController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AjoutShopList.fxml"));
-        leLoader.setController(this);
-        leLoader.setRoot(this);
-        leLoader.load();
-        this.facade = ShareShopFacade.getInstance();
-    }
+	/**
+	 * AjoutListController constructor Display view Ajout ShopList in the Main View
+	 *
+	 * @throws IOException
+	 */
+	public AjoutListController() throws IOException {
+		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AjoutShopList.fxml"));
+		leLoader.setController(this);
+		leLoader.setRoot(this);
+		leLoader.load();
+		this.facade = ShareShopFacade.getInstance();
+	}
 
-    @FXML
-    void add(ActionEvent event) {
-        if (facade.addShopList(name.getText())) {
-            try {
-                super.getChildren().clear();
-                super.getChildren().add(new ShopListController());
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	/**
+	 * FXML function add to add a new ShopList on click
+	 *
+	 * @param event
+	 */
+	@FXML
+	void add(ActionEvent event) {
+		if (facade.addShopList(name.getText())) {
+			try {
+				super.getChildren().clear();
+				super.getChildren().add(new ShopListController());
+			} catch (IOException ex) {
+				Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 
-            }
-        } else {
-            res.setText("Echec lors de l'ajout");
-            res.setFill(Paint.valueOf("red"));
-        }
-    }
+			}
+		} else {
+			res.setText("Echec lors de l'ajout");
+			res.setFill(Paint.valueOf("red"));
+		}
+	}
 
-    @FXML
-    void back(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new ShopListController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	/**
+	 * FXML function back, return previous view
+	 *
+	 * @param event
+	 */
+	@FXML
+	void back(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new ShopListController());
+		} catch (IOException ex) {
+			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 
-        }
-    }
+		}
+	}
 
 }

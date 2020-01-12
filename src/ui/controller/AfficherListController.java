@@ -32,87 +32,92 @@ import model.domain.products.PricedProduct;
  */
 public class AfficherListController extends GridPane {
 
-    private ShareShopFacade facade;
+	private ShareShopFacade facade;
 
-    @FXML
-    private Label nameList;
+	@FXML
+	private Label nameList;
 
-    @FXML
-    private VBox shopListe;
+	@FXML
+	private VBox shopListe;
 
-    @FXML
-    private ScrollPane scrollpaneShopList;
+	@FXML
+	private ScrollPane scrollpaneShopList;
 
-    @FXML
-    private VBox BoughtProductListe;
+	@FXML
+	private VBox BoughtProductListe;
 
-    @FXML
-    private ScrollPane scrollpaneBoughtProductList;
+	@FXML
+	private ScrollPane scrollpaneBoughtProductList;
 
-    public AfficherListController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
-        leLoader.setController(this);
-        leLoader.setRoot(this);
-        leLoader.load();
-        this.facade = ShareShopFacade.getInstance();
-        shopListe = new VBox();
-        BoughtProductListe = new VBox();
-        nameList.setText(facade.getListName());
-        initBoughtProduct();
-        //shopListe.getChildren().addAll(quantified product list);
-        //        shopListe.setAlignment(Pos.CENTER);
-        //        scrollpaneShopList.setContent(shopListe);
-        //        BoughtProductList.getChildren().addAll(priced product list);
-        //        BoughtProductList.setAlignment(Pos.CENTER);
-        //        scrollpaneBoughtProductList.setContent(BoughtProductListe);
-    }
+	public AfficherListController() throws IOException {
+		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
+		leLoader.setController(this);
+		leLoader.setRoot(this);
+		leLoader.load();
+		this.facade = ShareShopFacade.getInstance();
+		shopListe = new VBox();
+		BoughtProductListe = new VBox();
+		nameList.setText(facade.getListName());
+		initBoughtProduct();
+		// shopListe.getChildren().addAll(quantified product list);
+		// shopListe.setAlignment(Pos.CENTER);
+		// scrollpaneShopList.setContent(shopListe);
+		// BoughtProductList.getChildren().addAll(priced product list);
+		// BoughtProductList.setAlignment(Pos.CENTER);
+		// scrollpaneBoughtProductList.setContent(BoughtProductListe);
+	}
 
-    @FXML
-    void back(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new ShopListController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	@FXML
+	void back(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new ShopListController());
+		} catch (IOException ex) {
+			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-        }
-    }
+	@FXML
+	void ok(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new AfficherListController());
+		} catch (IOException ex) {
+			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
 
-    @FXML
-    void ok(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new AfficherListController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-        }
-    }
+	/**
+	 * FXML function to add a shopping list to the view
+	 *
+	 * @param event
+	 */
+	@FXML
+	void modify(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new ModifyListController());
+		} catch (IOException ex) {
+			Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
 
-    @FXML
-    void modify(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            //super.getChildren().add(new UpdateShopListController());
-        } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-        }
-    }
+	@FXML
+	void validate(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new AfficherListController());
+		} catch (IOException ex) {
+			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
 
-    @FXML
-    void validate(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new AfficherListController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-        }
-    }
+	private void initBoughtProduct() {
+		GroupList selected = facade.getBoughtProduct();
+		List<PricedProduct> boughtProducts = selected.getBoughtProducts();
+	}
 
-    private void initBoughtProduct() {
-        GroupList selected = facade.getBoughtProduct();
-        List<PricedProduct> boughtProducts = selected.getBoughtProducts();
-    }
 }

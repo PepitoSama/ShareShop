@@ -22,60 +22,133 @@ public class GroupList {
     private char type;
     private List<PricedProduct> boughtProducts;
 
-    public List<PricedProduct> getBoughtProducts() {
-        return boughtProducts;
-    }
-
-    public void setBoughtProducts(List<PricedProduct> boughtProducts) {
-        this.boughtProducts = boughtProducts;
-    }
-
-    public int getIdGroupList() {
-        return idGroupList;
-    }
-
-    public void setIdGroupList(int idGroupList) {
-        this.idGroupList = idGroupList;
-    }
-
+    /**
+     * GroupList constructor
+     *
+     * @param idGroupList
+     * @param idGroup
+     * @param name
+     * @param date
+     * @param type
+     */
     public GroupList(int idGroupList, int idGroup, String name, Date date, char type) {
-        this.idGroupList = idGroupList;
-        this.idGroup = idGroup;
-        this.name = name;
-        this.date = date;
-        this.type = type;
+	this.idGroupList = idGroupList;
+	this.idGroup = idGroup;
+	this.name = name;
+	this.date = date;
+	this.type = type;
     }
 
+    /**
+     * getter for attribut boughtProducts
+     *
+     * @return List<PricedProduct>
+     * @see PricedProduct
+     */
+    public List<PricedProduct> getBoughtProducts() {
+	return boughtProducts;
+    }
+
+    /**
+     * setter for attribut boughtProducts
+     *
+     * @param boughtProducts
+     * @see PricedProduct
+     */
+    public void setBoughtProducts(List<PricedProduct> boughtProducts) {
+	this.boughtProducts = boughtProducts;
+    }
+
+    /**
+     * getter for attribut idGroupList
+     *
+     * @return int
+     */
+    public int getIdGroupList() {
+	return idGroupList;
+    }
+
+    /**
+     *
+     * setter for attribut idGroupList
+     *
+     * @param idGroupList
+     */
+    public void setIdGroupList(int idGroupList) {
+	this.idGroupList = idGroupList;
+    }
+
+    /**
+     *
+     * getter for attribut idGroup
+     *
+     * @return int
+     */
     public int getIdGroup() {
-        return idGroup;
+	return idGroup;
     }
 
+    /**
+     * setter for attribut idGroup
+     *
+     * @param idGroup
+     */
     public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
+	this.idGroup = idGroup;
     }
 
+    /**
+     * getter for attribut name
+     *
+     * @return String
+     */
     public String getName() {
-        return name;
+	return name;
     }
 
+    /**
+     * setter for attribut name
+     *
+     * @param name
+     */
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
+    /**
+     * getter for attribut date
+     *
+     * @return Date
+     */
     public Date getDate() {
-        return date;
+	return date;
     }
 
+    /**
+     * setter for attribut date
+     *
+     * @param date
+     */
     public void setDate(Date date) {
-        this.date = date;
+	this.date = date;
     }
 
+    /**
+     * getter for attribut type
+     *
+     * @return char
+     */
     public char getType() {
-        return type;
+	return type;
     }
 
+    /**
+     * setter for attribut type
+     *
+     * @param type
+     */
     public void setType(char type) {
-        this.type = type;
+	this.type = type;
     }
 
 }

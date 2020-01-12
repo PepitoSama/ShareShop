@@ -26,7 +26,7 @@ public class ListManager {
         List<Couple> liste = new ArrayList<Couple>();
         liste.add(new Couple("idGroup", Integer.toString(id)));
         liste.add(new Couple("type", "S"));
-        return dao.getWhere(liste);
+        return dao.get(liste);
     }
 
     private GroupList selected;
@@ -44,7 +44,7 @@ public class ListManager {
         List<Couple> liste = new ArrayList<Couple>();
         liste.add(new Couple("idGroup", Integer.toString(id)));
         liste.add(new Couple("type", "F"));
-        return dao.getWhere(liste).get(0);
+        return dao.get(liste).get(0);
     }
 
     private static ListManager instance = null;
@@ -74,12 +74,7 @@ public class ListManager {
     public boolean updateShopList(String name){
         DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
         selected.setName(name);
-        try {
-            return dao.update(selected);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+        return dao.update(selected);
     }
 
     public boolean removeList() {
@@ -96,7 +91,7 @@ public class ListManager {
         List<Couple> liste = new ArrayList<Couple>();
         liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
         liste.add(new Couple("p.idProduct", "t.idProduct"));
-        selected.setBoughtProducts(dao.getWhere(liste));
+        selected.setBoughtProducts(dao.get(liste));
     }
 
     public int getGroupListId(){

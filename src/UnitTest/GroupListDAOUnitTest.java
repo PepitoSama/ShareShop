@@ -22,7 +22,7 @@ public class GroupListDAOUnitTest {
         List<Couple> couple = new ArrayList<Couple>();
         couple.add(new Couple("idGroup", Integer.toString(1)));
         couple.add(new Couple("type", "S"));
-        List<GroupList> liste = dao.getWhere(couple);
+        List<GroupList> liste = dao.get(couple);
         System.out.println(liste);
     }
 }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.domain.products.PricedProduct;
-import model.domain.products.Product;
+import model.domain.products.SubGeneralProduct;
 
 /**
  *
@@ -30,7 +30,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
     }
 
     @Override
-    public List<PricedProduct>  getWhere(List<Couple> where) {
+    public List<PricedProduct>  get(List<Couple> where) {
         String sql = "SELECT * FROM " + this.tableName + " t, " + this.product + " p WHERE ";
         int rows = 0;
         boolean first = true;
@@ -57,7 +57,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
                     String name = result.getString("name");
                     int idFather = result.getInt("idFather");
                     String description = result.getString("description");
-                    boughtList.add(new PricedProduct(price, new Product(idProduct, name, null, description, idFather), quantity));
+                    boughtList.add(new PricedProduct(price, new SubGeneralProduct(idProduct, name, null, description, idFather), quantity));
                 }
             } else {
                 return null;
@@ -77,17 +77,12 @@ public class PricedProductDAO implements DAO<PricedProduct> {
     }
 
     @Override
-    public PricedProduct get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean save(PricedProduct obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(PricedProduct obj) throws SQLException {
+    public boolean update(PricedProduct obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

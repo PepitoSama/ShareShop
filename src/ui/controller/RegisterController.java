@@ -62,7 +62,7 @@ public class RegisterController extends GridPane {
             super.getChildren().clear();
             super.getChildren().add(new LoginController());
         } catch (IOException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -88,7 +88,7 @@ public class RegisterController extends GridPane {
             if (facade.register(nicknameV, passwordV, nameV, lastnameV, ageV, mailV, passwordCV)) {
                 try {
                     super.getChildren().clear();
-                    super.getChildren().add(new LoginController());
+					super.getChildren().add(new LoginController());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 } 

@@ -1,7 +1,5 @@
 package bl.manager;
 
-import model.dao.AbstractDAOFactory;
-import model.dao.UserDAO;
 import model.domain.User;
 
 import java.math.BigInteger;
@@ -14,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -106,7 +105,12 @@ public class UserManager {
     public boolean login(String name, String pwd) {
 
         DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
-        User u = dao.get(name);
+        
+        Couple where = new Couple("nickname", name);
+		List<Couple> listWhere = new ArrayList<>();
+		listWhere.add(where);
+		
+        User u = dao.get(listWhere).get(0);
 
         if (u != null) {
             try {
@@ -199,7 +203,7 @@ public class UserManager {
 
     public void setPassword(String text) {
         try {
-            getUser().setPassword(hashPassword(text, user.getPassword()));
+            getUser().setPassword(hashPassword(text, user.getNickname()));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -212,4 +216,11 @@ public class UserManager {
 	public int getUserId() {
 		return user.getId();
 	}
+
+    public User getUserById(int id) {
+	DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+        liste.add(new Couple("idUser", Integer.toString(id)));
+        return dao.get(liste).get(0);
+    }
 }

@@ -49,9 +49,41 @@ public class GroupDAO implements DAO<Group> {
 	}
 
 	@Override
-	public Group get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Group> get(List<Couple> where) {
+		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
+		boolean first = true;
+		for (Couple couple : where) {
+			if (first != true) {
+				sql += " AND ";
+			}
+			sql += couple.getName();
+			sql += " LIKE ";
+			sql += couple.getValue();
+			first = false;
+		}
+		Statement statement;
+		ArrayList<Group> groupList = new ArrayList<>();
+
+		statement = jdbc.prepareStatement(sql);
+		ResultSet result;
+		try {
+			result = statement.executeQuery(sql);
+			if (result != null) {
+				while (result.next()) {
+					int idGroup = result.getInt("idGroup");
+					String name = result.getString("name");
+					groupList.add(new Group(idGroup, name));
+				}
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return groupList;
 	}
 
 	@Override
@@ -78,7 +110,7 @@ public class GroupDAO implements DAO<Group> {
 	}
 
 	@Override
-	public boolean update(Group obj) throws SQLException {
+	public boolean update(Group obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -87,44 +119,5 @@ public class GroupDAO implements DAO<Group> {
 	public boolean delete(Group obj) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	@Override
-	public List<Group> getWhere(List<Couple> where) {
-		String sql = "SELECT * FROM " + this.tableName + " WHERE ";
-		boolean first = true;
-		for (Couple couple : where) {
-			if (first != true) {
-				sql += " AND ";
-			}
-			sql += couple.getName();
-			sql += " LIKE ";
-			sql += couple.getValue();
-			first = false;
-		}
-		Statement statement;
-		ArrayList<Group> groupList = new ArrayList<>();
-
-		statement = jdbc.prepareStatement(sql);
-		System.out.println(statement.toString());
-		ResultSet result;
-		try {
-			result = statement.executeQuery(sql);
-			if (result != null) {
-				while (result.next()) {
-					int idGroup = result.getInt("idGroup");
-					String name = result.getString("name");
-					groupList.add(new Group(idGroup, name));
-				}
-			} else {
-				return null;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-
-		return groupList;
 	}
 }
