@@ -145,6 +145,14 @@ public class AfficherListController extends GridPane {
 	    h.getChildren().add(amount);
 	    cellbp.add(h);
 	}
+	if (boughtProducts.isEmpty()) {
+	    Label mess = new Label("No product purchased");
+	    mess.setStyle("-fx-font-size: 30px; ");
+	    mess.setAlignment(Pos.CENTER);
+	    HBox h = new HBox();
+	    h.getChildren().add(mess);
+	    cellbp.add(h);
+	}
 	boughtProductListe.setAlignment(Pos.CENTER);
 	boughtProductListe.setSpacing(10.0);
     }
@@ -165,6 +173,15 @@ public class AfficherListController extends GridPane {
 	    h.getChildren().add(name);
 	    h.getChildren().add(quantity);
 	    cellsl.add(h);
+	}
+	if (shoplist.isEmpty()) {
+	    Label mess = new Label("No product to buy");
+	    mess.setStyle("-fx-font-size: 30px; ");
+	    mess.setAlignment(Pos.CENTER);
+	    HBox h = new HBox();
+	    h.getChildren().add(mess);
+	    cellsl.add(h);
+
 	}
 	shopListe.setAlignment(Pos.CENTER);
 	boughtProductListe.setSpacing(10.0);
