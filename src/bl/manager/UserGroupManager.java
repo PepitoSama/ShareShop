@@ -52,7 +52,7 @@ public class UserGroupManager {
 
     public List<Integer> getUsersIdGroupList(int groupId) {
 	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
-	Couple where = new Couple("groupId", Integer.toString(groupId));
+	Couple where = new Couple("idGroup", Integer.toString(groupId));
 	List<Couple> listWhere = new ArrayList<>();
 	listWhere.add(where);
 	List<UserGroup> listGroup = dao.get(listWhere);

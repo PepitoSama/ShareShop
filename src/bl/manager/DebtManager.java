@@ -5,11 +5,13 @@
  */
 package bl.manager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
+import model.domain.User;
 import model.domain.UserDebt;
 
 /**
@@ -79,5 +81,17 @@ public class DebtManager {
     public boolean updateDebt(UserDebt ud) {
 	DAO<UserDebt> dao = AbstractDAOFactory.getInstance().getUserDebtDAO();
 	return dao.update(ud);
+    }
+
+    public void addGroupDebt(List<User> users, int userId, Double price) {
+	Double prix = price / users.size();
+	DecimalFormat df = new DecimalFormat("#.##");
+	String aff = (df.format(prix)).replace(",", ".");
+	prix = Double.parseDouble(aff);
+	for (User user : users) {
+	    if (user.getId() != userId) {
+		addDebt(user.getId(), userId,prix);
+	    }
+	}
     }
 }

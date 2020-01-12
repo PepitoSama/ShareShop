@@ -9,7 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -67,13 +73,7 @@ public class AfficherListController extends GridPane {
 	boughtProductListe = new VBox();
 	nameList.setText(facade.getListName());
 	initShopList();
-	shopListe.getChildren().addAll(cellsl);
-	shopListe.setAlignment(Pos.CENTER);
-	scrollpane.setContent(shopListe);
 	initBoughtProduct();
-	boughtProductListe.getChildren().addAll(cellbp);
-	boughtProductListe.setAlignment(Pos.CENTER);
-	scrollpane1.setContent(boughtProductListe);
     }
 
     @FXML
@@ -126,6 +126,7 @@ public class AfficherListController extends GridPane {
 
     private void initBoughtProduct() {
 	List<PricedProduct> boughtProducts = facade.getBoughtProducts();
+	cellbp.clear();
 	boughtProductListe.getChildren().clear();
 	for (PricedProduct p : boughtProducts) {
 	    HBox h = new HBox();
@@ -155,10 +156,15 @@ public class AfficherListController extends GridPane {
 	}
 	boughtProductListe.setAlignment(Pos.CENTER);
 	boughtProductListe.setSpacing(10.0);
+	boughtProductListe.getChildren().addAll(cellbp);
+	boughtProductListe.setAlignment(Pos.CENTER);
+	scrollpane1.setContent(boughtProductListe);
+
     }
 
     private void initShopList() {
 	List<QuantifiedProduct> shoplist = facade.getShopList();
+	cellsl.clear();
 	shopListe.getChildren().clear();
 	for (QuantifiedProduct p : shoplist) {
 	    HBox h = new HBox();
@@ -170,8 +176,18 @@ public class AfficherListController extends GridPane {
 	    quantity.setStyle("-fx-font-size: 24px; ");
 	    quantity.setAlignment(Pos.CENTER);
 	    h.setSpacing(20);
+	    Button purchase = new Button("Purchased");
+	    purchase.setStyle("-fx-font-size: 24px; ");
+	    purchase.setAlignment(Pos.CENTER);
+	    purchase.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+		    purchase(p,prod);
+		}
+	    });
 	    h.getChildren().add(name);
 	    h.getChildren().add(quantity);
+	    h.getChildren().add(purchase);
 	    cellsl.add(h);
 	}
 	if (shoplist.isEmpty()) {
@@ -184,7 +200,43 @@ public class AfficherListController extends GridPane {
 
 	}
 	shopListe.setAlignment(Pos.CENTER);
-	boughtProductListe.setSpacing(10.0);
+	shopListe.setSpacing(10.0);
+	shopListe.getChildren().addAll(cellsl);
+	shopListe.setAlignment(Pos.CENTER);
+	scrollpane.setContent(shopListe);
+    }
+
+    public void purchase(QuantifiedProduct p, GeneralProduct prod) {
+	TextInputDialog dialog = new TextInputDialog("");
+	dialog.setTitle("Purchase product");
+	dialog.setHeaderText("Enter the product unit price" + prod.getName());
+	dialog.setContentText("Please enter the unit amount:");
+
+	Optional<String> result = dialog.showAndWait();
+	if (result.isPresent()) {
+	    String value = result.get();
+	    Double price = check(value); 
+	    if ( price != null) {
+		facade.buyProduct(p,price);
+	    }
+	}
+
+	initBoughtProduct();
+	initShopList();
+    }
+
+    private Double check(String value) {
+	Pattern p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
+	Matcher m = p.matcher(value);
+	Double price = null;
+	if (value != "" | value != null) {
+	    if (m.matches()) {
+		Double val = Double.parseDouble(value);
+		DecimalFormat df = new DecimalFormat("#.##");
+		price = Double.parseDouble(df.format(val).replace(",", "."));
+	    }
+	}
+	return price;
     }
 
 }
