@@ -52,7 +52,7 @@
       	                        <Image url="@../../../ressources/images/List.png" />
       	                     </image>
       	                  </ImageView>
-      	                  <Label fx:id="nameList" prefHeight="31.0" prefWidth="82.0" text="My List" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+      	                  <Label fx:id="nameList" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
                               <Font name="Calibri Bold" size="26.0" />
                            </font></Label>

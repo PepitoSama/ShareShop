@@ -117,4 +117,12 @@ public class ListManager {
 	selected.setShoppinglist(dao.get(liste));
     }
 
+    public void buyProduct(QuantifiedProduct p, Double price) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	dao.delete(p);
+	DAO<PricedProduct> daoPP = AbstractDAOFactory.getInstance().getPricedProductDAO();
+	daoPP.save(new PricedProduct(price, p.getIdGroupList(), p.getIdProduct(), p.getQuantity()));
+	
+    }
+
 }
