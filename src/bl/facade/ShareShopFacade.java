@@ -27,201 +27,197 @@ import model.domain.products.QuantifiedProduct;
 
 public class ShareShopFacade {
 
-    private UserManager userManager;
-    private StatsManager statsManager;
-    private GroupManager groupManager;
-    private UserGroupManager userGroupManager;
-    private ListManager listManager;
-    private MessageManager messageManager;
-    private ProductManager productManager;
-    private DebtManager debtManager;
+	private UserManager userManager;
+	private StatsManager statsManager;
+	private GroupManager groupManager;
+	private UserGroupManager userGroupManager;
+	private ListManager listManager;
+	private MessageManager messageManager;
+	private ProductManager productManager;
+	private DebtManager debtManager;
 
-    private static ShareShopFacade instance = null;
+	private static ShareShopFacade instance = null;
 
-    public static ShareShopFacade getInstance() {
-	if (instance == null) {
-	    instance = new ShareShopFacade();
+	public static ShareShopFacade getInstance() {
+		if (instance == null) {
+			instance = new ShareShopFacade();
+		}
+		return instance;
 	}
-	return instance;
-    }
 
-    private ShareShopFacade() {
-	userManager = null;
-    }
-
-    public boolean register(String username, String password, String firstname, String lastname, Date birthdate,
-	    String email, String passwordC) throws Exception {
-	if (userManager == null) {
-	    userManager = new UserManager();
+	private ShareShopFacade() {
+		userManager = null;
 	}
-	return userManager.register(username, password, firstname, lastname, birthdate, email, passwordC);
-    }
 
-    public UserManager getUserManager() {
-	return userManager;
-    }
+	public boolean register(String username, String password, String firstname, String lastname, Date birthdate,
+			String email, String passwordC) throws Exception {
+		if (userManager == null) {
+			userManager = new UserManager();
+		}
+		return userManager.register(username, password, firstname, lastname, birthdate, email, passwordC);
+	}
 
-    public void setUserManager(UserManager userManager) {
-	this.userManager = userManager;
-    }
+	public UserManager getUserManager() {
+		return userManager;
+	}
 
-    public boolean login(String name, String pwd) {
-	userManager = new UserManager();
-	return this.userManager.login(name, pwd);
-    }
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
 
-    public List<Stats> consultStats(int id, Date dd, Date df) {
-	statsManager = StatsManager.getInstance();
-	return this.statsManager.consultStats(id, dd, df);
-    }
+	public boolean login(String name, String pwd) {
+		userManager = new UserManager();
+		return this.userManager.login(name, pwd);
+	}
 
-    public List<Stats> consultStats(Date dd, Date df) {
-	statsManager = StatsManager.getInstance();
-	return this.statsManager.consultStats(dd, df);
-    }
+	public List<Stats> consultStats(int id, Date dd, Date df) {
+		statsManager = StatsManager.getInstance();
+		return this.statsManager.consultStats(id, dd, df);
+	}
 
-    public int getNumberUserStats() {
-	statsManager = StatsManager.getInstance();
-	return this.statsManager.getNumber();
-    }
+	public List<Stats> consultStats(Date dd, Date df) {
+		statsManager = StatsManager.getInstance();
+		return this.statsManager.consultStats(dd, df);
+	}
 
-    public String getNickname() {
-	return userManager.getNickname();
-    }
+	public int getNumberUserStats() {
+		statsManager = StatsManager.getInstance();
+		return this.statsManager.getNumber();
+	}
 
-    public String getName() {
-	return userManager.getName();
-    }
+	public String getNickname() {
+		return userManager.getNickname();
+	}
 
-    public String getLastname() {
-	return userManager.getLastname();
-    }
+	public String getName() {
+		return userManager.getName();
+	}
 
-    public String getMail() {
-	return userManager.getMail();
-    }
+	public String getLastname() {
+		return userManager.getLastname();
+	}
 
-    public Date getBirthdate() {
-	return userManager.getBirthdate();
-    }
+	public String getMail() {
+		return userManager.getMail();
+	}
 
-    public LocalDate getLocalBirthdate() {
-	return userManager.getLocalBirthdate();
-    }
+	public Date getBirthdate() {
+		return userManager.getBirthdate();
+	}
 
-    public String getPassword() {
-	return userManager.getPassword();
-    }
-    
-    public boolean updateUser() throws SQLException {
-	return userManager.updateUser();
-    }
+	public LocalDate getLocalBirthdate() {
+		return userManager.getLocalBirthdate();
+	}
 
-    public void setName(String text) {
-	userManager.setName(text);
-    }
+	public String getPassword() {
+		return userManager.getPassword();
+	}
 
-    public void setLastname(String text) {
-	userManager.setLastname(text);
-    }
+	public boolean updateUser() throws SQLException {
+		return userManager.updateUser();
+	}
 
-    public void setNickname(String text) {
-	userManager.setNickname(text);
-    }
+	public void setName(String text) {
+		userManager.setName(text);
+	}
 
-    public void setMail(String text) {
-	userManager.setMail(text);
-    }
+	public void setLastname(String text) {
+		userManager.setLastname(text);
+	}
 
-    public void setPassword(String text) {
-	userManager.setPassword(text);
-    }
+	public void setNickname(String text) {
+		userManager.setNickname(text);
+	}
 
-    public void setBirthdate(Date date) {
-	userManager.setBirthdate(date);
-    }
+	public void setMail(String text) {
+		userManager.setMail(text);
+	}
 
-    public boolean createGroup(String groupName) {
-	groupManager = GroupManager.getInstance();
-	userGroupManager = userGroupManager.getInstance();
-	groupManager.createGroup(groupName);
+	public void setPassword(String text) {
+		userManager.setPassword(text);
+	}
 
-	int newGroupId = groupManager.getGroupId(groupName);
+	public void setBirthdate(Date date) {
+		userManager.setBirthdate(date);
+	}
 
-	return userGroupManager.createUserGroup(getUserId(), newGroupId);
-    }
+	public boolean createGroup(String groupName) {
+		groupManager = GroupManager.getInstance();
+		userGroupManager = userGroupManager.getInstance();
+		groupManager.createGroup(groupName);
 
-    public int getUserId() {
-	return userManager.getUserId();
-    }
+		int newGroupId = groupManager.getGroupId(groupName);
 
-    public List<UserGroup> getUserGroupList(int userId) {
-	userGroupManager = UserGroupManager.getInstance();
-	return userGroupManager.getUserGroupList(userId);
-    }
+		return userGroupManager.createUserGroup(getUserId(), newGroupId);
+	}
 
-    public List<Group> getGroupList(List<UserGroup> userGroupList) {
-	GroupManager groupManager = GroupManager.getInstance();
-	return groupManager.getGroupList(userGroupList);
-    }
+	public int getUserId() {
+		return userManager.getUserId();
+	}
 
-    public GroupManager getGroupManager() {
-	return GroupManager.getInstance();
-    }
+	public List<UserGroup> getUserGroupList(int userId) {
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.getUserGroupList(userId);
+	}
 
+	public List<Group> getGroupList(List<UserGroup> userGroupList) {
+		GroupManager groupManager = GroupManager.getInstance();
+		return groupManager.getGroupList(userGroupList);
+	}
+
+	public GroupManager getGroupManager() {
+		return GroupManager.getInstance();
+	}
+	
     public UserGroupManager getUserGroupManager() {
     	return UserGroupManager.getInstance();
-        }
-    
-    public ListManager getListManager() {
-	return ListManager.getInstance();
     }
 
-    public List<GroupList> getShoppingList() {
-	listManager = getListManager();
-	return listManager.getShoppingList(getSelectedGroupID());
-    }
+	public ListManager getListManager() {
+		return ListManager.getInstance();
+	}
 
-    public int getSelectedGroupListID() {
-	return this.listManager.getGroupListId();
-    }
+	public List<GroupList> getShoppingList() {
+		listManager = getListManager();
+		return listManager.getShoppingList(getSelectedGroupID());
+	}
 
-    public GroupList getSelectedGroupList() {
-	listManager = ListManager.getInstance();
-	return this.listManager.getSelected();
-    }
+	public int getSelectedGroupListID() {
+		return this.listManager.getGroupListId();
+	}
 
-    public int getSelectedGroupID() {
-	groupManager = GroupManager.getInstance();
-	return this.groupManager.getSelectedGroupId();
-    }
+	public GroupList getSelectedGroupList() {
+		listManager = ListManager.getInstance();
+		return this.listManager.getSelected();
+	}
 
-    public boolean addShopList(String name) {
-	return listManager.addShopList(name, this.getSelectedGroupID());
-    }
+	public int getSelectedGroupID() {
+		groupManager = GroupManager.getInstance();
+		return this.groupManager.getSelectedGroupId();
+	}
 
-    public String getListName() {
-	return listManager.getNameSelected();
-    }
+	public boolean addShopList(String name) {
+		return listManager.addShopList(name, this.getSelectedGroupID());
+	}
 
-    public List<Message> getMessages() {
-	this.messageManager = messageManager.getInstance();
-	return this.messageManager.getAllMessages();
-    }
+	public String getListName() {
+		return listManager.getNameSelected();
+	}
 
-    public MessageManager getMessageManager() {
-	this.messageManager = messageManager.getInstance();
-	return this.messageManager;
-    }
+	public List<Message> getMessages() {
+		this.messageManager = messageManager.getInstance();
+		return this.messageManager.getAllMessages();
+	}
 
-    public void setMessageSelected() {
-	this.getMessageManager().setSelected(this.groupManager.getSelected());
-    }
+	public MessageManager getMessageManager() {
+		this.messageManager = messageManager.getInstance();
+		return this.messageManager;
+	}
 
-    public boolean updateShopList(String name) {
-	return listManager.updateShopList(name);
-    }
-
+	public void setMessageSelected() {
+		this.getMessageManager().setSelected(this.groupManager.getSelected());
+	}
+s
     public boolean removeSelectedList() {
     	return listManager.removeList();
     }
@@ -243,95 +239,128 @@ public class ShareShopFacade {
      */
     public List<GeneralProduct> getAllProducts() {
 	return null;
+	}
+
+	public boolean updateShopList(String name) {
+		return listManager.updateShopList(name);
+	}
+
+	public boolean removeSelectedList() {
+		return listManager.removeList();
+	}
+	
+    public boolean removeSelectedMember() {
+    	return UserGroupManager.removeMember();
     }
 
-    /**
-     * Add a Custom product. This product will be linked to the currently
-     * selected group in the groupManager
-     *
-     * @param name	The name of the product
-     * @param image	The image of the product
-     * @param description	The description of the product
-     * @param idFather	The id of the Parent Product. Give a negative number or 0
-     * if this product doesn't have a parent Product
-     * @return true if the product has been created
-     */
-    public boolean addProduct(String name, Image image, String description, int idFather) {
-	this.productManager = ProductManager.getInstance();
-	return this.productManager.addCustomProduct(name, image, description, idFather, groupManager.getSelected());
-    }
+	/**
+	 * @return all the products in the database
+	 */
+	public List<GeneralProduct> getAllProducts() {
+		return null;
+	}
 
-    /**
-     * Search products whose name is like the string given in parameter or is a
-     * child product of the former.
-     *
-     * @param name	The name or part of the name of the product or parent product
-     * @return	the List of products found
-     */
-    public List<GeneralProduct> searchProducts(String name) {
-	this.productManager = ProductManager.getInstance();
-	return this.productManager.searchProducts(name);
-    }
+	/**
+	 * Add a Custom product. This product will be linked to the currently selected
+	 * group in the groupManager
+	 *
+	 * @param name
+	 *            The name of the product
+	 * @param image
+	 *            The image of the product
+	 * @param description
+	 *            The description of the product
+	 * @param idFather
+	 *            The id of the Parent Product. Give a negative number or 0 if this
+	 *            product doesn't have a parent Product
+	 * @return true if the product has been created
+	 */
+	public boolean addProduct(String name, Image image, String description, int idFather) {
+		this.productManager = ProductManager.getInstance();
+		return this.productManager.addCustomProduct(name, image, description, idFather, groupManager.getSelected());
+	}
 
-    public boolean sendMessage(String text) {
-	return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
-    }
+	/**
+	 * Search products whose name is like the string given in parameter or is a
+	 * child product of the former.
+	 *
+	 * @param name
+	 *            The name or part of the name of the product or parent product
+	 * @return the List of products found
+	 */
+	public List<GeneralProduct> searchProducts(String name) {
+		this.productManager = ProductManager.getInstance();
+		return this.productManager.searchProducts(name);
+	}
 
-    public List<UserDebt> getMyDebt() {
-	debtManager = DebtManager.getInstance();
-	return debtManager.getMyDebt(this.getUserId());
-    }
+	public boolean sendMessage(String text) {
+		return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
+	}
 
-    public User getUserById(int id) {
-	return this.userManager.getUserById(id);
-    }
+	public List<UserDebt> getMyDebt() {
+		debtManager = DebtManager.getInstance();
+		return debtManager.getMyDebt(this.getUserId());
+	}
 
-    public List<UserDebt> getMyDue() {
-	debtManager = DebtManager.getInstance();
-	return debtManager.getMyDue(this.getUserId());
-    }
+	public User getUserById(int id) {
+		return this.userManager.getUserById(id);
+	}
 
-    public void setSelectedDebt(UserDebt debt) {
-	debtManager = DebtManager.getInstance();
-	debtManager.setSelectedDebt(debt);
-    }
+	public List<UserDebt> getMyDue() {
+		debtManager = DebtManager.getInstance();
+		return debtManager.getMyDue(this.getUserId());
+	}
 
-    public UserDebt getSelectedDebt() {
-	debtManager = DebtManager.getInstance();
-	return debtManager.getSelectedDebt();
-    }
+	public void setSelectedDebt(UserDebt debt) {
+		debtManager = DebtManager.getInstance();
+		debtManager.setSelectedDebt(debt);
+	}
 
-    /*
-    public boolean sendMessage(String text) {
-	return messageManager.sendMessage(text, getUserManager().getUser(), getGroupManager().getSelected());
-    }
-     */
-    public boolean updateDebt() {
-	debtManager = DebtManager.getInstance();
-	return debtManager.updateDebt(getSelectedDebt());
-    }
+	public UserDebt getSelectedDebt() {
+		debtManager = DebtManager.getInstance();
+		return debtManager.getSelectedDebt();
+	}
 
-    public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
-	listManager = ListManager.getInstance();
-	return listManager.addProductsToShopList(selectedProducts);
-    }
+	/*
+	 * public boolean sendMessage(String text) { return
+	 * messageManager.sendMessage(text, getUserManager().getUser(),
+	 * getGroupManager().getSelected()); }
+	 */
+	public boolean updateDebt() {
+		debtManager = DebtManager.getInstance();
+		return debtManager.updateDebt(getSelectedDebt());
+	}
 
-    public GeneralProduct getProductById(int idProduct) {
-	productManager = ProductManager.getInstance();
-	return productManager.getProductById(idProduct);
-    }
+	public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
+		listManager = ListManager.getInstance();
+		return listManager.addProductsToShopList(selectedProducts);
+	}
 
-    public List<PricedProduct> getBoughtProducts() {
-	listManager = ListManager.getInstance();
-	listManager.getBoughtProducts(getSelectedGroupList());
-	return getSelectedGroupList().getBoughtProducts();
-    }
+	public GeneralProduct getProductById(int idProduct) {
+		productManager = ProductManager.getInstance();
+		return productManager.getProductById(idProduct);
+	}
+	
+	/**
+	 * @return all the subgeneralProducts
+	 */
+	public List<GeneralProduct> getAllSubGeneralProducts() {
+		productManager = ProductManager.getInstance();
+		return productManager.getAllSubGeneralProducts();
+	}
 
-    public List<QuantifiedProduct> getShopList() {
-	listManager = ListManager.getInstance();
-	listManager.getShopList(getSelectedGroupList());
-	return getSelectedGroupList().getShoppinglist();
-    }
+	public List<PricedProduct> getBoughtProducts() {
+		listManager = ListManager.getInstance();
+		listManager.getBoughtProducts(getSelectedGroupList());
+		return getSelectedGroupList().getBoughtProducts();
+	}
+
+	public List<QuantifiedProduct> getShopList() {
+		listManager = ListManager.getInstance();
+		listManager.getShopList(getSelectedGroupList());
+		return getSelectedGroupList().getShoppinglist();
+	}
+
 
     public void buyProduct(QuantifiedProduct p, Double price) {
 	statsManager = StatsManager.getInstance();
@@ -347,6 +376,21 @@ public class ShareShopFacade {
 	List<Integer> users = userGroupManager.getUsersIdGroupList(getSelectedGroupID());
 	List<User> liste = userManager.getGroupUsers(users);
 	return liste;
+    }
+
+    public void addOne(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.addOne(p);
+    }
+
+    public void removeOne(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.removeOne(p);
+    }
+
+    public void removeProductInShopList(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.remove(p);
     }
 
 }

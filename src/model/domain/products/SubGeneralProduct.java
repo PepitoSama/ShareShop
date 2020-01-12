@@ -2,6 +2,7 @@ package model.domain.products;
 
 import java.util.List;
 
+
 import javafx.scene.image.Image;
 
 public class SubGeneralProduct extends GeneralProduct {
@@ -22,10 +23,18 @@ public class SubGeneralProduct extends GeneralProduct {
 
 	@Override
 	public String toString() {
-		return "SubGeneralProduct [children=" + children + ", getChildren()=" + getChildren() + ", getIdProduct()="
-				+ getIdProduct() + ", getName()=" + getName() + ", getImage()=" + getImage() + ", getDescription()="
-				+ getDescription() + ", getIdFather()=" + getIdFather() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+		String description = getDescription();
+		if (description == null) {
+			description = "";
+		} else if (description.length() > 25) {
+			description = description.substring(0,25) + "...";
+		}
+		
+		if (description != "") {
+			description = " - " + description;
+		}
+		
+		return getName() + description;
 	}
 
 }

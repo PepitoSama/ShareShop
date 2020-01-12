@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import bl.facade.ShareShopFacade;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -55,7 +57,12 @@ public class CreateProductController extends GridPane {
 	@FXML
 	private TextField description;
 	
+	@FXML
+	private GridPane parentProductGP;
+	
 	private ShareShopFacade facade;
+	
+	private ChoiceBox<GeneralProduct> parentChoiceBox;
 
 
 	public CreateProductController() throws IOException {
@@ -64,6 +71,15 @@ public class CreateProductController extends GridPane {
 		loader.setRoot(this);
 		loader.load();
 		this.facade = ShareShopFacade.getInstance();
+		
+		
+		List<GeneralProduct> subGenProd = facade.getAllSubGeneralProducts();
+		
+		parentChoiceBox = new ChoiceBox<>();
+		parentChoiceBox.getItems().add(null);
+		parentChoiceBox.getItems().addAll(subGenProd);
+				
+		parentProductGP.add(parentChoiceBox, 0, 1);
 	}
 	
 	@FXML
@@ -79,7 +95,13 @@ public class CreateProductController extends GridPane {
 	@FXML
 	void create(ActionEvent event) {
 		
-		boolean created = facade.addProduct(productName.getText().trim(), null, description.getText().trim(), 0); // TODO idFather
+		
+		GeneralProduct parent = parentChoiceBox.getSelectionModel().selectedItemProperty().getValue();
+		int idparent = 0;
+		if (parent != null) {
+			idparent = parent.getIdProduct();
+		}
+		boolean created = facade.addProduct(productName.getText().trim(), null, description.getText().trim(), idparent);
 		
 		if (created) {
 			try {
