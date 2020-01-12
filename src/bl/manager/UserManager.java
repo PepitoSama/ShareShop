@@ -223,4 +223,12 @@ public class UserManager {
         liste.add(new Couple("idUser", Integer.toString(id)));
         return dao.get(liste).get(0);
     }
+
+    public List<User> getGroupUsers(List<Integer> users) {
+	List<User> liste = new ArrayList<>();
+	for (Integer user1 : users) {
+	    liste.add(getUserById(user1.intValue()));
+	}
+	return liste;
+    }
 }
