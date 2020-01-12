@@ -236,17 +236,6 @@ public class ShopListController extends GridPane {
 	}
 
     }
-    
-    @FXML
-    void modify(ActionEvent event) {
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherMemberController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
-	}
-    }
 
 	/**
 	 * function to update a group list
@@ -280,7 +269,7 @@ public class ShopListController extends GridPane {
 	    super.getChildren().clear();
 	    super.getChildren().add(new UpdateListController());
 	} catch (IOException ex) {
-	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
+	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Delete List : " + liste.getName());
