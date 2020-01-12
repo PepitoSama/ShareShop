@@ -116,5 +116,23 @@ public class ProductManager {
 		couple.add(new Couple("idProduct", Integer.toString(idProduct)));
 		return dao.get(couple).get(0);
 	}
+	
+	/**
+	 * @return all the subgeneralProducts
+	 */
+	public List<GeneralProduct> getAllSubGeneralProducts() {
+		DAO<GeneralProduct> dao = AbstractDAOFactory.getInstance().getProductDAO();
+		List<GeneralProduct> l = dao.getAll();
+		
+		List<GeneralProduct> res = new ArrayList<>();
+		
+		for (GeneralProduct p : l) {
+			if (p instanceof SubGeneralProduct) {
+				res.add(p);
+			}
+		}
+ 
+		return res;
+	}
 
 }

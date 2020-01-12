@@ -22,8 +22,10 @@ public class ProductDAO implements DAO<GeneralProduct> {
 
     @Override
     public List<GeneralProduct> getAll() {
-	// TODO Auto-generated method stub
-	return null;
+    	Couple where = new Couple("1", "1");
+		List<Couple> listWhere = new ArrayList<>();
+		listWhere.add(where);
+		return get(listWhere);
     }
 
 //	@Override
