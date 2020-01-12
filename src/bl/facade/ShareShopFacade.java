@@ -168,6 +168,10 @@ public class ShareShopFacade {
 	public GroupManager getGroupManager() {
 		return GroupManager.getInstance();
 	}
+	
+    public UserGroupManager getUserGroupManager() {
+    	return UserGroupManager.getInstance();
+    }
 
 	public ListManager getListManager() {
 		return ListManager.getInstance();
@@ -221,6 +225,10 @@ public class ShareShopFacade {
 	public boolean removeSelectedList() {
 		return listManager.removeList();
 	}
+	
+    public boolean removeSelectedMember() {
+    	return UserGroupManager.removeMember();
+    }
 
 	/**
 	 * @return all the products in the database
