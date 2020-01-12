@@ -5,17 +5,11 @@
  */
 package bl.manager;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
-import model.dao.StatsDAO;
-import model.domain.Group;
-import model.domain.GroupList;
-import model.domain.Stats;
 import model.domain.User;
 import model.domain.UserGroup;
 
@@ -29,11 +23,16 @@ public class UserGroupManager {
 
     private static UserGroupManager instance = null;
     
-	private User selected;
+	private static UserGroup selected;
 	
-	public User getSelected() {
+	public UserGroup getSelected() {
 		return selected;
 	    }
+	
+    public static void setSelected(UserGroup userGroup) {
+    		selected = userGroup;
+        }
+    
 
     public static UserGroupManager getInstance() {
 	if (instance == null) {
@@ -47,7 +46,33 @@ public class UserGroupManager {
 	UserGroup userGroup = new UserGroup(idUser, idGroup);
 	return dao.save(userGroup);
     }
-
+    
+    public UserGroup getUserGroup(User user) {
+    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+    		for (UserGroup userGroup : dao.getAll()) {
+    	    if (userGroup.getIdUser() == user.getId()) {
+    	    	if(userGroup.getIdGroup() == this.getSelected().getIdGroup())
+    	    		return userGroup;
+    	    }
+    	}
+		return null;
+    }
+    
+    
+//    public List<Integer> getGroupId(int userId) {
+//    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+//    	List<Integer> GroupId = new ArrayList<>();
+//    	for (UserGroup userGroup : dao.getAll()) {
+//    	    if (userGroup.getIdUser() == userId) {
+//    	    		GroupId.add(userGroup.getIdGroup());
+//    	    		return GroupId;
+//    	    }
+//    	}
+//		return GroupId;
+//    }
+    
+    	
+    
     public List<UserGroup> getUserGroupList(int userId) {
 	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
 	List<UserGroup> userGroupList = new ArrayList<>();
@@ -58,6 +83,7 @@ public class UserGroupManager {
 	}
 	return userGroupList;
     }
+    
 
     public List<Integer> getUsersIdGroupList(int groupId) {
 	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
@@ -72,15 +98,10 @@ public class UserGroupManager {
 	return users;
     }
     
-    public void setSelected(User user) {
-    	this.selected = user;
-        }
-    
-    public static boolean removeMember() {
+
+    public static  boolean removeUserGroup() {
     	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
-    	//TO DO DELETE POUR USER
-    	//return dao.delete(selected);
-    	return true;
+    	return dao.delete(selected);
         }
 
 }
