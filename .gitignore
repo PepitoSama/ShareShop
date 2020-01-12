@@ -40,3 +40,4 @@ manifest.mf
 ressources/config/*
 *.properties
 .settings/org.eclipse.jdt.core.prefs
+/bin1/

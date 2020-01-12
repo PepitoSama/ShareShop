@@ -5,12 +5,14 @@
  */
 package ui.controller;
 
+
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
+import javafx.geometry.Insets;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -44,7 +46,7 @@ import model.domain.UserGroup;
  */
 public class MyGroupsController extends GridPane {
 
-    private final ObservableList<BorderPane> buttons = FXCollections.observableArrayList();
+    private final ObservableList<HBox> buttons = FXCollections.observableArrayList();
     @FXML
     private VBox shopListe;
 
@@ -65,7 +67,6 @@ public class MyGroupsController extends GridPane {
         initList();
         flButton = new FilteredList(buttons, p -> true);
         shopListe.getChildren().addAll(flButton);
-        shopListe.setAlignment(Pos.CENTER);
         scrollpane.setContent(shopListe);
     }
 
@@ -85,13 +86,16 @@ public class MyGroupsController extends GridPane {
                     toGroup(liste);
                 }
             });
-            b.setPrefWidth(500);
+            b.setPrefWidth(540);
             BorderPane border = new BorderPane();
             border.setCenter(b);
-            buttons.add(border);
+            HBox boutonHBox = new HBox();
+            boutonHBox.getChildren().add(border);
+            buttons.add(boutonHBox);
         }
         shopListe.setAlignment(Pos.CENTER);
-        shopListe.setSpacing(10.0);
+        shopListe.setSpacing(5);
+        shopListe.setPadding(new Insets(5, 5, 5, 5));
     }
 
     /*
@@ -114,26 +118,6 @@ public class MyGroupsController extends GridPane {
         try {
             super.getChildren().clear();
             super.getChildren().add(new ProfilController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void mystats(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new StatsController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    @FXML
-    private void debt(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new DebtController());
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

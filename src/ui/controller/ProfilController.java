@@ -125,4 +125,24 @@ public class ProfilController extends GridPane {
             res.setFill(Paint.valueOf("red"));
         }
     }
+    
+    @FXML
+    private void mystats(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new StatsController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void debt(ActionEvent event) {
+        try {
+            super.getChildren().clear();
+            super.getChildren().add(new DebtController());
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

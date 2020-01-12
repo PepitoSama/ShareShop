@@ -177,10 +177,10 @@ public class StatsController extends GridPane {
     private void back(ActionEvent event) {
         try {
             super.getChildren().clear();
-            super.getChildren().add(new MyGroupsController());
+            super.getChildren().add(new ProfilController());
             super.getChildren();
         } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -59,8 +60,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <DatePicker fx:id="datedebut" onAction="#refresh" />
-                        <DatePicker fx:id="datefin" onAction="#refresh" GridPane.columnIndex="2" />
+                        <DatePicker fx:id="datedebut" onAction="#refresh" promptText="Start" />
+                        <DatePicker fx:id="datefin" onAction="#refresh" promptText="End" GridPane.columnIndex="2" />
                     </children>
                 </GridPane>
                 <GridPane prefWidth="161.0">
@@ -70,15 +71,25 @@
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#back" text="Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                            <font>
-                                <Font name="Calibri" size="24.0" />
-                            </font>
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="24.0" />
+                           </font>
                         </Button>
-                    </children>
+                     </center>
+                  </BorderPane>
+               </children>
                 </GridPane>
             </children>
         </GridPane> 
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </fx:root>

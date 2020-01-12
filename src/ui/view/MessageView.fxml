@@ -42,9 +42,9 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button mnemonicParsing="false" onAction="#back" text="Back" BorderPane.alignment="CENTER">
+                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="Calibri Bold" size="22.0" />
+                              <Font name="Calibri" size="24.0" />
                            </font>
                         </Button>
                      </center>
