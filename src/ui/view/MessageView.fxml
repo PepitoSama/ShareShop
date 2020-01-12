@@ -42,9 +42,9 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button mnemonicParsing="false" onAction="#back" text="Back" BorderPane.alignment="CENTER">
+                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="Calibri Bold" size="22.0" />
+                              <Font name="Calibri" size="24.0" />
                            </font>
                         </Button>
                      </center>
@@ -77,7 +77,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <center>
-                        <Button mnemonicParsing="false" onAction="#send" text="Send" BorderPane.alignment="CENTER" />
+                        <Button id="lion" mnemonicParsing="false" onAction="#send" stylesheets="@../../../ressources/css/buttons.css" text="Send" BorderPane.alignment="CENTER" />
                      </center></BorderPane>
                </children>
                <GridPane.margin>

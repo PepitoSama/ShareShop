@@ -163,9 +163,10 @@ public class DebtController extends GridPane {
 	try {
 	    super.getChildren().clear();
 	    super.getChildren().add(new MyGroupsController());
-	} catch (IOException ex) {
-	    Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
 
+	} catch (IOException ex) {
+	    Logger.getLogger(DebtController.class
+		    .getName()).log(Level.SEVERE, null, ex);
 	}
     }
 
@@ -179,9 +180,10 @@ public class DebtController extends GridPane {
 	try {
 	    super.getChildren().clear();
 	    super.getChildren().add(new PayDebtController());
-	} catch (IOException ex) {
-	    Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
 
+	} catch (IOException ex) {
+	    Logger.getLogger(DebtController.class
+		    .getName()).log(Level.SEVERE, null, ex);
 	}
     }
 

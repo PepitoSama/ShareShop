@@ -50,112 +50,112 @@ import model.domain.UserDebt;
  */
 public class PayDebtController extends GridPane {
 
-    private ShareShopFacade facade;
+	private ShareShopFacade facade;
 
-    @FXML
-    private TextField amount;
+	@FXML
+	private TextField amount;
 
-    @FXML
-    private Label name;
+	@FXML
+	private Label name;
 
-    @FXML
-    private Label rest;
+	@FXML
+	private Label rest;
 
-    private UserDebt select;
+	private UserDebt select;
 
-    private Pattern p;
+	private Pattern p;
 
-    private Double re;
+	private Double re;
 
-    /**
-     * PayDebtController constructor Display view to pay a Debt in the Main View
-     *
-     * @throws IOException
-     */
-    public PayDebtController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/PayDebtView.fxml"));
-	leLoader.setController(this);
-	leLoader.setRoot(this);
-	leLoader.load();
-	this.facade = ShareShopFacade.getInstance();
-	select = facade.getSelectedDebt();
-	User u = facade.getUserById(select.getIdTo());
-	name.setText("Pay " + u.getFistname());
-	rest.setText("Amount due: " + select.getAmount() + " €");
-	p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
-    }
-
-    /**
-     * FXML function back, return previous view
-     *
-     * @param event
-     */
-    @FXML
-    void back(ActionEvent event) {
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new DebtController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	/**
+	 * PayDebtController constructor Display view to pay a Debt in the Main View
+	 *
+	 * @throws IOException
+	 */
+	public PayDebtController() throws IOException {
+		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/PayDebtView.fxml"));
+		leLoader.setController(this);
+		leLoader.setRoot(this);
+		leLoader.load();
+		this.facade = ShareShopFacade.getInstance();
+		select = facade.getSelectedDebt();
+		User u = facade.getUserById(select.getIdTo());
+		name.setText("Pay " + u.getFistname());
+		rest.setText("Amount due: " + select.getAmount() + " €");
+		p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
 	}
-    }
 
-    /**
-     * FXML function pay that pay the Debt with the amount entered by user and
-     * turn back to Debt View
-     *
-     * @param event
-     */
-    @FXML
-    public void pay(ActionEvent event) {
-	Double val = select.getAmount() - Double.parseDouble(amount.getText());
-	facade.getSelectedDebt().setAmount(val);
-	if (facade.updateDebt()) {
-	    try {
-		super.getChildren().clear();
-		super.getChildren().add(new DebtController());
-	    } catch (IOException ex) {
-		Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-	    }
-	}
-	rest.setText(rest.getText() + "\n" + "Fail to pay debt");
-    }
-
-    /**
-     * FXML function that checkinkg amount entered by the user
-     *
-     * @param event
-     */
-    @FXML
-    private void check(KeyEvent event) {
-	String am = amount.getText();
-	Matcher m = p.matcher(am);
-	if (am == "" | am == null) {
-	    rest.setText("Amount due: " + select.getAmount() + " €");
-	} else {
-	    if (m.matches()) {
+	/**
+	 * FXML function back, return previous view
+	 *
+	 * @param event
+	 */
+	@FXML
+	void back(ActionEvent event) {
 		try {
-		    Double val = Double.parseDouble(am);
-		    if (val > select.getAmount()) {
-			amount.setText(Double.toString(select.getAmount()));
-			rest.setText("Amount due : 0€");
-		    } else {
-			re = select.getAmount() - val;
-			DecimalFormat df = new DecimalFormat("#.##");
-			String aff = (df.format(re)).replace(",", ".");
-			rest.setText("Amount due : " + aff + " €");
-		    }
-		} catch (Exception e) {
-		    amount.setText("");
-		    rest.setText("Amount due : " + select.getAmount() + " €");
+			super.getChildren().clear();
+			super.getChildren().add(new DebtController());
+		} catch (IOException ex) {
+			Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	    } else {
-		DecimalFormat df = new DecimalFormat("#.##");
-		String aff = (df.format(select.getAmount() - re)).replace(",", ".");
-		amount.setText(aff);
-	    }
 	}
 
-    }
+	/**
+	 * FXML function pay that pay the Debt with the amount entered by user and turn
+	 * back to Debt View
+	 *
+	 * @param event
+	 */
+	@FXML
+	public void pay(ActionEvent event) {
+		Double val = select.getAmount() - Double.parseDouble(amount.getText());
+		facade.getSelectedDebt().setAmount(val);
+		if (facade.updateDebt()) {
+			try {
+				super.getChildren().clear();
+				super.getChildren().add(new DebtController());
+			} catch (IOException ex) {
+				Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		rest.setText(rest.getText() + "\n" + "Fail to pay debt");
+	}
+
+	/**
+	 * FXML function that checkinkg amount entered by the user
+	 *
+	 * @param event
+	 */
+	@FXML
+	private void check(KeyEvent event) {
+		String am = amount.getText();
+		Matcher m = p.matcher(am);
+		if (am == "" | am == null) {
+			rest.setText("Amount due: " + select.getAmount() + " €");
+		} else {
+			if (m.matches()) {
+				try {
+					Double val = Double.parseDouble(am);
+					if (val > select.getAmount()) {
+						amount.setText(Double.toString(select.getAmount()));
+						rest.setText("Amount due : 0€");
+					} else {
+						re = select.getAmount() - val;
+						DecimalFormat df = new DecimalFormat("#.##");
+						String aff = (df.format(re)).replace(",", ".");
+						rest.setText("Amount due : " + aff + " €");
+					}
+				} catch (Exception e) {
+					amount.setText("");
+					rest.setText("Amount due : " + select.getAmount() + " €");
+				}
+			} else {
+				DecimalFormat df = new DecimalFormat("#.##");
+				String aff = (df.format(select.getAmount() - re)).replace(",", ".");
+				amount.setText(aff);
+			}
+		}
+
+	}
 
 }

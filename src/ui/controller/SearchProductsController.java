@@ -86,22 +86,9 @@ public class SearchProductsController extends GridPane {
     void back(ActionEvent event) {
 	try {
 	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherListController());
+	    super.getChildren().add(new ModifyListController());
 	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
-	}
-    }
-    
-     @FXML
-    void select(ActionEvent event) {
-	facade.addProductsToShopList(selectedProducts);
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherListController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
+	    Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
 	}
     }
 
@@ -111,6 +98,20 @@ public class SearchProductsController extends GridPane {
 	String txt = searchbar.getText().toLowerCase().trim();
 	products = facade.searchProducts(txt);
 	printProducts();
+    }
+
+    @FXML
+    void select(ActionEvent event) {
+	facade.addProductsToShopList(selectedProducts);
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new AfficherListController());
+
+	} catch (IOException ex) {
+	    Logger.getLogger(LoginController.class
+		    .getName()).log(Level.SEVERE, null, ex);
+
+	}
     }
 
     private void printProducts() {
@@ -155,8 +156,7 @@ public class SearchProductsController extends GridPane {
 	    if (!selectedProducts.contains(p)) {
 		selectedProducts.add(p);
 	    }
-	}
-	else{
+	} else {
 	    if (selectedProducts.contains(p)) {
 		selectedProducts.remove(p);
 	    }

@@ -34,13 +34,13 @@
                     </rowConstraints>
                     <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
-                            <center>
-                                <Button mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="68.0" text="Back" BorderPane.alignment="CENTER">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                            </center>
+                     <center>
+                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="24.0" />
+                           </font>
+                        </Button>
+                     </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <center>
@@ -73,16 +73,19 @@
                     <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <center>
-                                <Button mnemonicParsing="false" onAction="#createGroup" prefHeight="47.0" prefWidth="85.0" text="Create" BorderPane.alignment="CENTER">
+                                <Button id="lion" mnemonicParsing="false" onAction="#createGroup" prefHeight="34.0" prefWidth="127.0" stylesheets="@../../../ressources/css/buttons.css" text="Create" textFill="#00680e" BorderPane.alignment="CENTER">
                                     <font>
-                                        <Font name="System Bold" size="18.0" />
+                                        <Font name="System Bold" size="23.0" />
                                     </font>
                                 </Button>
                             </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                             <center>
-                                <TextField fx:id="groupName" promptText="Group Name" BorderPane.alignment="CENTER" />
+                                <TextField fx:id="groupName" promptText="Group Name" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="21.0" />
+                           </font></TextField>
                             </center>
                             <left>
                                 <AnchorPane prefHeight="381.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
@@ -99,4 +102,10 @@
             </children>
         </GridPane>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </fx:root>
