@@ -34,7 +34,7 @@
                     <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
+                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri" size="24.0" />
                            </font>
@@ -95,7 +95,7 @@
                   </GridPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <center>
-                                <Button mnemonicParsing="false" onAction="#pay" prefHeight="47.0" prefWidth="85.0" text="💲 Pay" BorderPane.alignment="CENTER">
+                                <Button id="lion" mnemonicParsing="false" onAction="#pay" prefHeight="47.0" prefWidth="123.0" stylesheets="@../../../ressources/css/buttons.css" text="💲 Pay" BorderPane.alignment="CENTER">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>

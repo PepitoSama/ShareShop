@@ -31,8 +31,8 @@
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -61,14 +61,14 @@
                         <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
                      </image>
                   </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="193.0" text="ShareShop" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="193.0" text="Produits" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
                                 <Font name="Calibri Bold" size="39.0" />
                             </font>
                         </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
+                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri" size="24.0" />
                            </font>
@@ -94,7 +94,7 @@
                      </content></ScrollPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <center>
-                        <Button fx:id="select" mnemonicParsing="false" onAction="#search" text="Select" BorderPane.alignment="CENTER">
+                        <Button id="lion" fx:id="select" mnemonicParsing="false" onAction="#search" stylesheets="@../../../ressources/css/buttons.css" text="Select" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>

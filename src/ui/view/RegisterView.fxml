@@ -238,7 +238,7 @@
                   </ImageView>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
+                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri" size="24.0" />
                            </font>
@@ -247,7 +247,7 @@
                   </BorderPane>
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#register" text="Register" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button id="lion" mnemonicParsing="false" onAction="#register" stylesheets="@../../../ressources/css/buttons.css" text="Register" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>

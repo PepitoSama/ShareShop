@@ -44,7 +44,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                 <Button fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                 <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Calibri" size="24.0" />
                      </font>
@@ -60,7 +60,7 @@
                   </BorderPane>
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#modify" text="Modify" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button id="lion" mnemonicParsing="false" onAction="#modify" stylesheets="@../../../ressources/css/buttons.css" text="Modify" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
@@ -269,7 +269,7 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <bottom>
-                              <Button contentDisplay="CENTER" onAction="#mystats" text="MyStats" BorderPane.alignment="CENTER">
+                              <Button id="lion" contentDisplay="CENTER" onAction="#mystats" stylesheets="@../../../ressources/css/buttons.css" text="MyStats" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="Calibri Bold" size="15.0" />
                                  </font>
@@ -298,7 +298,7 @@
                               </ImageView>
                            </center>
                            <bottom>
-                              <Button mnemonicParsing="false" onAction="#debt" text="Budget" BorderPane.alignment="CENTER">
+                              <Button id="lion" mnemonicParsing="false" onAction="#debt" stylesheets="@../../../ressources/css/buttons.css" text="Budget" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

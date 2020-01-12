@@ -6,12 +6,10 @@
 package ui.controller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase;
 
 import bl.facade.ShareShopFacade;
 import javafx.fxml.FXML;
@@ -23,7 +21,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -119,7 +116,6 @@ public class MessageController extends GridPane {
 	@FXML
     private void send() {
 		// Save message in DataBase
-		System.out.println(message.getText());
 		if (facade.sendMessage(message.getText())) {
 			// Clear message TextArea
 			message.clear();
