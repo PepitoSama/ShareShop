@@ -14,6 +14,7 @@ import model.dao.Couple;
 import model.dao.DAO;
 import model.dao.StatsDAO;
 import model.domain.Group;
+import model.domain.GroupList;
 import model.domain.Stats;
 import model.domain.User;
 import model.domain.UserGroup;
@@ -23,8 +24,16 @@ import model.domain.UserGroup;
  * @author pepito
  */
 public class UserGroupManager {
+	
+	
 
     private static UserGroupManager instance = null;
+    
+	private User selected;
+	
+	public User getSelected() {
+		return selected;
+	    }
 
     public static UserGroupManager getInstance() {
 	if (instance == null) {
@@ -62,5 +71,16 @@ public class UserGroupManager {
 	}
 	return users;
     }
+    
+    public void setSelected(User user) {
+    	this.selected = user;
+        }
+    
+    public static boolean removeMember() {
+    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+    	//TO DO DELETE POUR USER
+    	//return dao.delete(selected);
+    	return true;
+        }
 
 }

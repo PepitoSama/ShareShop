@@ -112,7 +112,7 @@ public class ShareShopFacade {
     public String getPassword() {
 	return userManager.getPassword();
     }
-
+    
     public boolean updateUser() throws SQLException {
 	return userManager.updateUser();
     }
@@ -169,6 +169,10 @@ public class ShareShopFacade {
 	return GroupManager.getInstance();
     }
 
+    public UserGroupManager getUserGroupManager() {
+    	return UserGroupManager.getInstance();
+        }
+    
     public ListManager getListManager() {
 	return ListManager.getInstance();
     }
@@ -221,6 +225,11 @@ public class ShareShopFacade {
     public boolean removeSelectedList() {
 	return listManager.removeList();
     }
+    
+    public boolean removeSelectedMember() {
+    	return UserGroupManager.removeMember();
+        }
+    
 
     /**
      * @return all the products in the database

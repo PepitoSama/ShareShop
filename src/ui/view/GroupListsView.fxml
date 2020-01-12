@@ -88,6 +88,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
+                        <ImageView fx:id="members" fitHeight="88.0" fitWidth="117.0" nodeOrientation="INHERIT" onMouseClicked="#members" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@../../../ressources/images/members.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children>
