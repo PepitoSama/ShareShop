@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
+import java.util.ArrayList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,11 +21,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.domain.GroupList;
+import model.domain.User;
+import model.domain.UserDebt;
 import model.domain.products.GeneralProduct;
 import model.domain.products.PricedProduct;
+import model.domain.products.QuantifiedProduct;
 
 /**
  *
@@ -32,92 +37,137 @@ import model.domain.products.PricedProduct;
  */
 public class AfficherListController extends GridPane {
 
-	private ShareShopFacade facade;
+    private ShareShopFacade facade;
 
-	@FXML
-	private Label nameList;
+    @FXML
+    private Label nameList;
 
-	@FXML
-	private VBox shopListe;
+    private final List<HBox> cellbp = new ArrayList();
+    private final List<HBox> cellsl = new ArrayList();
 
-	@FXML
-	private ScrollPane scrollpaneShopList;
+    @FXML
+    private VBox shopListe;
 
-	@FXML
-	private VBox BoughtProductListe;
+    @FXML
+    private ScrollPane scrollpane;
 
-	@FXML
-	private ScrollPane scrollpaneBoughtProductList;
+    @FXML
+    private VBox boughtProductListe;
 
-	public AfficherListController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
-		leLoader.setController(this);
-		leLoader.setRoot(this);
-		leLoader.load();
-		this.facade = ShareShopFacade.getInstance();
-		shopListe = new VBox();
-		BoughtProductListe = new VBox();
-		nameList.setText(facade.getListName());
-		initBoughtProduct();
-		// shopListe.getChildren().addAll(quantified product list);
-		// shopListe.setAlignment(Pos.CENTER);
-		// scrollpaneShopList.setContent(shopListe);
-		// BoughtProductList.getChildren().addAll(priced product list);
-		// BoughtProductList.setAlignment(Pos.CENTER);
-		// scrollpaneBoughtProductList.setContent(BoughtProductListe);
+    @FXML
+    private ScrollPane scrollpane1;
+
+    public AfficherListController() throws IOException {
+	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
+	leLoader.setController(this);
+	leLoader.setRoot(this);
+	leLoader.load();
+	this.facade = ShareShopFacade.getInstance();
+	shopListe = new VBox();
+	boughtProductListe = new VBox();
+	nameList.setText(facade.getListName());
+	initShopList();
+	shopListe.getChildren().addAll(cellsl);
+	shopListe.setAlignment(Pos.CENTER);
+	scrollpane.setContent(shopListe);
+	initBoughtProduct();
+	boughtProductListe.getChildren().addAll(cellbp);
+	boughtProductListe.setAlignment(Pos.CENTER);
+	scrollpane1.setContent(boughtProductListe);
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new ShopListController());
+	} catch (IOException ex) {
+	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 	}
+    }
 
-	@FXML
-	void back(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new ShopListController());
-		} catch (IOException ex) {
-			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
-		}
+    @FXML
+    void ok(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new AfficherListController());
+	} catch (IOException ex) {
+	    Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
+
 	}
+    }
 
-	@FXML
-	void ok(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new AfficherListController());
-		} catch (IOException ex) {
-			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
+    /**
+     * FXML function to add a shopping list to the view
+     *
+     * @param event
+     */
+    @FXML
+    void modify(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new ModifyListController());
+	} catch (IOException ex) {
+	    Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
 
-		}
 	}
+    }
 
-	/**
-	 * FXML function to add a shopping list to the view
-	 *
-	 * @param event
-	 */
-	@FXML
-	void modify(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new ModifyListController());
-		} catch (IOException ex) {
-			Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
+    @FXML
+    void validate(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new AfficherListController());
+	} catch (IOException ex) {
+	    Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
 
-		}
 	}
+    }
 
-	@FXML
-	void validate(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new AfficherListController());
-		} catch (IOException ex) {
-			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
-
-		}
+    private void initBoughtProduct() {
+	List<PricedProduct> boughtProducts = facade.getBoughtProducts();
+	boughtProductListe.getChildren().clear();
+	for (PricedProduct p : boughtProducts) {
+	    HBox h = new HBox();
+	    GeneralProduct prod = facade.getProductById(p.getIdProduct());
+	    Label name = new Label(prod.getName());
+	    name.setStyle("-fx-font-size: 24px; ");
+	    name.setAlignment(Pos.CENTER);
+	    Label quantity = new Label(Integer.toString(p.getQuantity()));
+	    quantity.setStyle("-fx-font-size: 24px; ");
+	    quantity.setAlignment(Pos.CENTER);
+	    Label amount = new Label(Double.toString(p.getPrice()) + " €");
+	    amount.setStyle("-fx-font-size: 24px; ");
+	    amount.setAlignment(Pos.CENTER);
+	    h.setSpacing(20);
+	    h.getChildren().add(name);
+	    h.getChildren().add(quantity);
+	    h.getChildren().add(amount);
+	    cellbp.add(h);
 	}
+	boughtProductListe.setAlignment(Pos.CENTER);
+	boughtProductListe.setSpacing(10.0);
+    }
 
-	private void initBoughtProduct() {
-		GroupList selected = facade.getBoughtProduct();
-		List<PricedProduct> boughtProducts = selected.getBoughtProducts();
+    private void initShopList() {
+	List<QuantifiedProduct> shoplist = facade.getShopList();
+	shopListe.getChildren().clear();
+	for (QuantifiedProduct p : shoplist) {
+	    HBox h = new HBox();
+	    GeneralProduct prod = facade.getProductById(p.getIdProduct());
+	    Label name = new Label(prod.getName());
+	    name.setStyle("-fx-font-size: 24px; ");
+	    name.setAlignment(Pos.CENTER);
+	    Label quantity = new Label(Integer.toString(p.getQuantity()));
+	    quantity.setStyle("-fx-font-size: 24px; ");
+	    quantity.setAlignment(Pos.CENTER);
+	    h.setSpacing(20);
+	    h.getChildren().add(name);
+	    h.getChildren().add(quantity);
+	    cellsl.add(h);
 	}
+	shopListe.setAlignment(Pos.CENTER);
+	boughtProductListe.setSpacing(10.0);
+    }
 
 }

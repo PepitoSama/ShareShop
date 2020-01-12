@@ -12,37 +12,47 @@ package model.domain.products;
 public class PricedProduct {
 
     private Double price;
+    private int idGroupList;
+    private int	idProduct;
     private int quantity;
-    private GeneralProduct product;
 
-    public PricedProduct(Double price, GeneralProduct product, int quantity) {
-        this.price = price;
-        this.product = product;
-        this.quantity = quantity;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public PricedProduct(Double price, int idGroupList, int idProduct, int quantity) {
+	this.price = price;
+	this.idGroupList = idGroupList;
+	this.idProduct = idProduct;
+	this.quantity = quantity;
     }
 
     public Double getPrice() {
-        return price;
+	return price;
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+	this.price = price;
     }
 
-    public GeneralProduct getProduct() {
-        return product;
+    public int getIdGroupList() {
+	return idGroupList;
     }
 
-    public void setProduct(GeneralProduct product) {
-        this.product = product;
+    public void setIdGroupList(int idGroupList) {
+	this.idGroupList = idGroupList;
+    }
+
+    public int getIdProduct() {
+	return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+	this.idProduct = idProduct;
+    }
+
+    public int getQuantity() {
+	return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+	this.quantity = quantity;
     }
 
 }

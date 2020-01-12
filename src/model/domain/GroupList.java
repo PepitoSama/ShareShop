@@ -21,6 +21,7 @@ public class GroupList {
     private Date date;
     private char type;
     private List<PricedProduct> boughtProducts;
+    private List<QuantifiedProduct> shoppinglist;
 
     /**
      * GroupList constructor
@@ -37,6 +38,14 @@ public class GroupList {
 	this.name = name;
 	this.date = date;
 	this.type = type;
+    }
+
+    public List<QuantifiedProduct> getShoppinglist() {
+	return shoppinglist;
+    }
+
+    public void setShoppinglist(List<QuantifiedProduct> shoppinglist) {
+	this.shoppinglist = shoppinglist;
     }
 
     /**

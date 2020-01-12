@@ -92,7 +92,6 @@ public class ListManager {
 	DAO<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
 	List<Couple> liste = new ArrayList<Couple>();
 	liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
-	liste.add(new Couple("p.idProduct", "t.idProduct"));
 	selected.setBoughtProducts(dao.get(liste));
     }
 
@@ -109,6 +108,13 @@ public class ListManager {
 	    }
 	}
 	return b;
+    }
+
+    public void getShopList(GroupList selectedGroupList) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+	liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
+	selected.setShoppinglist(dao.get(liste));
     }
 
 }

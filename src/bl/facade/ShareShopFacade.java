@@ -22,6 +22,8 @@ import model.domain.GroupList;
 import model.domain.Message;
 import model.domain.User;
 import model.domain.UserDebt;
+import model.domain.products.PricedProduct;
+import model.domain.products.QuantifiedProduct;
 
 public class ShareShopFacade {
 
@@ -198,11 +200,6 @@ public class ShareShopFacade {
 	return listManager.getNameSelected();
     }
 
-    public GroupList getBoughtProduct() {
-	listManager.getBoughtProducts(listManager.getSelected());
-	return listManager.getSelected();
-    }
-
     public List<Message> getMessages() {
 	this.messageManager = messageManager.getInstance();
 	return this.messageManager.getAllMessages();
@@ -301,6 +298,23 @@ public class ShareShopFacade {
     public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
 	listManager = ListManager.getInstance();
 	return listManager.addProductsToShopList(selectedProducts);
+    }
+
+    public GeneralProduct getProductById(int idProduct) {
+	productManager = ProductManager.getInstance();
+	return productManager.getProductById(idProduct);
+    }
+
+    public List<PricedProduct> getBoughtProducts() {
+	listManager = ListManager.getInstance();
+	listManager.getBoughtProducts(getSelectedGroupList());
+	return getSelectedGroupList().getBoughtProducts();
+    }
+
+    public List<QuantifiedProduct> getShopList() {
+	listManager = ListManager.getInstance();
+	listManager.getShopList(getSelectedGroupList());
+	return getSelectedGroupList().getShoppinglist();
     }
 
 }

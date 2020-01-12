@@ -182,8 +182,7 @@ public class DebtController extends GridPane {
 	    super.getChildren().add(new PayDebtController());
 
 	} catch (IOException ex) {
-	    Logger.getLogger(DebtController.class
-		    .getName()).log(Level.SEVERE, null, ex);
+	    Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
 	}
     }
 
