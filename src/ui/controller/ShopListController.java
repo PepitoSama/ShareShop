@@ -149,6 +149,23 @@ public class ShopListController extends GridPane {
     void favorites(MouseEvent event) {
 	System.out.println("TODO");
     }
+    
+    /**
+     * FXML function that display the member view
+     *
+     * @param event
+     */
+    @FXML
+    void members(MouseEvent event) {
+    	try {
+    	    super.getChildren().clear();
+    	    super.getChildren().add(new AfficherMembersController());
+    	} catch (IOException ex) {
+    	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
+
+    	}
+    }
+    
 
     /**
      * FXML function that permit to acces to messages

@@ -330,4 +330,21 @@ public class ShareShopFacade {
 		return getSelectedGroupList().getShoppinglist();
 	}
 
+
+    public void buyProduct(QuantifiedProduct p, Double price) {
+	statsManager = StatsManager.getInstance();
+	statsManager.addStat(getUserId(), price.floatValue() * p.getQuantity(), new Date());
+	debtManager = DebtManager.getInstance();
+	debtManager.addGroupDebt(getUserbyGroupId(), getUserId(), price * p.getQuantity());
+	listManager = ListManager.getInstance();
+	listManager.buyProduct(p,price);
+    }
+
+    public List<User> getUserbyGroupId() {
+	userGroupManager = UserGroupManager.getInstance();
+	List<Integer> users = userGroupManager.getUsersIdGroupList(getSelectedGroupID());
+	List<User> liste = userManager.getGroupUsers(users);
+	return liste;
+    }
+
 }

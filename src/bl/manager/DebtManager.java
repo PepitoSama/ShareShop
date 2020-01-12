@@ -5,11 +5,13 @@
  */
 package bl.manager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
+import model.domain.User;
 import model.domain.UserDebt;
 
 /**
@@ -56,28 +58,50 @@ public class DebtManager {
 	liste.add(new Couple("idFrom", Integer.toString(idFrom)));
 	liste.add(new Couple("idTo", Integer.toString(idTo)));
 	List<UserDebt> res = dao.get(liste);
-	if (res.size() == 0) {
+	if (!res.isEmpty()) {
+	    UserDebt ud = res.get(0);
+	    Double d = ud.getAmount();
+	    ud.setAmount(d + value);
+	    dao.update(ud);
+	} else {
 	    List<Couple> liste2 = new ArrayList<Couple>();
 	    liste2.add(new Couple("idTo", Integer.toString(idFrom)));
 	    liste2.add(new Couple("idFrom", Integer.toString(idTo)));
 	    res = dao.get(liste2);
-	}
-	if (res.size() == 0) {
-	    dao.save(new UserDebt(0, value, idFrom, idTo));
-	} else {
-	    UserDebt ud = res.get(0);
-	    Double d = ud.getAmount();
-	    if ((d - value) < 0) {
-		int i = ud.getIdFrom();
-		ud.setIdFrom(ud.getIdTo());
-		ud.setIdTo(i);
-		ud.setAmount((d - value) * -1);
+	    if (res.isEmpty()) {
+		dao.save(new UserDebt(0, value, idFrom, idTo));
+	    } else {
+		UserDebt ud = res.get(0);
+		Double d = ud.getAmount();
+		if ((d - value) < 0) {
+		    int i = ud.getIdFrom();
+		    ud.setIdFrom(ud.getIdTo());
+		    ud.setIdTo(i);
+		    ud.setAmount((d - value) * -1);
+		    dao.update(ud);
+		} else {
+		    ud.setAmount(d - value);
+		    dao.update(ud);
+		}
 	    }
 	}
+
     }
 
     public boolean updateDebt(UserDebt ud) {
 	DAO<UserDebt> dao = AbstractDAOFactory.getInstance().getUserDebtDAO();
 	return dao.update(ud);
+    }
+
+    public void addGroupDebt(List<User> users, int userId, Double price) {
+	Double prix = price / users.size();
+	DecimalFormat df = new DecimalFormat("#.##");
+	String aff = (df.format(prix)).replace(",", ".");
+	prix = Double.parseDouble(aff);
+	for (User user : users) {
+	    if (user.getId() != userId) {
+		addDebt(user.getId(), userId, prix);
+	    }
+	}
     }
 }
