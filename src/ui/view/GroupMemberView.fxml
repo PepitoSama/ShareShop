@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	   <columnConstraints>
+	      <ColumnConstraints />
+	   </columnConstraints>
+	   <rowConstraints>
+	      <RowConstraints />
+	   </rowConstraints>
+	   <children>
+	      <GridPane minHeight="600.0" minWidth="650.0" prefHeight="590.0" prefWidth="606.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+	         <columnConstraints>
+	            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="33.0" />
+	         </columnConstraints>
+	         <rowConstraints>
+	            <RowConstraints maxHeight="289.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
+	            <RowConstraints maxHeight="471.0" minHeight="10.0" prefHeight="461.0" vgrow="SOMETIMES" />
+	            <RowConstraints maxHeight="471.0" minHeight="10.0" percentHeight="15.0" prefHeight="461.0" vgrow="SOMETIMES" />
+	         </rowConstraints>
+	         <children>
+	            <GridPane GridPane.rowIndex="1">
+	               <columnConstraints>
+	                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	               </columnConstraints>
+	               <rowConstraints>
+	                  <RowConstraints maxHeight="309.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+	                  <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="336.0" vgrow="SOMETIMES" />
+	               </rowConstraints>
+	               <children>
+	                  <GridPane>
+	                     <columnConstraints>
+	                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	                     </columnConstraints>
+	                     <rowConstraints>
+	                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+	                     </rowConstraints>
+	                     <children>
+	                        <ImageView fitHeight="88.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+	                           <image>
+	                              <Image url="@../../../ressources/images/MyGroups.png" />
+	                           </image>
+	                           <cursor>
+	                              <Cursor fx:constant="HAND" />
+	                           </cursor>
+	                        </ImageView>
+	                     </children>
+	                  </GridPane>
+	                  <GridPane GridPane.rowIndex="1">
+	                    <columnConstraints>
+	                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="100.0" />
+	                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.4000122070313" minWidth="10.0" prefWidth="464.0" />
+	                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="100.0" />
+	                    </columnConstraints>
+	                     <children>
+	                        <ScrollPane fx:id="member" prefHeight="349.0" prefWidth="455.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+	                     </children>
+	                  </GridPane>
+	               </children>
+	            </GridPane>
+	            <GridPane prefWidth="650.0">
+	               <columnConstraints>
+	                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+	                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	               </columnConstraints>
+	               <rowConstraints>
+	                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+	               </rowConstraints>
+	               <children>
+	                  <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+	                     <font>
+	                        <Font name="Calibri" size="24.0" />
+	                     </font>
+	                  </Button>
+	                  <Label fx:id="groupName" prefHeight="36.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+	                     <font>
+	                        <Font name="Calibri Bold" size="39.0" />
+	                     </font>
+	                  </Label>
+	                  <ImageView fitHeight="83.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+	                     <image>
+	                        <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+	                     </image>
+	                  </ImageView>
+	               </children>
+	            </GridPane>
+	            <Button id="lion" mnemonicParsing="false" onAction="#add" stylesheets="@../../../ressources/css/buttons.css" text="➕ Add" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+	               <font>
+	                  <Font name="Calibri Bold" size="24.0" />
+	               </font>
+	            </Button>
+	         </children>
+	      </GridPane>
+	   </children>
+	</GridPane>
+</fx:root>
