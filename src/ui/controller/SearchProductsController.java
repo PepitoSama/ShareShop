@@ -88,7 +88,7 @@ public class SearchProductsController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new ModifyListController());
 		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

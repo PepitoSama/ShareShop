@@ -18,7 +18,8 @@ public class ModifyListController extends GridPane {
 	private ShareShopFacade facade;
 
 	/**
-	 * ModifyListController constructor Display view ModifyShopListView in the Main View
+	 * ModifyListController constructor Display view ModifyShopListView in the Main
+	 * View
 	 *
 	 * @throws IOException
 	 */
@@ -45,17 +46,17 @@ public class ModifyListController extends GridPane {
 
 		}
 	}
-	
+
 	@FXML
-    void addProduct(ActionEvent event) {
-    	 try {
-             super.getChildren().clear();
-             super.getChildren().add(new SearchProductsController());
+	void addProduct(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new SearchProductsController());
 
-         } catch (Exception ex) {
-             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (Exception ex) {
+			Logger.getLogger(SearchProductsController.class.getName()).log(Level.SEVERE, null, ex);
 
-         }
-    }
+		}
+	}
 
 }

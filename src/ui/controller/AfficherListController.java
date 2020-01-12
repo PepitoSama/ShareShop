@@ -73,7 +73,7 @@ public class AfficherListController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new ShopListController());
 		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class AfficherListController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new AfficherListController());
 		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 	}
@@ -99,7 +99,7 @@ public class AfficherListController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new ModifyListController());
 		} catch (IOException ex) {
-			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ModifyListController.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 	}
@@ -110,7 +110,7 @@ public class AfficherListController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new AfficherListController());
 		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(AfficherListController.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 	}

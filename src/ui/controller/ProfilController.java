@@ -37,112 +37,112 @@ import javafx.stage.Stage;
  */
 public class ProfilController extends GridPane {
 
-    @FXML
-    private PasswordField passwordC;
+	@FXML
+	private PasswordField passwordC;
 
-    @FXML
-    private PasswordField password;
+	@FXML
+	private PasswordField password;
 
-    @FXML
-    private TextField nickname;
+	@FXML
+	private TextField nickname;
 
-    @FXML
-    private TextField name;
+	@FXML
+	private TextField name;
 
-    @FXML
-    private TextField mail;
+	@FXML
+	private TextField mail;
 
-    @FXML
-    private TextField lastname;
+	@FXML
+	private TextField lastname;
 
-    @FXML
-    private DatePicker age;
+	@FXML
+	private DatePicker age;
 
-    @FXML
-    private Text res;
+	@FXML
+	private Text res;
 
-    private final ShareShopFacade facade;
+	private final ShareShopFacade facade;
 
-    public ProfilController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ProfilView.fxml"));
-        leLoader.setController(this);
-        leLoader.setRoot(this);
-        leLoader.load();
-        this.facade = ShareShopFacade.getInstance();
-        nickname.setText(this.facade.getNickname());
-        name.setText(this.facade.getName());
-        lastname.setText(this.facade.getLastname());
-        mail.setText(this.facade.getMail());
-        age.setValue(this.facade.getLocalBirthdate());
-    }
+	public ProfilController() throws IOException {
+		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ProfilView.fxml"));
+		leLoader.setController(this);
+		leLoader.setRoot(this);
+		leLoader.load();
+		this.facade = ShareShopFacade.getInstance();
+		nickname.setText(this.facade.getNickname());
+		name.setText(this.facade.getName());
+		lastname.setText(this.facade.getLastname());
+		mail.setText(this.facade.getMail());
+		age.setValue(this.facade.getLocalBirthdate());
+	}
 
-    @FXML
-    private void back(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new MyGroupsController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	@FXML
+	private void back(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new MyGroupsController());
+		} catch (IOException ex) {
+			Logger.getLogger(MyGroupsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-    @FXML
-    private void modify(ActionEvent event) {
+	@FXML
+	private void modify(ActionEvent event) {
 
-        if ((password.getText().equals(passwordC.getText())) && (!password.getText().equals(""))) {
-            facade.setName(name.getText());
-            facade.setMail(mail.getText());
-            facade.setLastname(lastname.getText());
-            facade.setNickname(nickname.getText());
-            facade.setPassword(password.getText());
-            Date ageV = null;
+		if ((password.getText().equals(passwordC.getText())) && (!password.getText().equals(""))) {
+			facade.setName(name.getText());
+			facade.setMail(mail.getText());
+			facade.setLastname(lastname.getText());
+			facade.setNickname(nickname.getText());
+			facade.setPassword(password.getText());
+			Date ageV = null;
 
-            try {
-                LocalDate localDate = age.getValue();
-                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-                facade.setBirthdate(Date.from(instant));
-            } catch (Exception e) {
-                res.setText("Missing age");
-                res.setFill(Paint.valueOf("red"));
-            }
-            
-            try {
-                try {
-                    facade.updateUser();
-                    super.getChildren().clear();
-                    super.getChildren().add(new MyGroupsController());
-                } catch (SQLException e) {
-                    res.setText(e.getMessage());
-                    res.setFill(Paint.valueOf("red"));
-                }
-            } catch (IOException e) {
-                res.setText(e.getMessage());
-                res.setFill(Paint.valueOf("red"));
-            }
-            
-        } else {
-            res.setText("Entrez un mot de passe valide");
-            res.setFill(Paint.valueOf("red"));
-        }
-    }
-    
-    @FXML
-    private void mystats(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new StatsController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    @FXML
-    private void debt(ActionEvent event) {
-        try {
-            super.getChildren().clear();
-            super.getChildren().add(new DebtController());
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+			try {
+				LocalDate localDate = age.getValue();
+				Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+				facade.setBirthdate(Date.from(instant));
+			} catch (Exception e) {
+				res.setText("Missing age");
+				res.setFill(Paint.valueOf("red"));
+			}
+
+			try {
+				try {
+					facade.updateUser();
+					super.getChildren().clear();
+					super.getChildren().add(new MyGroupsController());
+				} catch (SQLException e) {
+					res.setText(e.getMessage());
+					res.setFill(Paint.valueOf("red"));
+				}
+			} catch (IOException e) {
+				res.setText(e.getMessage());
+				res.setFill(Paint.valueOf("red"));
+			}
+
+		} else {
+			res.setText("Entrez un mot de passe valide");
+			res.setFill(Paint.valueOf("red"));
+		}
+	}
+
+	@FXML
+	private void mystats(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new StatsController());
+		} catch (IOException ex) {
+			Logger.getLogger(StatsController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	@FXML
+	private void debt(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new DebtController());
+		} catch (IOException ex) {
+			Logger.getLogger(DebtController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

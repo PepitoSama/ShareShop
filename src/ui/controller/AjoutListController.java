@@ -58,7 +58,7 @@ public class AjoutListController extends GridPane {
 				super.getChildren().clear();
 				super.getChildren().add(new ShopListController());
 			} catch (IOException ex) {
-				Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 
 			}
 		} else {
@@ -78,7 +78,7 @@ public class AjoutListController extends GridPane {
 			super.getChildren().clear();
 			super.getChildren().add(new ShopListController());
 		} catch (IOException ex) {
-			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 
 		}
 	}
