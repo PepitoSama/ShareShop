@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 import model.domain.Group;
 import model.domain.Stats;
-import model.domain.User;
 import model.domain.UserGroup;
 import model.domain.products.GeneralProduct;
 import model.domain.GroupList;
@@ -176,11 +175,6 @@ public class ShareShopFacade {
 	listManager = getListManager();
 	return listManager.getShoppingList(getSelectedGroupID());
     }
-    
-    public List<User> getMembers(Group group){
-    	GroupManager groupManager = getGroupManager();
-    	return groupManager.getMembers(group);
-    }
 
     public int getSelectedGroupListID() {
 	return this.listManager.getGroupListId();
@@ -302,6 +296,11 @@ public class ShareShopFacade {
     public boolean updateDebt() {
 	debtManager = DebtManager.getInstance();
 	return debtManager.updateDebt(getSelectedDebt());
+    }
+
+    public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
+	listManager = ListManager.getInstance();
+	return listManager.addProductsToShopList(selectedProducts);
     }
 
 }

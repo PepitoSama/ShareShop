@@ -235,19 +235,6 @@ public class ShopListController extends GridPane {
 		showConfirmation(selectedList);
 	}
 
-    }
-    
-    @FXML
-    void modify(ActionEvent event) {
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherMemberController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
-	}
-    }
-
 	/**
 	 * function to update a group list
 	 *
@@ -273,20 +260,10 @@ public class ShopListController extends GridPane {
 	 */
 	private void showConfirmation(GroupList liste) {
 
-
-    public void update(GroupList selectedList) {
-	facade.getListManager().setSelected(selectedList);
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new UpdateListController());
-	} catch (IOException ex) {
-	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
-
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Delete List : " + liste.getName());
 		alert.setHeaderText("Are you're sure you want to remove this List?");
 		alert.setContentText("This shopping list will be definitly removed");
-
 
 		// option != null.
 		Optional<ButtonType> option = alert.showAndWait();
