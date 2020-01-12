@@ -104,11 +104,24 @@ public class ListManager {
 	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
 	boolean b = true;
 	for (GeneralProduct selectedProduct : selectedProducts) {
-	    if (!dao.save(new QuantifiedProduct(selected.getIdGroupList(), selectedProduct.getIdProduct(), 1))) {
-		b = false;
+	    List<Couple> liste = new ArrayList<Couple>();
+	    liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
+	    liste.add(new Couple("idProduct", Integer.toString(selectedProduct.getIdProduct())));
+	    List<QuantifiedProduct> res = dao.get(liste);
+	    if (res.isEmpty()) {
+		if (!dao.save(new QuantifiedProduct(selected.getIdGroupList(), selectedProduct.getIdProduct(), 1))) {
+		    b = false;
+		}
+	    } else {
+		QuantifiedProduct prod = res.get(0);
+		prod.setQuantity(prod.getQuantity() + 1);
+		if(!dao.update(prod)){
+		    b=false;
+		}
 	    }
 	}
 	return b;
+
     }
 
     public void getShopList(GroupList selectedGroupList) {
@@ -128,12 +141,12 @@ public class ListManager {
 	List<PricedProduct> res = daoPP.get(where);
 	if (!res.isEmpty()) {
 	    PricedProduct product = res.get(0);
-	    Double prix = (price * p.getQuantity() + product.getQuantity() * product.getPrice()) / (p.getQuantity()+product.getQuantity());
+	    Double prix = (price * p.getQuantity() + product.getQuantity() * product.getPrice()) / (p.getQuantity() + product.getQuantity());
 	    DecimalFormat df = new DecimalFormat("#.##");
 	    String aff = (df.format(prix)).replace(",", ".");
 	    prix = Double.parseDouble(aff);
 	    product.setPrice(prix);
-	    product.setQuantity(p.getQuantity()+product.getQuantity());
+	    product.setQuantity(p.getQuantity() + product.getQuantity());
 	    daoPP.update(product);
 	} else {
 	    daoPP.save(new PricedProduct(price, p.getIdGroupList(), p.getIdProduct(), p.getQuantity()));
