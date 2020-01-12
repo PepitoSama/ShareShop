@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import model.domain.Group;
 import model.domain.Stats;
+import model.domain.User;
 import model.domain.UserGroup;
 import model.domain.GroupList;
 import model.domain.Message;
@@ -166,6 +167,11 @@ public class ShareShopFacade {
     public List<GroupList> getShoppingList() {
         listManager = getListManager();
         return listManager.getShoppingList(getSelectedGroupID());
+    }
+    
+    public List<User> getMembers(Group group){
+    	GroupManager groupManager = getGroupManager();
+    	return groupManager.getMembers(group);
     }
 
     public int getSelectedGroupListID(){

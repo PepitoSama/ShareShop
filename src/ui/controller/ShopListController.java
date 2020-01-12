@@ -150,6 +150,17 @@ public class ShopListController extends GridPane {
 
 	}
     }
+    
+    @FXML
+    void modify(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new AfficherMemberController());
+	} catch (IOException ex) {
+	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+
+	}
+    }
 
     public void toList(GroupList selectedList) {
 	facade.getListManager().setSelected(selectedList);
@@ -173,7 +184,7 @@ public class ShopListController extends GridPane {
 	    super.getChildren().clear();
 	    super.getChildren().add(new UpdateListController());
 	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 
 	}
     }
