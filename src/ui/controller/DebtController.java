@@ -162,7 +162,7 @@ public class DebtController extends GridPane {
     void back(ActionEvent event) {
 	try {
 	    super.getChildren().clear();
-	    super.getChildren().add(new MyGroupsController());
+	    super.getChildren().add(new ProfilController());
 
 	} catch (IOException ex) {
 	    Logger.getLogger(DebtController.class
