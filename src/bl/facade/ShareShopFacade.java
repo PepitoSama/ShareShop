@@ -298,9 +298,4 @@ public class ShareShopFacade {
 	return debtManager.updateDebt(getSelectedDebt());
     }
 
-    public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
-	listManager = ListManager.getInstance();
-	return listManager.addProductsToShopList(selectedProducts);
-    }
-
 }

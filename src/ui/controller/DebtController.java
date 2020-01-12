@@ -45,146 +45,144 @@ import model.domain.UserDebt;
  */
 public class DebtController extends GridPane {
 
-    private ShareShopFacade facade;
-    private final List<HBox> cellsMB = new ArrayList();
-    private final List<HBox> cellsAD = new ArrayList();
+	private ShareShopFacade facade;
+	private final List<HBox> cellsMB = new ArrayList();
+	private final List<HBox> cellsAD = new ArrayList();
 
-    @FXML
-    private VBox myDebt;
+	@FXML
+	private VBox myDebt;
 
-    @FXML
-    private VBox amountDue;
+	@FXML
+	private VBox amountDue;
 
-    @FXML
-    private ScrollPane scrollpaneMD;
+	@FXML
+	private ScrollPane scrollpaneMD;
 
-    @FXML
-    private ScrollPane scrollpaneAD;
+	@FXML
+	private ScrollPane scrollpaneAD;
 
-    /**
-     * DebtController constructor Display view Debt in the Main View
-     *
-     * @throws IOException
-     */
-    public DebtController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/DebtView.fxml"));
-	leLoader.setController(this);
-	leLoader.setRoot(this);
-	leLoader.load();
-	this.facade = ShareShopFacade.getInstance();
-	myDebt = new VBox();
-	amountDue = new VBox();
-	initDebt();
-	initDue();
-	myDebt.getChildren().addAll(cellsMB);
-	myDebt.setAlignment(Pos.CENTER);
-	scrollpaneMD.setContent(myDebt);
-	amountDue.getChildren().addAll(cellsAD);
-	amountDue.setAlignment(Pos.CENTER);
-	scrollpaneAD.setContent(amountDue);
-    }
-
-    /**
-     * private function to init My Debt
-     */
-    private void initDebt() {
-	List<UserDebt> debt = facade.getMyDebt();
-	myDebt.getChildren().clear();
-	for (UserDebt ud : debt) {
-	    if (ud.getAmount() > 0) {
-		HBox h = new HBox();
-		h.setId(Integer.toString(ud.getIdDebt()) + "b");
-		Label i = new Label("👤");
-		User u = facade.getUserById(ud.getIdFrom());
-		Label l = new Label(u.getFistname());
-		l.setStyle("-fx-font-size: 24px; ");
-		l.setAlignment(Pos.CENTER);
-		Label amount = new Label(Double.toString(ud.getAmount()) + " €");
-		amount.setStyle("-fx-font-size: 24px; ");
-		amount.setAlignment(Pos.CENTER);
-		h.setSpacing(20);
-		h.getChildren().add(i);
-		h.getChildren().add(l);
-		h.getChildren().add(amount);
-		cellsMB.add(h);
-	    }
+	/**
+	 * DebtController constructor Display view Debt in the Main View
+	 *
+	 * @throws IOException
+	 */
+	public DebtController() throws IOException {
+		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/DebtView.fxml"));
+		leLoader.setController(this);
+		leLoader.setRoot(this);
+		leLoader.load();
+		this.facade = ShareShopFacade.getInstance();
+		myDebt = new VBox();
+		amountDue = new VBox();
+		initDebt();
+		initDue();
+		myDebt.getChildren().addAll(cellsMB);
+		myDebt.setAlignment(Pos.CENTER);
+		scrollpaneMD.setContent(myDebt);
+		amountDue.getChildren().addAll(cellsAD);
+		amountDue.setAlignment(Pos.CENTER);
+		scrollpaneAD.setContent(amountDue);
 	}
-	myDebt.setAlignment(Pos.CENTER);
-	myDebt.setSpacing(10.0);
-    }
 
-    /**
-     * private function to init Amount Due
-     */
-    private void initDue() {
-	List<UserDebt> debt = facade.getMyDue();
-	amountDue.getChildren().clear();
-	for (UserDebt ud : debt) {
-	    if (ud.getAmount() > 0) {
-		HBox h = new HBox();
-		h.setId(Integer.toString(ud.getIdDebt()) + "b");
-		Label i = new Label("👤");
-		User u = facade.getUserById(ud.getIdTo());
-		Label l = new Label(u.getFistname());
-		l.setStyle("-fx-font-size: 24px; ");
-		l.setAlignment(Pos.CENTER);
-		Label amount = new Label(Double.toString(ud.getAmount()) + " €");
-		amount.setStyle("-fx-font-size: 24px; ");
-		amount.setAlignment(Pos.CENTER);
-		Button pay = new Button("Pay");
-		pay.setId(Integer.toString(ud.getIdDebt()));
-		pay.setStyle("-fx-font-size: 24px; ");
-		pay.setAlignment(Pos.CENTER);
-		pay.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent e) {
-			pay(ud);
-		    }
-		});
-		h.setSpacing(20);
-		h.getChildren().add(i);
-		h.getChildren().add(l);
-		h.getChildren().add(amount);
-		h.getChildren().add(pay);
-		cellsAD.add(h);
-	    }
+	/**
+	 * private function to init My Debt
+	 */
+	private void initDebt() {
+		List<UserDebt> debt = facade.getMyDebt();
+		myDebt.getChildren().clear();
+		for (UserDebt ud : debt) {
+			if (ud.getAmount() > 0) {
+				HBox h = new HBox();
+				h.setId(Integer.toString(ud.getIdDebt()) + "b");
+				Label i = new Label("👤");
+				User u = facade.getUserById(ud.getIdFrom());
+				Label l = new Label(u.getFistname());
+				l.setStyle("-fx-font-size: 24px; ");
+				l.setAlignment(Pos.CENTER);
+				Label amount = new Label(Double.toString(ud.getAmount()) + " €");
+				amount.setStyle("-fx-font-size: 24px; ");
+				amount.setAlignment(Pos.CENTER);
+				h.setSpacing(20);
+				h.getChildren().add(i);
+				h.getChildren().add(l);
+				h.getChildren().add(amount);
+				cellsMB.add(h);
+			}
+		}
+		myDebt.setAlignment(Pos.CENTER);
+		myDebt.setSpacing(10.0);
 	}
-	amountDue.setAlignment(Pos.CENTER);
-	amountDue.setSpacing(10.0);
-    }
 
-    /**
-     * FXML function back, return previous view
-     *
-     * @param event
-     */
-    @FXML
-    void back(ActionEvent event) {
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new MyGroupsController());
-
-	} catch (IOException ex) {
-	    Logger.getLogger(DebtController.class
-		    .getName()).log(Level.SEVERE, null, ex);
+	/**
+	 * private function to init Amount Due
+	 */
+	private void initDue() {
+		List<UserDebt> debt = facade.getMyDue();
+		amountDue.getChildren().clear();
+		for (UserDebt ud : debt) {
+			if (ud.getAmount() > 0) {
+				HBox h = new HBox();
+				h.setId(Integer.toString(ud.getIdDebt()) + "b");
+				Label i = new Label("👤");
+				User u = facade.getUserById(ud.getIdTo());
+				Label l = new Label(u.getFistname());
+				l.setStyle("-fx-font-size: 24px; ");
+				l.setAlignment(Pos.CENTER);
+				Label amount = new Label(Double.toString(ud.getAmount()) + " €");
+				amount.setStyle("-fx-font-size: 24px; ");
+				amount.setAlignment(Pos.CENTER);
+				Button pay = new Button("Pay");
+				pay.setId(Integer.toString(ud.getIdDebt()));
+				pay.setStyle("-fx-font-size: 24px; ");
+				pay.setAlignment(Pos.CENTER);
+				pay.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						pay(ud);
+					}
+				});
+				h.setSpacing(20);
+				h.getChildren().add(i);
+				h.getChildren().add(l);
+				h.getChildren().add(amount);
+				h.getChildren().add(pay);
+				cellsAD.add(h);
+			}
+		}
+		amountDue.setAlignment(Pos.CENTER);
+		amountDue.setSpacing(10.0);
 	}
-    }
 
-    /**
-     * public function to pay a Debt
-     *
-     * @param debt
-     */
-    public void pay(UserDebt debt) {
-	facade.setSelectedDebt(debt);
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new PayDebtController());
+	/**
+	 * FXML function back, return previous view
+	 *
+	 * @param event
+	 */
+	@FXML
+	void back(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new ProfilController());
+		} catch (IOException ex) {
+			Logger.getLogger(ProfilController.class.getName()).log(Level.SEVERE, null, ex);
 
-	} catch (IOException ex) {
-	    Logger.getLogger(DebtController.class
-		    .getName()).log(Level.SEVERE, null, ex);
+		}
 	}
-    }
+
+	/**
+	 * public function to pay a Debt
+	 *
+	 * @param debt
+	 */
+	public void pay(UserDebt debt) {
+		facade.setSelectedDebt(debt);
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new PayDebtController());
+		} catch (IOException ex) {
+			Logger.getLogger(PayDebtController.class.getName()).log(Level.SEVERE, null, ex);
+
+		}
+	}
 
 }

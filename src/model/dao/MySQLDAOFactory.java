@@ -12,7 +12,6 @@ import model.domain.products.GeneralProduct;
 import model.domain.UserDebt;
 
 import model.domain.products.PricedProduct;
-import model.domain.products.QuantifiedProduct;
 
 
 /**
@@ -63,12 +62,6 @@ public class MySQLDAOFactory extends AbstractDAOFactory {
     @Override
     public DAO<UserDebt> getUserDebtDAO() {
 	return new UserDebtDAO();
-    }
-
-    @Override
-    public DAO<QuantifiedProduct> getQuantifiedProductDAO() {
-   	return new QuantifiedProductDAO();
-
     }
 
 
