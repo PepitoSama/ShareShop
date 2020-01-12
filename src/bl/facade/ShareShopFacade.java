@@ -321,7 +321,7 @@ public class ShareShopFacade {
 	statsManager = StatsManager.getInstance();
 	statsManager.addStat(getUserId(), price.floatValue() * p.getQuantity(), new Date());
 	debtManager = DebtManager.getInstance();
-	debtManager.addGroupDebt(getUserbyGroupId(), getUserId(), price * p.getQuantity());
+	//debtManager.addGroupDebt(getUserbyGroupId(), getUserId(), price * p.getQuantity());
     }
 
     public List<User> getUserbyGroupId() {
