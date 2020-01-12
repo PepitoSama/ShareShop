@@ -237,7 +237,7 @@ public class ShareShopFacade {
      * @param image	The image of the product
      * @param description	The description of the product
      * @param idFather	The id of the Parent Product. Give a negative number or 0
-     * if this product doen't have a parent Product
+     * if this product doesn't have a parent Product
      * @return true if the product has been created
      */
     public boolean addProduct(String name, Image image, String description, int idFather) {
