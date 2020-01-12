@@ -11,6 +11,7 @@ import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
 import model.domain.Group;
+import model.domain.User;
 import model.domain.UserGroup;
 
 /**
@@ -68,6 +69,20 @@ public class GroupManager {
             }
         }
         return groupList;
+    }
+    
+    public List<User> getMembers(Group group){
+    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+    	DAO<User> daoU = AbstractDAOFactory.getInstance().getUserDAO();
+        List<User> membersList = new ArrayList<>();
+        for (User user : daoU.getAll()) {
+        	for (UserGroup userGroup : dao.getAll()) {
+                if (userGroup.getIdGroup() == group.getId() && userGroup.getIdUser() == user.getId()) {
+                    membersList.add(user);
+                }
+            }
+        }
+        return membersList;
     }
 
     public void setSelected(Group group) {

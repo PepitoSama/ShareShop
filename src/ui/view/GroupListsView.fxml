@@ -65,6 +65,7 @@
                   <GridPane>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -72,7 +73,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fx:id="favorites" fitHeight="88.0" fitWidth="117.0" onMouseClicked="#favorites" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                        <ImageView fx:id="favorites" fitHeight="88.0" fitWidth="117.0" onMouseClicked="#favorites" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../../../ressources/images/star.png" />
                            </image>
@@ -80,7 +81,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ImageView fitHeight="88.0" fitWidth="117.0" onMouseClicked="#messages" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="88.0" fitWidth="117.0" onMouseClicked="#messages" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../../../ressources/images/envelope.png" />
                            </image>
@@ -88,6 +89,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
+                        <ImageView fx:id="favorites1" fitHeight="88.0" fitWidth="117.0" onMouseClicked="#favorites" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@../../../ressources/images/members.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" onAction="#modify" opacity="0.02" text="modify" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                      </children>
                   </GridPane>
                </children>

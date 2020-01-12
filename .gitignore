@@ -40,9 +40,6 @@ manifest.mf
 ressources/config/*
 *.properties
 .settings/org.eclipse.jdt.core.prefs
-<<<<<<< HEAD
 
 /.metadata/
 /bin1/
-=======
->>>>>>> parent of bdbab9f... afficher membre du groupe
