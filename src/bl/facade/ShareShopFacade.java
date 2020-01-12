@@ -355,4 +355,19 @@ public class ShareShopFacade {
 	return liste;
     }
 
+    public void addOne(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.addOne(p);
+    }
+
+    public void removeOne(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.removeOne(p);
+    }
+
+    public void removeProductInShopList(QuantifiedProduct p) {
+	listManager = ListManager.getInstance();
+	listManager.remove(p);
+    }
+
 }

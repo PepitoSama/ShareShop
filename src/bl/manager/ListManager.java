@@ -115,8 +115,8 @@ public class ListManager {
 	    } else {
 		QuantifiedProduct prod = res.get(0);
 		prod.setQuantity(prod.getQuantity() + 1);
-		if(!dao.update(prod)){
-		    b=false;
+		if (!dao.update(prod)) {
+		    b = false;
 		}
 	    }
 	}
@@ -152,6 +152,23 @@ public class ListManager {
 	    daoPP.save(new PricedProduct(price, p.getIdGroupList(), p.getIdProduct(), p.getQuantity()));
 	}
 
+    }
+
+    public void addOne(QuantifiedProduct p) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	p.setQuantity(p.getQuantity() + 1);
+	dao.update(p);
+    }
+
+    public void removeOne(QuantifiedProduct p) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	p.setQuantity(p.getQuantity() - 1);
+	dao.update(p);
+    }
+
+    public void remove(QuantifiedProduct p) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	dao.delete(p);
     }
 
 }
