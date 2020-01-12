@@ -92,6 +92,18 @@ public class SearchProductsController extends GridPane {
 
 	}
     }
+    
+     @FXML
+    void select(ActionEvent event) {
+	facade.addProductsToShopList(selectedProducts);
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new AfficherListController());
+	} catch (IOException ex) {
+	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+
+	}
+    }
 
     @FXML
     void search() {

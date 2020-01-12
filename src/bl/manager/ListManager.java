@@ -13,7 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dao.*;
 import model.domain.GroupList;
+import model.domain.products.GeneralProduct;
 import model.domain.products.PricedProduct;
+import model.domain.products.QuantifiedProduct;
 
 /**
  *
@@ -22,80 +24,91 @@ import model.domain.products.PricedProduct;
 public class ListManager {
 
     public List<GroupList> getShoppingList(int id) {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        List<Couple> liste = new ArrayList<Couple>();
-        liste.add(new Couple("idGroup", Integer.toString(id)));
-        liste.add(new Couple("type", "S"));
-        return dao.get(liste);
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+	liste.add(new Couple("idGroup", Integer.toString(id)));
+	liste.add(new Couple("type", "S"));
+	return dao.get(liste);
     }
 
     private GroupList selected;
 
     public GroupList getSelected() {
-        return selected;
+	return selected;
     }
 
     public void setSelected(GroupList selected) {
-        this.selected = selected;
+	this.selected = selected;
     }
 
     public GroupList getFavoriteList(int id) {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        List<Couple> liste = new ArrayList<Couple>();
-        liste.add(new Couple("idGroup", Integer.toString(id)));
-        liste.add(new Couple("type", "F"));
-        return dao.get(liste).get(0);
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+	liste.add(new Couple("idGroup", Integer.toString(id)));
+	liste.add(new Couple("type", "F"));
+	return dao.get(liste).get(0);
     }
 
     private static ListManager instance = null;
 
     public static ListManager getInstance() {
-        if (instance == null) {
-            instance = new ListManager();
-        }
-        return instance;
+	if (instance == null) {
+	    instance = new ListManager();
+	}
+	return instance;
     }
 
     public boolean addShopList(String name, int id) {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.save(new GroupList(0, id, name, new Date(), 'S'));
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	return dao.save(new GroupList(0, id, name, new Date(), 'S'));
     }
 
     public boolean addFavorisList(int id) {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.save(new GroupList(0, id, "Favoris", new Date(), 'F'));
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	return dao.save(new GroupList(0, id, "Favoris", new Date(), 'F'));
     }
 
     public boolean addSuggestList(int id) {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.save(new GroupList(0, id, "Suggest", new Date(), 'P'));
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	return dao.save(new GroupList(0, id, "Suggest", new Date(), 'P'));
     }
 
-    public boolean updateShopList(String name){
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        selected.setName(name);
-        return dao.update(selected);
+    public boolean updateShopList(String name) {
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	selected.setName(name);
+	return dao.update(selected);
     }
 
     public boolean removeList() {
-        DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
-        return dao.delete(selected);
+	DAO<GroupList> dao = AbstractDAOFactory.getInstance().getGroupListDAO();
+	return dao.delete(selected);
     }
 
     public String getNameSelected() {
-        return selected.getName();
+	return selected.getName();
     }
 
     public void getBoughtProducts(GroupList selected) {
-        DAO<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
-        List<Couple> liste = new ArrayList<Couple>();
-        liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
-        liste.add(new Couple("p.idProduct", "t.idProduct"));
-        selected.setBoughtProducts(dao.get(liste));
+	DAO<PricedProduct> dao = AbstractDAOFactory.getInstance().getPricedProductDAO();
+	List<Couple> liste = new ArrayList<Couple>();
+	liste.add(new Couple("idGroupList", Integer.toString(selected.getIdGroupList())));
+	liste.add(new Couple("p.idProduct", "t.idProduct"));
+	selected.setBoughtProducts(dao.get(liste));
     }
 
-    public int getGroupListId(){
-        return this.selected.getIdGroupList();
+    public int getGroupListId() {
+	return this.selected.getIdGroupList();
     }
-    
+
+    public boolean addProductsToShopList(List<GeneralProduct> selectedProducts) {
+	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
+	boolean b = true;
+	for (GeneralProduct selectedProduct : selectedProducts) {
+	    if (!dao.save(new QuantifiedProduct(selected.getIdGroupList(), selectedProduct.getIdProduct(), 1))) {
+		b = false;
+	    }
+	}
+	return b;
+    }
+
 }
