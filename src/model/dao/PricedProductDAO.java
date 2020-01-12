@@ -97,7 +97,7 @@ public class PricedProductDAO implements DAO<PricedProduct> {
 
     @Override
     public boolean update(PricedProduct obj) {
-	String sql = "UPDATE " + this.tableName + " SET quantity=? and price = ? WHERE idProduct=? and idGroupList=?";
+	String sql = "UPDATE " + this.tableName + " SET quantity=? , price = ? WHERE idProduct=? and idGroupList=?";
 
 	PreparedStatement statement = jdbc.prepareStatement(sql);
 	try {
@@ -106,12 +106,12 @@ public class PricedProductDAO implements DAO<PricedProduct> {
 	    statement.setInt(3, obj.getIdProduct());
 	    statement.setInt(4, obj.getIdGroupList());
 	    int rowsUpdated = statement.executeUpdate();
+
 	    if (rowsUpdated > 0) {
 		return true;
 	    }
 	    return false;
 	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return false;

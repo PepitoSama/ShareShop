@@ -6,6 +6,7 @@
 package bl.manager;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -121,8 +122,23 @@ public class ListManager {
 	DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
 	dao.delete(p);
 	DAO<PricedProduct> daoPP = AbstractDAOFactory.getInstance().getPricedProductDAO();
-	daoPP.save(new PricedProduct(price, p.getIdGroupList(), p.getIdProduct(), p.getQuantity()));
-	
+	List<Couple> where = new ArrayList<Couple>();
+	where.add(new Couple("idGroupList", Integer.toString(p.getIdGroupList())));
+	where.add(new Couple("idProduct", Integer.toString(p.getIdProduct())));
+	List<PricedProduct> res = daoPP.get(where);
+	if (!res.isEmpty()) {
+	    PricedProduct product = res.get(0);
+	    Double prix = (price * p.getQuantity() + product.getQuantity() * product.getPrice()) / (p.getQuantity()+product.getQuantity());
+	    DecimalFormat df = new DecimalFormat("#.##");
+	    String aff = (df.format(prix)).replace(",", ".");
+	    prix = Double.parseDouble(aff);
+	    product.setPrice(prix);
+	    product.setQuantity(p.getQuantity()+product.getQuantity());
+	    daoPP.update(product);
+	} else {
+	    daoPP.save(new PricedProduct(price, p.getIdGroupList(), p.getIdProduct(), p.getQuantity()));
+	}
+
     }
 
 }
