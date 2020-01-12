@@ -78,15 +78,15 @@ public class MyGroupsController extends GridPane {
         for (Group liste : groupList) {
             Button b = new Button(liste.getGroupName());
             b.setId(Integer.toString(liste.getId()));
-            b.setStyle("-fx-font-size: 24px;"
-            		+ "-fx-background-color: \r\n" + 
-            		" #c3c4c4,\r\n" + 
-            		" linear-gradient(#d6d6d6 50%, white 100%),\r\n" + 
-            		" radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);\r\n" + 
-            		" -fx-background-radius: 30;\r\n" + 
-            		" -fx-background-insets: 0,1,1;\r\n" + 
-            		" -fx-text-fill: black;\r\n" + 
-            		" -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
+            b.setStyle("-fx-font-size: 24px;" +
+            		" -fx-background-color: " + 
+            		"  #c3c4c4," + 
+            		"  linear-gradient(#d6d6d6 50%, white 100%)," + 
+            		"  radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);" + 
+            		" -fx-background-radius: 30;" + 
+            		" -fx-background-insets: 0,1,1;" + 
+            		" -fx-text-fill: black;" + 
+            		" -fx-effect: dropshadow(three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );");
             b.setAlignment(Pos.CENTER);
             b.setOnAction(new EventHandler<ActionEvent>() {
                 @Override

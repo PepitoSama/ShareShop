@@ -49,106 +49,104 @@ import model.domain.products.GeneralProduct;
  */
 public class SearchProductsController extends GridPane {
 
-    private final ObservableList<Button> buttons = FXCollections.observableArrayList();
+	private final ObservableList<Button> buttons = FXCollections.observableArrayList();
 
-    @FXML
-    private VBox productList;
+	@FXML
+	private VBox productList;
 
-    @FXML
-    private ScrollPane scrollpane;
+	@FXML
+	private ScrollPane scrollpane;
 
-    @FXML
-    private TextField searchbar;
+	@FXML
+	private TextField searchbar;
 
-    private ShareShopFacade facade;
+	private ShareShopFacade facade;
 
-    private ArrayList<HBox> productsList;
+	private ArrayList<HBox> productsList;
 
-    private List<GeneralProduct> selectedProducts;
+	private List<GeneralProduct> selectedProducts;
 
-    List<GeneralProduct> products;
+	List<GeneralProduct> products;
 
-    public SearchProductsController() throws IOException {
-	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SearchProductsView.fxml"));
-	loader.setController(this);
-	loader.setRoot(this);
-	loader.load();
-	this.facade = ShareShopFacade.getInstance();
-	productList = new VBox();
-	scrollpane.setContent(productList);
-	products = new ArrayList<>();
-	selectedProducts = new ArrayList<GeneralProduct>();
-	productList.setAlignment(Pos.CENTER);
-	productList.setPrefWidth(scrollpane.getPrefWidth());
-    }
-
-    @FXML
-    void back(ActionEvent event) {
-	try {
-	    super.getChildren().clear();
-	    super.getChildren().add(new AfficherListController());
-	} catch (IOException ex) {
-	    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-
+	public SearchProductsController() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SearchProductsView.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		loader.load();
+		this.facade = ShareShopFacade.getInstance();
+		productList = new VBox();
+		scrollpane.setContent(productList);
+		products = new ArrayList<>();
+		selectedProducts = new ArrayList<GeneralProduct>();
+		productList.setAlignment(Pos.CENTER);
+		productList.setPrefWidth(scrollpane.getPrefWidth());
 	}
-    }
 
-    @FXML
-    void search() {
-	productList.getChildren().clear();
-	String txt = searchbar.getText().toLowerCase().trim();
-	products = facade.searchProducts(txt);
-	printProducts();
-    }
-
-    private void printProducts() {
-	for (GeneralProduct p : products) {
-	    GridPane h = new GridPane();
-
-	    ColumnConstraints column1 = new ColumnConstraints();
-	    column1.setPercentWidth(10);
-	    h.getColumnConstraints().add(column1);
-
-	    ColumnConstraints column2 = new ColumnConstraints();
-	    column2.setPercentWidth(20);
-	    h.getColumnConstraints().add(column2);
-
-	    ColumnConstraints column3 = new ColumnConstraints();
-	    column3.setPercentWidth(60);
-	    h.getColumnConstraints().add(column3);
-
-	    h.setId(p.getIdProduct() + "");
-
-	    CheckBox c = new CheckBox();
-	    c.setOnAction(new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent e) {
-		    check(p, c);
+	@FXML
+	void back(ActionEvent event) {
+		try {
+			super.getChildren().clear();
+			super.getChildren().add(new ModifyListController());
+		} catch (IOException ex) {
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	    });
-	    Label name = new Label(p.getName());
-
-	    Label description = new Label(p.getDescription());
-
-	    h.add(c, 0, 0);
-	    h.add(name, 1, 0);
-	    h.add(description, 2, 0);
-	    h.setPrefWidth(productList.getPrefWidth());
-	    productList.getChildren().add(h);
 	}
-    }
 
-    public void check(GeneralProduct p, CheckBox c) {
-	if (c.isSelected()) {
-	    if (!selectedProducts.contains(p)) {
-		selectedProducts.add(p);
-	    }
+	@FXML
+	void search() {
+		productList.getChildren().clear();
+		String txt = searchbar.getText().toLowerCase().trim();
+		products = facade.searchProducts(txt);
+		printProducts();
 	}
-	else{
-	    if (selectedProducts.contains(p)) {
-		selectedProducts.remove(p);
-	    }
+
+	private void printProducts() {
+		for (GeneralProduct p : products) {
+			GridPane h = new GridPane();
+
+			ColumnConstraints column1 = new ColumnConstraints();
+			column1.setPercentWidth(10);
+			h.getColumnConstraints().add(column1);
+
+			ColumnConstraints column2 = new ColumnConstraints();
+			column2.setPercentWidth(20);
+			h.getColumnConstraints().add(column2);
+
+			ColumnConstraints column3 = new ColumnConstraints();
+			column3.setPercentWidth(60);
+			h.getColumnConstraints().add(column3);
+
+			h.setId(p.getIdProduct() + "");
+
+			CheckBox c = new CheckBox();
+			c.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					check(p, c);
+				}
+			});
+			Label name = new Label(p.getName());
+
+			Label description = new Label(p.getDescription());
+
+			h.add(c, 0, 0);
+			h.add(name, 1, 0);
+			h.add(description, 2, 0);
+			h.setPrefWidth(productList.getPrefWidth());
+			productList.getChildren().add(h);
+		}
 	}
-    }
+
+	public void check(GeneralProduct p, CheckBox c) {
+		if (c.isSelected()) {
+			if (!selectedProducts.contains(p)) {
+				selectedProducts.add(p);
+			}
+		} else {
+			if (selectedProducts.contains(p)) {
+				selectedProducts.remove(p);
+			}
+		}
+	}
 
 }
