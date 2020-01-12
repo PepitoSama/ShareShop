@@ -10,39 +10,20 @@ import javafx.scene.image.Image;
  *
  * @author
  */
-public class QuantifiedProduct {
-    private int idGroupList;
-    private int	idProduct;
-    private int quantity;
+public class QuantifiedProduct extends GeneralProduct {
 
-    public QuantifiedProduct(int idGroupList, int idProduct, int quantity) {
-	this.idGroupList = idGroupList;
-	this.idProduct = idProduct;
-	this.quantity = quantity;
+    private int quantite;
+
+    public int getQuantite() {
+        return this.quantite;
     }
 
-    public int getIdGroupList() {
-	return idGroupList;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
-    public void setIdGroupList(int idGroupList) {
-	this.idGroupList = idGroupList;
+    public QuantifiedProduct(int idProduct, String name, Image image, String description, int idFather, int quantite) {
+        super(idProduct, name, image, description, idFather);
+        this.quantite = quantite;
     }
-
-    public int getIdProduct() {
-	return idProduct;
-    }
-
-    public void setIdProduct(int idProduct) {
-	this.idProduct = idProduct;
-    }
-
-    public int getQuantity() {
-	return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-	this.quantity = quantity;
-    }
-    
 }

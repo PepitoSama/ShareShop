@@ -11,7 +11,6 @@ import model.domain.products.GeneralProduct;
 
 import model.domain.UserDebt;
 import model.domain.products.PricedProduct;
-import model.domain.products.QuantifiedProduct;
 
 
 /**
@@ -53,7 +52,5 @@ public abstract class AbstractDAOFactory {
     public abstract DAO<GeneralProduct> getProductDAO();
 
     public abstract DAO<UserDebt> getUserDebtDAO();
-
-    public abstract DAO<QuantifiedProduct> getQuantifiedProductDAO();
 
 }
