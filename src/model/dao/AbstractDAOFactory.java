@@ -13,47 +13,48 @@ import model.domain.UserDebt;
 import model.domain.products.PricedProduct;
 import model.domain.products.QuantifiedProduct;
 
-
 /**
  *
  */
 public abstract class AbstractDAOFactory {
 
-    private static AbstractDAOFactory instance = null;
+	private static AbstractDAOFactory instance = null;
 
-    /**
-     * Default constructor
-     */
-    protected AbstractDAOFactory() {
-    }
+	/**
+	 * Default constructor
+	 */
+	protected AbstractDAOFactory() {
+	}
 
-    public static AbstractDAOFactory getInstance() {
+	public static AbstractDAOFactory getInstance() {
 
-        if (instance == null) {
-            instance = new MySQLDAOFactory();
-        }
-        return instance;
-    }
+		if (instance == null) {
+			instance = new MySQLDAOFactory();
+		}
+		return instance;
+	}
 
-    /**
-     * @return
-     */
-    public abstract DAO<User> getUserDAO();
+	/**
+	 * @return
+	 */
+	public abstract DAO<User> getUserDAO();
 
-    public abstract DAOStatsInterface<Stats> getStatsDAO();
-    public abstract DAO<Group> getGroupDAO();
-    public abstract DAO<UserGroup> getUserGroupDAO();
+	public abstract DAOStatsInterface<Stats> getStatsDAO();
 
-    public abstract DAO<GroupList> getGroupListDAO();
+	public abstract DAO<Group> getGroupDAO();
 
-    public abstract DAO<PricedProduct> getPricedProductDAO();
-    
-    public abstract DAO<Message> getMessageDAO();
-    
-    public abstract DAO<GeneralProduct> getProductDAO();
+	public abstract DAO<UserGroup> getUserGroupDAO();
 
-    public abstract DAO<UserDebt> getUserDebtDAO();
+	public abstract DAO<GroupList> getGroupListDAO();
 
-    public abstract DAO<QuantifiedProduct> getQuantifiedProductDAO();
+	public abstract DAO<PricedProduct> getPricedProductDAO();
+
+	public abstract DAO<Message> getMessageDAO();
+
+	public abstract DAO<GeneralProduct> getProductDAO();
+
+	public abstract DAO<UserDebt> getUserDebtDAO();
+
+	public abstract DAO<QuantifiedProduct> getQuantifiedProductDAO();
 
 }

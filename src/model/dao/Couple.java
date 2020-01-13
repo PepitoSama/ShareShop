@@ -4,6 +4,12 @@ public class Couple {
 	private String name;
 	private String value;
 	
+	/**
+	 * Couple constructor
+	 * Create a Couple of two string user for database request
+	 * @param name The column name
+	 * @param value The value
+	 */
 	public Couple(String name, String value) {
 		this.name =name;
 		this.value = "'" + value + "'";
