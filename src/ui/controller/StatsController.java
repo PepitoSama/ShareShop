@@ -65,7 +65,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
+        List<Stats> mystats = facade.consultStats(facade.getUserId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyMonth(mystats);
             for (String key : m.keySet()) {
@@ -195,7 +195,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
+        List<Stats> mystats = facade.consultStats(facade.getUserId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyDay(mystats);
             for (String key : m.keySet()) {
@@ -229,7 +229,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
+        List<Stats> mystats = facade.consultStats(facade.getUserId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyMonth(mystats);
             for (String key : m.keySet()) {
@@ -262,7 +262,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
+        List<Stats> mystats = facade.consultStats(facade.getUserId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyWeek(mystats);
             for (String key : m.keySet()) {
@@ -295,7 +295,7 @@ public class StatsController extends GridPane {
         yAxis.setLabel("Amount in €");
         XYChart.Series<String, Double> series1 = new XYChart.Series<String, Double>();
         series1.setName("Me");
-        List<Stats> mystats = facade.consultStats(facade.getUserManager().getUser().getId(), checkDD(), checkDF());
+        List<Stats> mystats = facade.consultStats(facade.getUserId(), checkDD(), checkDF());
         if (mystats != null) {
             HashMap<String, Double> m = groupbyYear(mystats);
             for (String key : m.keySet()) {
