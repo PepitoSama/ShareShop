@@ -110,31 +110,41 @@ public class ProductManager {
 		return products;
 	}
 
+	/**
+	 * Get the product with the id given in parameter
+	 * 
+	 * @param idProduct
+	 *            the id of the product
+	 * @return the GeneralProduct
+	 */
 	public GeneralProduct getProductById(int idProduct) {
 		DAO<GeneralProduct> dao = AbstractDAOFactory.getInstance().getProductDAO();
 		List<Couple> couple = new ArrayList<>();
 		couple.add(new Couple("idProduct", Integer.toString(idProduct)));
 		return dao.get(couple).get(0);
 	}
-	
+
 	/**
-	 * @return all the subgeneralProducts
+	 * @return all the subgeneralProducts in the database
 	 */
 	public List<GeneralProduct> getAllSubGeneralProducts() {
 		DAO<GeneralProduct> dao = AbstractDAOFactory.getInstance().getProductDAO();
 		List<GeneralProduct> l = dao.getAll();
-		
+
 		List<GeneralProduct> res = new ArrayList<>();
-		
+
 		for (GeneralProduct p : l) {
 			if (p instanceof SubGeneralProduct) {
 				res.add(p);
 			}
 		}
- 
+
 		return res;
 	}
-	
+
+	/**
+	 * @return all the products in the database
+	 */
 	public List<GeneralProduct> getAllProducts() {
 		DAO<GeneralProduct> dao = AbstractDAOFactory.getInstance().getProductDAO();
 		return dao.getAll();
