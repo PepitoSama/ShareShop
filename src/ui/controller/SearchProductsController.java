@@ -24,12 +24,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -120,13 +122,17 @@ public class SearchProductsController extends GridPane {
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(10);
 			h.getColumnConstraints().add(column1);
+			
+			ColumnConstraints column1b = new ColumnConstraints();
+			column1b.setPercentWidth(10);
+			h.getColumnConstraints().add(column1b);
 
 			ColumnConstraints column2 = new ColumnConstraints();
 			column2.setPercentWidth(20);
 			h.getColumnConstraints().add(column2);
 
 			ColumnConstraints column3 = new ColumnConstraints();
-			column3.setPercentWidth(60);
+			column3.setPercentWidth(50);
 			h.getColumnConstraints().add(column3);
 
 			h.setId(p.getIdProduct() + "");
@@ -141,10 +147,21 @@ public class SearchProductsController extends GridPane {
 			Label name = new Label(p.getName());
 
 			Label description = new Label(p.getDescription());
+			
+			Button addFav = new Button("⭐");
+			addFav.setOnAction( e-> {
+				facade.addFavorite(p);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Added to favorite");
+				alert.setContentText("The product \"" + p + "\" has been added to your favorite list");
+				
+				alert.showAndWait();
+			});
 
 			h.add(c, 0, 0);
-			h.add(name, 1, 0);
-			h.add(description, 2, 0);
+			h.add(addFav,1,0);
+			h.add(name, 2, 0);
+			h.add(description, 3, 0);
 			h.setPrefWidth(productList.getPrefWidth());
 			productList.getChildren().add(h);
 		}

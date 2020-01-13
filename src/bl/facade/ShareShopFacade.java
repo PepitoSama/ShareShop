@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+
+import model.dao.AbstractDAOFactory;
+import model.dao.DAO;
 import model.domain.Group;
 import model.domain.Stats;
 import model.domain.UserGroup;
@@ -654,6 +657,25 @@ public class ShareShopFacade {
 	public void removeProductInShopList(QuantifiedProduct p) {
 		listManager = ListManager.getInstance();
 		listManager.remove(p);
+	}
+	
+	
+	/**
+	 * Get the favorite list of the current group
+	 * @return the list
+	 */
+	public List<GeneralProduct> getFavorites() {
+		return this.listManager.getFavorites(this.groupManager.getSelected());
+	}
+	
+	
+	/**
+	 * Add the product to favorite list of current group
+	 * @param p	the product
+	 * @return	true if success
+	 */
+	public boolean addFavorite(GeneralProduct p) {
+		return this.listManager.addFavorite(p, this.groupManager.getSelected());
 	}
 	
 	

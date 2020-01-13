@@ -9,7 +9,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import bl.facade.ShareShopFacade;
 import model.dao.*;
+import model.domain.Group;
 import model.domain.GroupList;
 import model.domain.products.GeneralProduct;
 import model.domain.products.PricedProduct;
@@ -182,6 +185,20 @@ public class ListManager {
 	public void remove(QuantifiedProduct p) {
 		DAO<QuantifiedProduct> dao = AbstractDAOFactory.getInstance().getQuantifiedProductDAO();
 		dao.delete(p);
+	}
+	
+	public List<GeneralProduct> getFavorites(Group g) {
+		
+		GroupDAO dao = (GroupDAO) AbstractDAOFactory.getInstance().getGroupDAO();
+		g.setFavoriteList(dao.getFavorites(g));
+
+		return g.getFavoriteList();
+	}
+	
+	public boolean addFavorite(GeneralProduct p, Group g) {
+		g.getFavoriteList().add(p);
+		DAO<Group> dao = AbstractDAOFactory.getInstance().getGroupDAO();
+		return dao.update(g);
 	}
 
 }
