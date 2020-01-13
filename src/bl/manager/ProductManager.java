@@ -134,5 +134,10 @@ public class ProductManager {
  
 		return res;
 	}
+	
+	public List<GeneralProduct> getAllProducts() {
+		DAO<GeneralProduct> dao = AbstractDAOFactory.getInstance().getProductDAO();
+		return dao.getAll();
+	}
 
 }

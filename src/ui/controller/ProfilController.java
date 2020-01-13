@@ -107,14 +107,10 @@ public class ProfilController extends GridPane {
 			}
 
 			try {
-				try {
-					facade.updateUser();
-					super.getChildren().clear();
-					super.getChildren().add(new MyGroupsController());
-				} catch (SQLException e) {
-					res.setText(e.getMessage());
-					res.setFill(Paint.valueOf("red"));
-				}
+				facade.updateUser();
+				super.getChildren().clear();
+				super.getChildren().add(new MyGroupsController());
+								
 			} catch (IOException e) {
 				res.setText(e.getMessage());
 				res.setFill(Paint.valueOf("red"));
