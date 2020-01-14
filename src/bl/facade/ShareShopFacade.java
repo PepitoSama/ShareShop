@@ -247,6 +247,17 @@ public class ShareShopFacade {
 	public User getUserById(int id) {
 		return this.userManager.getUserById(id);
 	}
+	
+	/**
+	 * Get the user whose nickname is given in parameter
+	 * 
+	 * @param nickname
+	 *            the nickname of the user
+	 * @return The user if the nicknames matches, null else
+	 */
+	public User getUserByNickname(String nickname) {
+		return this.userManager.getUserByNickname(nickname);
+	}
 
 	
 	
@@ -369,6 +380,18 @@ public class ShareShopFacade {
     public int getGroupId() {
     	return GroupManager.getInstance().getSelectedGroupId();
     }
+    
+    /**
+	 * Create a new UserGroup
+	 *
+	 * @param memberNickname
+	 *            the name of the user we want to add
+	 * @return true if the UserGroup has been created
+	 */
+	public boolean createUserGroup(int userId, int groupId) {
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.createUserGroup(userId,groupId);
+	}
 	
 	
 	/**
@@ -399,6 +422,9 @@ public class ShareShopFacade {
 		List<User> liste = userManager.getGroupUsers(users);
 		return liste;
 	}
+	
+	
+	
 	
 	
 	

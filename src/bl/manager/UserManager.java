@@ -288,6 +288,7 @@ public class UserManager {
 	public int getUserId() {
 		return user.getId();
 	}
+	
 
 	/**
 	 * @param id
@@ -298,6 +299,21 @@ public class UserManager {
 		DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
 		List<Couple> liste = new ArrayList<Couple>();
 		liste.add(new Couple("idUser", Integer.toString(id)));
+		return dao.get(liste).get(0);
+	}
+	
+	/**
+	 * @param Nickname
+	 *            the nickname of the user
+	 * @return the user with the nickname given in parameter
+	 */
+	public User getUserByNickname(String nickname) {
+		DAO<User> dao = AbstractDAOFactory.getInstance().getUserDAO();
+		List<Couple> liste = new ArrayList<Couple>();
+		liste.add(new Couple("nickname", nickname));
+		if(dao.get(liste).isEmpty()) {
+			return null;
+		}
 		return dao.get(liste).get(0);
 	}
 
