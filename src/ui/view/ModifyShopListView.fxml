@@ -86,7 +86,7 @@
                               </ScrollPane>
                            </content>
                            <content>
-                              <ScrollPane prefHeight="933.0" prefWidth="226.0" />
+                              <ScrollPane fx:id="suggest" prefHeight="933.0" prefWidth="226.0" />
                            </content>
                       </Tab>
                       <Tab text="⭐Favorites">
@@ -98,7 +98,7 @@
                               </ScrollPane>
                            </content>
                            <content>
-                              <ScrollPane prefHeight="933.0" prefWidth="226.0" />
+                              <ScrollPane fx:id="favoris" prefHeight="933.0" prefWidth="226.0" />
                            </content>
                       </Tab>
                     </tabs>

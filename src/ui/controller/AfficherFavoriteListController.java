@@ -48,66 +48,61 @@ import model.domain.products.QuantifiedProduct;
  */
 public class AfficherFavoriteListController extends GridPane {
 
-	private ShareShopFacade facade;
+    private ShareShopFacade facade;
 
-	@FXML
-	private ScrollPane scrollpane;
-	
-	@FXML
-	private VBox productList;
+    @FXML
+    private ScrollPane scrollpane;
 
-	
-	private List<GeneralProduct> products;
+    @FXML
+    private VBox productList;
 
-	public AfficherFavoriteListController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/FavoriteListView.fxml"));
-		leLoader.setController(this);
-		leLoader.setRoot(this);
-		leLoader.load();
-		this.facade = ShareShopFacade.getInstance();
-		initList();
+    private List<GeneralProduct> products;
+
+    public AfficherFavoriteListController() throws IOException {
+	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/FavoriteListView.fxml"));
+	leLoader.setController(this);
+	leLoader.setRoot(this);
+	leLoader.load();
+	this.facade = ShareShopFacade.getInstance();
+	initList();
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+	try {
+	    super.getChildren().clear();
+	    super.getChildren().add(new MyGroupsController());
+	} catch (IOException ex) {
+	    Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
 	}
+    }
 
-	@FXML
-	void back(ActionEvent event) {
-		try {
-			super.getChildren().clear();
-			super.getChildren().add(new MyGroupsController());
-		} catch (IOException ex) {
-			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
-		}
+    private void initList() {
+	products = facade.getFavorites();
+
+	for (GeneralProduct p : products) {
+	    GridPane h = new GridPane();
+
+	    ColumnConstraints column1 = new ColumnConstraints();
+	    column1.setPercentWidth(30);
+	    h.getColumnConstraints().add(column1);
+
+	    ColumnConstraints column2 = new ColumnConstraints();
+	    column2.setPercentWidth(70);
+	    h.getColumnConstraints().add(column2);
+
+	    h.setId(p.getIdProduct() + "");
+
+	    Label name = new Label(p.getName());
+
+	    Label description = new Label(p.getDescription());
+
+	    h.add(name, 0, 0);
+	    h.add(description, 1, 0);
+	    h.setPrefWidth(productList.getPrefWidth());
+	    productList.getChildren().add(h);
+
 	}
-	
-	private void initList() {
-		products = facade.getFavorites();
-		
-		for (GeneralProduct p : products) {
-			GridPane h = new GridPane();
-
-
-			ColumnConstraints column1 = new ColumnConstraints();
-			column1.setPercentWidth(30);
-			h.getColumnConstraints().add(column1);
-
-			ColumnConstraints column2 = new ColumnConstraints();
-			column2.setPercentWidth(70);
-			h.getColumnConstraints().add(column2);
-
-			h.setId(p.getIdProduct() + "");
-
-			Label name = new Label(p.getName());
-
-			Label description = new Label(p.getDescription());
-			
-	
-			h.add(name, 0, 0);
-			h.add(description, 1, 0);
-			h.setPrefWidth(productList.getPrefWidth());
-			productList.getChildren().add(h);
-			
-		}
-	}
-
-
+    }
 
 }
