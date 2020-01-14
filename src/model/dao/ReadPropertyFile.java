@@ -20,8 +20,12 @@ public class ReadPropertyFile {
 	public static Hashtable<String, String> getValues(String fileName, Hashtable<String, String> toGet) throws IOException{
 		try {
 			Properties prop = new Properties();
-			//FileInputStream is = new FileInputStream("ressources/config/" + fileName + ".properties");
+			
 			InputStream is = ReadPropertyFile.class.getClassLoader().getResourceAsStream("ressources/config/" + fileName + ".properties");
+			
+			if (is == null) {
+				is = new FileInputStream("ressources/config/" + fileName + ".properties");
+			}
 			prop.load(is);
 			for(String key : toGet.keySet()) {
 				toGet.put(key, prop.getProperty(key));
