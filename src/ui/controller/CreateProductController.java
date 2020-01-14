@@ -66,7 +66,7 @@ public class CreateProductController extends GridPane {
 
 
 	public CreateProductController() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CreateProductView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/CreateProductView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		loader.load();

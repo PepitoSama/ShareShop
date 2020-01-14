@@ -89,12 +89,12 @@
 	                  </Button>
 	                  <ImageView fitHeight="83.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 	                     <image>
-	                        <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+	                        <Image url="/ressources/images/Cart2_Black_Red.png" />
 	                     </image>
 	                  </ImageView>
 	                        <ImageView fitHeight="81.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 	                           <image>
-	                              <Image url="@../../../ressources/images/MyGroups.png" />
+	                              <Image url="/ressources/images/MyGroups.png" />
 	                           </image>
 	                           <cursor>
 	                              <Cursor fx:constant="DEFAULT" />

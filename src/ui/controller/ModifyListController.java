@@ -57,7 +57,7 @@ public class ModifyListController extends GridPane {
      * @throws IOException
      */
     public ModifyListController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ModifyShopListView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/ModifyShopListView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

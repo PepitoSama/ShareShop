@@ -52,7 +52,7 @@ public class AfficherMembersController extends GridPane {
      * @throws IOException
      */
     public AfficherMembersController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/GroupMemberView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/GroupMemberView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

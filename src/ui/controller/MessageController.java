@@ -44,7 +44,7 @@ public class MessageController extends GridPane {
 	private ShareShopFacade facade;
 
 	public MessageController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/MessageView.fxml"));
+		FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/MessageView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
 		leLoader.load();

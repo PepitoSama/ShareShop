@@ -31,7 +31,7 @@ public class AddGroupController extends GridPane {
     private final ShareShopFacade facade;
 
     public AddGroupController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AddGroupView.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/AddGroupView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();    

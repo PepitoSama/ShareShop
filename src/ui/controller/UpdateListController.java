@@ -37,7 +37,7 @@ public class UpdateListController extends GridPane{
     private Button button;
 
     public UpdateListController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AjoutShopList.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/AjoutShopList.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();

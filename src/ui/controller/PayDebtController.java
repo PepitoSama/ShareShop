@@ -73,7 +73,7 @@ public class PayDebtController extends GridPane {
      * @throws IOException
      */
     public PayDebtController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/PayDebtView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/PayDebtView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

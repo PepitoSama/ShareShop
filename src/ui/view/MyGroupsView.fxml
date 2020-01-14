@@ -50,7 +50,7 @@
                             <children>
                                 <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                     <image>
-                                        <Image url="@../../../ressources/images/MyGroups.png" />
+                                        <Image url="/ressources/images/MyGroups.png" />
                                     </image>
                                 </ImageView>
                                 <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -81,7 +81,7 @@
                      <center>
                         <ImageView fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
-                              <Image url="@../../../ressources/images/disconnect.png" />
+                              <Image url="/ressources/images/disconnect.png" />
                            </image>
                         </ImageView>
                      </center>
@@ -96,7 +96,7 @@
                      <center>
                                 <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#profil" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                                     <image>
-                                        <Image url="@../../../ressources/images/Profil.png" />
+                                        <Image url="/ressources/images/Profil.png" />
                                     </image>
                                 </ImageView>
                      </center>

@@ -52,7 +52,7 @@ public class StatsController extends GridPane {
     private final ShareShopFacade facade;
 
     public StatsController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/StatsView.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/StatsView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();

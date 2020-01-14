@@ -59,7 +59,7 @@ public class AfficherFavoriteListController extends GridPane {
     private List<GeneralProduct> products;
 
     public AfficherFavoriteListController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/FavoriteListView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/FavoriteListView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

@@ -57,7 +57,7 @@
 	                     <center>
 	                        <ImageView fitHeight="90.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
 	                           <image>
-	                              <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+	                              <Image url="/ressources/images/Cart2_Black_Red.png" />
 	                           </image>
 	                        </ImageView>
 	                     </center>

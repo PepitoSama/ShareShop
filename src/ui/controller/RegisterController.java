@@ -49,7 +49,7 @@ public class RegisterController extends GridPane {
     private final ShareShopFacade facade;
 
     public RegisterController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/RegisterView.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/RegisterView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();

@@ -67,7 +67,7 @@ public class DebtController extends GridPane {
      * @throws IOException
      */
     public DebtController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/DebtView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/DebtView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

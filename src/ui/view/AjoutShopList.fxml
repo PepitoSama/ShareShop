@@ -52,7 +52,7 @@
                         </Label>
                         <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <image>
-                                <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+                                <Image url="/ressources/images/Cart2_Black_Red.png" />
                             </image>
                         </ImageView>
                     </children>

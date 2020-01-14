@@ -71,7 +71,7 @@ public class SearchProductsController extends GridPane {
 	List<GeneralProduct> products;
 
 	public SearchProductsController() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SearchProductsView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/SearchProductsView.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		loader.load();

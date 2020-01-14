@@ -67,7 +67,7 @@ public class AfficherListController extends GridPane {
     private ScrollPane scrollpane1;
 
     public AfficherListController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ShopListView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/ShopListView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

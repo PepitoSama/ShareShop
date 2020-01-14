@@ -62,7 +62,7 @@ public class ShopListController extends GridPane {
      * @throws IOException
      */
     public ShopListController() throws IOException {
-	FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/GroupListsView.fxml"));
+	FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/GroupListsView.fxml"));
 	leLoader.setController(this);
 	leLoader.setRoot(this);
 	leLoader.load();

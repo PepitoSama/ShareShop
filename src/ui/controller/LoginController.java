@@ -49,7 +49,7 @@ public class LoginController extends GridPane {
 	private final ShareShopFacade facade;
 
 	public LoginController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/LoginView.fxml"));
+		FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/LoginView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
 		leLoader.load();

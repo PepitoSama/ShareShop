@@ -64,7 +64,7 @@ public class ProfilController extends GridPane {
 	private final ShareShopFacade facade;
 
 	public ProfilController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/ProfilView.fxml"));
+		FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/ProfilView.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
 		leLoader.load();

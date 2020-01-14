@@ -44,12 +44,12 @@
       	               <children>
       	                  <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       	                     <image>
-      	                        <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+      	                        <Image url="/ressources/images/Cart2_Black_Red.png" />
       	                     </image>
       	                  </ImageView>
       	                  <ImageView fitHeight="63.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       	                     <image>
-      	                        <Image url="@../../../ressources/images/List.png" />
+      	                        <Image url="/ressources/images/List.png" />
       	                     </image>
       	                  </ImageView>
       	                  <Label fx:id="nameList" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -96,7 +96,7 @@
                         </GridPane>
       	                  <ImageView fitHeight="44.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       	                     <image>
-      	                        <Image url="@../../../ressources/images/List.png" />
+      	                        <Image url="/ressources/images/List.png" />
       	                     </image>
       	                  </ImageView>
       	                  <Button  fx:id="modify" contentDisplay="CENTER" onAction="#modify"  text="Modify" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -123,7 +123,7 @@
       	               <children>
       	                  <ImageView fitHeight="44.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
       	                     <image>
-      	                        <Image url="@../../../ressources/images/cart.png" />
+      	                        <Image url="/ressources/images/cart.png" />
       	                     </image>
       	                  </ImageView>
       	                  <Label prefHeight="37.0" prefWidth="505.0" text="Bought Product" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">

@@ -53,7 +53,7 @@
                      <center>
                         <ImageView fitHeight="87.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
-                              <Image url="@../../../ressources/images/envelope.png" />
+                              <Image url="/ressources/images/envelope.png" />
                            </image>
                         </ImageView>
                      </center></BorderPane>

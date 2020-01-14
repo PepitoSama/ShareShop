@@ -39,7 +39,7 @@ public class AjoutListController extends GridPane {
 	 * @throws IOException
 	 */
 	public AjoutListController() throws IOException {
-		FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AjoutShopList.fxml"));
+		FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/AjoutShopList.fxml"));
 		leLoader.setController(this);
 		leLoader.setRoot(this);
 		leLoader.load();

@@ -74,7 +74,7 @@
                      <children>
                         <ImageView fx:id="favorites" fitHeight="88.0" fitWidth="117.0" onMouseClicked="#favorites" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                            <image>
-                              <Image url="@../../../ressources/images/star.png" />
+                              <Image url="/ressources/images/star.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -82,7 +82,7 @@
                         </ImageView>
                         <ImageView fitHeight="88.0" fitWidth="117.0" onMouseClicked="#messages" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                            <image>
-                              <Image url="@../../../ressources/images/envelope.png" />
+                              <Image url="/ressources/images/envelope.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -90,7 +90,7 @@
                         </ImageView>
                         <ImageView fx:id="members" fitHeight="88.0" fitWidth="117.0" nodeOrientation="INHERIT" onMouseClicked="#members" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <image>
-                              <Image url="@../../../ressources/images/members.png" />
+                              <Image url="/ressources/images/members.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -122,7 +122,7 @@
                   </Label>
                   <ImageView fitHeight="83.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../ressources/images/Cart2_Black_Red.png" />
+                        <Image url="/ressources/images/Cart2_Black_Red.png" />
                      </image>
                   </ImageView>
                </children>

@@ -26,12 +26,12 @@ public class ShareShop extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 	try {
-	    Parent root = FXMLLoader.load(getClass().getResource("../view/MainView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("ui/view/MainView.fxml"));
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
-	    scene.getStylesheets().add("/ressources/css/buttons.css");
-	    scene.getStylesheets().add("/ressources/css/style.css");
+	    scene.getStylesheets().add("css/buttons.css");
+	    scene.getStylesheets().add("css/style.css");
 	    stage.setTitle("ShareShop");
 	} catch (Exception e) {
 	    e.printStackTrace();

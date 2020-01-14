@@ -33,7 +33,7 @@ public class AjoutMemberController extends GridPane {
     private final ShareShopFacade facade;
 
     public AjoutMemberController() throws IOException {
-        FXMLLoader leLoader = new FXMLLoader(getClass().getResource("../view/AjoutMemberView.fxml"));
+        FXMLLoader leLoader = new FXMLLoader(getClass().getClassLoader().getResource("ui/view/AjoutMemberView.fxml"));
         leLoader.setController(this);
         leLoader.setRoot(this);
         leLoader.load();    
