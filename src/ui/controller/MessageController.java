@@ -85,14 +85,12 @@ public class MessageController extends GridPane {
 				// User
 				messageGrid.add(borderAvatar, 1, 0);
 				messageGrid.add(borderText, 0, 0);
-				String style = "-fx-background-color: rgba(66, 135, 245, 0.5); -fx-border-radius: 18 18 18 18; -fx-background-radius: 18 18 18 18;";
-				messageGrid.setStyle(style);
+				messageGrid.setId("message1");
 			} else {
 				// Others
 				messageGrid.add(borderAvatar, 0, 0);
 				messageGrid.add(borderText, 1, 0);
-				String style = "-fx-background-color: rgba(130, 130, 130, 0.5); -fx-border-radius: 18 18 18 18; -fx-background-radius: 18 18 18 18;";
-				messageGrid.setStyle(style);
+				messageGrid.setId("message2");
 			}
 			// Ajout du Vbox au HBox
 			messageVBox.getChildren().add(messageGrid);
