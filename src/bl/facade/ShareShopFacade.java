@@ -236,24 +236,7 @@ public class ShareShopFacade {
 	userManager.setPassword(text);
     }
 
-    /**
-     * Set the birthdate of the user
-     *
-     * @param date
-     */
-    public void setBirthdate(Date date) {
-	userManager.setBirthdate(date);
-    }
 
-    /**
-     * Get the user whose id is given in parameter
-     *
-     * @param id the id of the user
-     * @return The user if the id matches, null else
-     */
-    public User getUserById(int id) {
-	return this.userManager.getUserById(id);
-    }
 
     // === STATS METHODS ===
     /**
@@ -365,51 +348,12 @@ public class ShareShopFacade {
 	}
 	
 	
-	/**
-	 * @return the id of the currently selected group
-	 */
-	public int getSelectedGroupID() {
-		groupManager = GroupManager.getInstance();
-		return this.groupManager.getSelectedGroupId();
-	}
-	
-	/**
-	 * Remove the selected user from the selected group in the in the
-	 * UserGroupManager
-	 * 
-	 * @return true if the user has been removed
-	 */
-	public boolean removeSelectedMember() {
-		userGroupManager = UserGroupManager.getInstance();
-		return userGroupManager.removeUserGroup();
-	}
-	
-	/**
-	 * @return the users of the currently selected group
-	 */
-	public List<User> getUserbyGroupId() {
-		userGroupManager = UserGroupManager.getInstance();
-		List<Integer> users = userGroupManager.getUsersIdGroupList(getSelectedGroupID());
-		List<User> liste = userManager.getGroupUsers(users);
-		return liste;
-	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	// === LISTS METHODS ===
 
-	/**
-	 * @return the ListManager
-	 */
-	public ListManager getListManager() {
-		return ListManager.getInstance();
-	}
+
 
     /**
      * @return the id of the currently selected group
@@ -426,7 +370,8 @@ public class ShareShopFacade {
      * @return true if the user has been removed
      */
     public boolean removeSelectedMember() {
-	return UserGroupManager.removeUserGroup();
+    	userGroupManager = UserGroupManager.getInstance();
+	return userGroupManager.removeUserGroup();
     }
 
     /**
