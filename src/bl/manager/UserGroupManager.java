@@ -32,7 +32,6 @@ public class UserGroupManager {
     		selected = userGroup;
         }
     
-	private static UserGroupManager instance = null;
 
 
 	public static UserGroupManager getInstance() {
@@ -81,17 +80,7 @@ public class UserGroupManager {
 //    }
     
     	
-    
-    public List<UserGroup> getUserGroupList(int userId) {
-	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
-	List<UserGroup> userGroupList = new ArrayList<>();
-	for (UserGroup userGroup : dao.getAll()) {
-	    if (userGroup.getIdUser() == userId) {
-		userGroupList.add(userGroup);
-	    }
-	}
-	return userGroupList;
-    }
+
     
 	
 	/**
@@ -138,13 +127,11 @@ public class UserGroupManager {
 	 * Remove a member from the group
 	 * @return
 	 */
-	public static boolean removeMember() {
+	public static boolean removeUserGroup() {
 		DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
 		// return dao.delete(selected);
 		return true;
 	}
-	return users;
-    }
     
 
 

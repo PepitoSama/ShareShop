@@ -360,9 +360,7 @@ public class ShareShopFacade {
 		return UserGroupManager.getInstance();
 	}
 
-	public boolean removeSelectedMember() {
-    	return UserGroupManager.removeUserGroup();
-        }
+
     
     public UserGroup getUserGroup(User user) {
     	return UserGroupManager.getInstance().getUserGroup(user);
@@ -388,7 +386,7 @@ public class ShareShopFacade {
 	 * @return true if the user has been removed
 	 */
 	public boolean removeSelectedMember() {
-		return UserGroupManager.removeMember();
+		return UserGroupManager.removeUserGroup();
 	}
 	
 	/**
@@ -520,17 +518,6 @@ public class ShareShopFacade {
 		return messageManager.sendMessage(text, this.userManager.getUser(), getGroupManager().getSelected());
 	}
 
-    /**
-     * @return all the products in the database
-     */
-    public List<GeneralProduct> getAllProducts() {
-	return null;
-	}
-
-	public boolean updateShopList(String name) {
-		return listManager.updateShopList(name);
-
-	
 	
 	
 	// === PRODUCTS METHODS ===
