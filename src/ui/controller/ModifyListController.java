@@ -175,6 +175,9 @@ public class ModifyListController extends GridPane {
     private void initFavorits() {
 	List<GeneralProduct> products = facade.getFavorites();
 	favorits = new VBox();
+	if (products.isEmpty()) {
+	    favorits.getChildren().add(new Label("No product in favorit list"));
+	}
 	for (GeneralProduct p : products) {
 	    GridPane h = new GridPane();
 
@@ -201,6 +204,9 @@ public class ModifyListController extends GridPane {
     private void initSuggests() {
 	List<GeneralProduct> products = facade.getSuggest();
 	suggests = new VBox();
+	if (products.isEmpty()) {
+	    suggests.getChildren().add(new Label("No product in suggest list"));
+	}
 	for (GeneralProduct p : products) {
 	    GridPane h = new GridPane();
 
