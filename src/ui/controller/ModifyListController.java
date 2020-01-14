@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,11 @@ public class ModifyListController extends GridPane {
     @FXML
     private ScrollPane productList;
 
+    @FXML
+    private ScrollPane favoris;
+
+    private VBox favorits;
+
     /**
      * ModifyListController constructor Display view ModifyShopListView in the
      * Main View
@@ -54,6 +60,7 @@ public class ModifyListController extends GridPane {
 	this.facade = ShareShopFacade.getInstance();
 	shopListe = new VBox();
 	initList();
+	initFavorits();
     }
 
     private void initList() {
@@ -157,6 +164,39 @@ public class ModifyListController extends GridPane {
 	} else {
 	    facade.removeOne(p);
 	}
+	initList();
+    }
+
+    private void initFavorits() {
+	List<GeneralProduct> products = facade.getFavorites();
+	favorits = new VBox();
+	for (GeneralProduct p : products) {
+	    GridPane h = new GridPane();
+
+	    ColumnConstraints column1 = new ColumnConstraints();
+	    column1.setPercentWidth(80);
+	    h.getColumnConstraints().add(column1);
+
+	    h.setId(p.getIdProduct() + "");
+
+	    Button name = new Button(p.getName());
+	    name.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+		    add(p);
+		}
+	    });
+	    h.add(name, 0, 0);
+	    h.setPrefWidth(favorits.getPrefWidth());
+	    favorits.getChildren().add(h);
+	}
+	favoris.setContent(favorits);
+    }
+    
+    private void add(GeneralProduct p){
+	List<GeneralProduct> liste = new ArrayList<>();
+	liste.add(p);
+	facade.addProductsToShopList(liste);
 	initList();
     }
 
