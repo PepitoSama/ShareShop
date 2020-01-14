@@ -147,7 +147,13 @@ public class ShopListController extends GridPane {
      */
     @FXML
     void favorites(MouseEvent event) {
-	System.out.println("TODO");
+    	
+    	try {
+			super.getChildren().clear();
+			super.getChildren().add(new AfficherFavoriteListController());
+		} catch (IOException ex) {
+			Logger.getLogger(ShopListController.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }
     
     /**

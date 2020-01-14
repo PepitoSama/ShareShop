@@ -22,69 +22,103 @@ import model.domain.Stats;
  */
 public class StatsManager {
 
-    private static StatsManager instance = null;
+	private static StatsManager instance = null;
 
-    public static StatsManager getInstance() {
-	if (instance == null) {
-	    instance = new StatsManager();
+	public static StatsManager getInstance() {
+		if (instance == null) {
+			instance = new StatsManager();
+		}
+		return instance;
 	}
-	return instance;
-    }
 
-    public List<Stats> consultStats(int id, Date dd, Date df) {
-	DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
+	
+	/**
+	 * Return a list of Stats within a date range for a specific user
+	 * 
+	 * @param id
+	 *            the id of the user
+	 * @param dd
+	 *            the start date
+	 * @param df
+	 *            the end date
+	 * @return The list of stats
+	 */
+	public List<Stats> consultStats(int id, Date dd, Date df) {
+		DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
 
-	try {
-	    if (dd != null || df != null) {
-		return dao.getDate(id, dd, df);
-	    } else {
-		return dao.getUser(id);
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
+		try {
+			if (dd != null || df != null) {
+				return dao.getDate(id, dd, df);
+			} else {
+				return dao.getUser(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	return null;
-    }
 
-    public List<Stats> consultStats(Date dd, Date df) {
-	DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
-	try {
-	    if (dd != null || df != null) {
-		return dao.getDate(dd, df);
-	    } else {
-		return dao.getAll();
-	    }
+	
+	/**
+	 * Return the list of stats within a date range for all the users
+	 * 
+	 * @param dd
+	 *            the start date
+	 * @param df
+	 *            the end date
+	 * @return The list of stats
+	 */
+	public List<Stats> consultStats(Date dd, Date df) {
+		DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
+		try {
+			if (dd != null || df != null) {
+				return dao.getDate(dd, df);
+			} else {
+				return dao.getAll();
+			}
 
-	} catch (Exception e) {
-	    e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	return null;
-    }
 
-    public int getNumber() {
-	DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
-	try {
-	    return dao.getNumber();
-	} catch (Exception e) {
-	    e.printStackTrace();
+	
+	/**
+	 * @return the number of stats entries in the database. Can be used in to adjust
+	 *         the scale in a graph in the ui
+	 */
+	public int getNumber() {
+		DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
+		try {
+			return dao.getNumber();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
 	}
-	return 1;
-    }
 
-    public boolean addStat(int id, float amount, Date date) {
-	DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
-	List<Couple> liste = new ArrayList<Couple>();
-	java.sql.Date d = new java.sql.Date(date.getTime());
-	liste.add(new Couple("date", d.toString()));
-	liste.add(new Couple("idUser", Integer.toString(id)));
-	List<Stats> s = dao.get(liste);
-	if(s.size()>0){
-	    Stats stat = s.get(0);
-	    stat.setAmount(stat.getAmount()+amount);
-	    return dao.update(stat);
+	
+	/**
+	 * Add a new stat 
+	 * @param id	the id of the user
+	 * @param amount	the amount
+	 * @param date	the date
+	 * @return	true if the stats has been added
+	 */
+	public boolean addStat(int id, float amount, Date date) {
+		DAOStatsInterface<Stats> dao = AbstractDAOFactory.getInstance().getStatsDAO();
+		List<Couple> liste = new ArrayList<Couple>();
+		java.sql.Date d = new java.sql.Date(date.getTime());
+		liste.add(new Couple("date", d.toString()));
+		liste.add(new Couple("idUser", Integer.toString(id)));
+		List<Stats> s = dao.get(liste);
+		if (s.size() > 0) {
+			Stats stat = s.get(0);
+			stat.setAmount(stat.getAmount() + amount);
+			return dao.update(stat);
+		} else {
+			return dao.save(new Stats(id, date, amount));
+		}
 	}
-	else{
-	    return dao.save(new Stats(id, date, amount));
-	}
-    }
 }

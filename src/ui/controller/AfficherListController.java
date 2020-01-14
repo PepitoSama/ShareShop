@@ -20,7 +20,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -212,14 +215,26 @@ public class AfficherListController extends GridPane {
 	dialog.setHeaderText("Enter the product unit price" + prod.getName());
 	dialog.setContentText("Please enter the unit amount:");
 
-	Optional<String> result = dialog.showAndWait();
-	if (result.isPresent()) {
-	    String value = result.get();
-	    Double price = check(value); 
-	    if ( price != null) {
-		facade.buyProduct(p,price);
-	    }
+	boolean ok = false;
+	while(!ok) {
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()) {
+		    String value = result.get();
+		    Double price = check(value); 
+		    if ( price != null && price > 0) {
+		    	facade.buyProduct(p,price);
+		    	ok = true;
+		    } else {
+		    	Alert errorDialog = new Alert(AlertType.ERROR, "Please enter a valid positive number");
+		    	errorDialog.showAndWait();
+		    	dialog.getEditor().clear();
+		    }
+		} else {
+			ok = true;
+		}
+		
 	}
+	
 
 	initBoughtProduct();
 	initShopList();
@@ -229,7 +244,7 @@ public class AfficherListController extends GridPane {
 	Pattern p = Pattern.compile("([0-9]*)+\\.?([0-9]?[0-9]?)?");
 	Matcher m = p.matcher(value);
 	Double price = null;
-	if (value != "" | value != null) {
+	if (value != "" && value != null) {
 	    if (m.matches()) {
 		Double val = Double.parseDouble(value);
 		DecimalFormat df = new DecimalFormat("#.##");
