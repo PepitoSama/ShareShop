@@ -33,7 +33,7 @@
     -fx-text-fill: black;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
-#shiny-orange {
+#shiny-orange,Button     {
     -fx-background-color: 
         linear-gradient(#ffd65b, #e68400),
         linear-gradient(#ffef84, #f2ba44),
