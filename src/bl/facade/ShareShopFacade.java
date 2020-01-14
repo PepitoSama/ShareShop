@@ -362,8 +362,8 @@ public class ShareShopFacade {
 
 
     
-    public UserGroup getUserGroup(User user) {
-    	return UserGroupManager.getInstance().getUserGroup(user);
+    public UserGroup getUserGroup(int userId, int groupId) {
+    	return UserGroupManager.getInstance().getUserGroup(userId, groupId);
     }
     
     public int getGroupId() {
@@ -386,7 +386,8 @@ public class ShareShopFacade {
 	 * @return true if the user has been removed
 	 */
 	public boolean removeSelectedMember() {
-		return UserGroupManager.removeUserGroup();
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.removeUserGroup();
 	}
 	
 	/**

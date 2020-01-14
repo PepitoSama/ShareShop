@@ -10,6 +10,8 @@ import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
+import model.domain.Group;
+import model.domain.GroupList;
 import model.domain.User;
 import model.domain.UserGroup;
 
@@ -22,18 +24,27 @@ public class UserGroupManager {
 
     private static UserGroupManager instance = null;
     
-	private static UserGroup selected;
-	
+    private UserGroup selected;
+    
+    /**
+	 * Return the selected UserGroup
+	 * 
+	 * @return GroupList
+	 */
 	public UserGroup getSelected() {
 		return selected;
-	    }
+	}
 	
-    public static void setSelected(UserGroup userGroup) {
-    		selected = userGroup;
-        }
+	/**
+	 * Set the selected UserGroup
+	 * 
+	 * @param selected UserGroup
+	 */
+	public void setSelected(UserGroup selected) {
+		this.selected = selected;
+	}
     
-
-
+    
 	public static UserGroupManager getInstance() {
 		if (instance == null) {
 			instance = new UserGroupManager();
@@ -55,11 +66,11 @@ public class UserGroupManager {
 	}
 
     
-    public UserGroup getUserGroup(User user) {
+    public UserGroup getUserGroup(int userId, int groupId) {
     	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
     		for (UserGroup userGroup : dao.getAll()) {
-    	    if (userGroup.getIdUser() == user.getId()) {
-    	    	if(userGroup.getIdGroup() == this.getSelected().getIdGroup())
+    	    if (userGroup.getIdUser() == userId) {
+    	    	if(userGroup.getIdGroup() == groupId)
     	    		return userGroup;
     	    }
     	}
@@ -127,10 +138,9 @@ public class UserGroupManager {
 	 * Remove a member from the group
 	 * @return
 	 */
-	public static boolean removeUserGroup() {
+	public boolean removeUserGroup() {
 		DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
-		// return dao.delete(selected);
-		return true;
+		return dao.delete(selected);
 	}
     
 
