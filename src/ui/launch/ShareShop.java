@@ -33,6 +33,7 @@ public class ShareShop extends Application {
 	    scene.getStylesheets().add("css/buttons.css");
 	    scene.getStylesheets().add("css/style.css");
 	    stage.setTitle("ShareShop");
+	    stage.getIcons().add(new Image("/ressources/images/Cart2_Black_Red.png"));
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
