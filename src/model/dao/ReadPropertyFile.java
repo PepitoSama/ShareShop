@@ -22,7 +22,6 @@ public class ReadPropertyFile {
 			Properties prop = new Properties();
 			InputStream is = ReadPropertyFile.class.getClassLoader().getResourceAsStream("ressources/config/" + fileName + ".properties");
 			if (is== null) {
-
 				is = new FileInputStream("ressources/config/" + fileName + ".properties");
 			}
 			prop.load(is);
