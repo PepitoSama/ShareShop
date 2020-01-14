@@ -78,9 +78,26 @@ public class UserGroupDAO implements DAO<UserGroup> {
     }
 
     @Override
-    public boolean delete(UserGroup obj) {
-	// TODO Auto-generated method stub
-	return false;
+    public boolean delete(UserGroup usergroup) {
+    	String sql = "DELETE FROM " + this.tableName + " WHERE idUser = ? AND idGroup = ?";
+    	
+    	int rowsDeleted = 0;
+    	PreparedStatement statement;
+    	statement = jdbc.prepareStatement(sql);
+    	
+		try {
+		    statement.setInt(1, usergroup.getIdUser());
+		    statement.setInt(2, usergroup.getIdGroup());
+		    rowsDeleted = statement.executeUpdate();
+			if (rowsDeleted > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return false;
     }
 
     @Override

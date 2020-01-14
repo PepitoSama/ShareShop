@@ -313,13 +313,58 @@ public class ShareShopFacade {
 	return UserGroupManager.getInstance();
     }
 
-    public UserGroup getUserGroup(User user) {
-	return UserGroupManager.getInstance().getUserGroup(user);
+    
+    public UserGroup getUserGroup(int userId, int groupId) {
+    	return UserGroupManager.getInstance().getUserGroup(userId, groupId);
     }
 
     public int getGroupId() {
-	return GroupManager.getInstance().getSelectedGroupId();
+    	return GroupManager.getInstance().getSelectedGroupId();
     }
+	
+	
+	/**
+	 * @return the id of the currently selected group
+	 */
+	public int getSelectedGroupID() {
+		groupManager = GroupManager.getInstance();
+		return this.groupManager.getSelectedGroupId();
+	}
+	
+	/**
+	 * Remove the selected user from the selected group in the in the
+	 * UserGroupManager
+	 * 
+	 * @return true if the user has been removed
+	 */
+	public boolean removeSelectedMember() {
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.removeUserGroup();
+	}
+	
+	/**
+	 * @return the users of the currently selected group
+	 */
+	public List<User> getUserbyGroupId() {
+		userGroupManager = UserGroupManager.getInstance();
+		List<Integer> users = userGroupManager.getUsersIdGroupList(getSelectedGroupID());
+		List<User> liste = userManager.getGroupUsers(users);
+		return liste;
+	}
+	
+	
+	
+	
+	
+	
+	// === LISTS METHODS ===
+
+	/**
+	 * @return the ListManager
+	 */
+	public ListManager getListManager() {
+		return ListManager.getInstance();
+	}
 
     /**
      * @return the id of the currently selected group

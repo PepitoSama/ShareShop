@@ -67,6 +67,7 @@ public class AfficherMembersController extends GridPane {
 
     private void initList() {
     	List<User> MemberList = facade.getUserbyGroupId();
+    	int groupId = facade.getSelectedGroupID();
     	memberList.getChildren().clear();
     	for (User liste : MemberList) {
     	    HBox h = new HBox();
@@ -86,7 +87,7 @@ public class AfficherMembersController extends GridPane {
     	    r.setOnAction(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent e) {
-    			UserGroup userGroup = facade.getUserGroup(liste);
+    			UserGroup userGroup = facade.getUserGroup(liste.getId(), groupId);
     		    remove(userGroup);
     		}
     	    });
@@ -147,8 +148,7 @@ public class AfficherMembersController extends GridPane {
      * @param selectedUserGroup
      */
     public void remove(UserGroup selectedUserGroup) {
-	facade.getUserGroupManager();
-	UserGroupManager.setSelected(selectedUserGroup);
+	facade.getUserGroupManager().setSelected(selectedUserGroup);
 	showConfirmation(selectedUserGroup);
     }
 
@@ -158,8 +158,7 @@ public class AfficherMembersController extends GridPane {
      * @param selectedUserGroup
      */
     public void update(UserGroup selectedUserGroup) {
-	facade.getUserGroupManager();
-	UserGroupManager.setSelected(selectedUserGroup);
+	facade.getUserGroupManager().setSelected(selectedUserGroup);
 	try {
 	    super.getChildren().clear();
 	    super.getChildren().add(new UpdateMemberController());
