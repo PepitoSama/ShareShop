@@ -273,7 +273,12 @@ public class ShareShopFacade {
 	return this.statsManager.getNumber();
     }
 
+    
+    
     // === GROUP METHODS ===
+    
+    
+    
     /**
      * Create a new group, of which the current user is a member
      *
@@ -326,11 +331,19 @@ public class ShareShopFacade {
 	return UserGroupManager.getInstance();
     }
 
-    
+    /**
+     * 
+     * @param userId
+     * @param groupId
+     * @return the UserGroup with the userId and groupId given in parameters
+     */
     public UserGroup getUserGroup(int userId, int groupId) {
     	return UserGroupManager.getInstance().getUserGroup(userId, groupId);
     }
 
+    /**
+     * @return the Selected group
+     */
     public int getGroupId() {
     	return GroupManager.getInstance().getSelectedGroupId();
     }
@@ -338,8 +351,8 @@ public class ShareShopFacade {
     /**
 	 * Create a new UserGroup
 	 *
-	 * @param memberNickname
-	 *            the name of the user we want to add
+	 * @param userId, groupId
+	 *            the userId of the user we want to add in the group with the groupId
 	 * @return true if the UserGroup has been created
 	 */
 	public boolean createUserGroup(int userId, int groupId) {
@@ -384,7 +397,11 @@ public class ShareShopFacade {
 	return liste;
     }
 
+    
+    
     // === LISTS METHODS ===
+    
+    
     /**
      * @return the ListManager
      */
@@ -486,7 +503,12 @@ public class ShareShopFacade {
 	return messageManager.sendMessage(text, this.userManager.getUser(), getGroupManager().getSelected());
     }
 
+    
+    
     // === PRODUCTS METHODS ===
+    
+    
+    
     /**
      * @return all the products in the database
      */
