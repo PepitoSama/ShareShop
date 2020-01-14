@@ -140,7 +140,7 @@ public class AfficherListController extends GridPane {
 	    Label quantity = new Label(Integer.toString(p.getQuantity()));
 	    quantity.setStyle("-fx-font-size: 24px; ");
 	    quantity.setAlignment(Pos.CENTER);
-	    Label amount = new Label(Double.toString(p.getPrice()) + " €");
+	    Label amount = new Label(Double.toString(p.getPrice()) + " â‚¬");
 	    amount.setStyle("-fx-font-size: 24px; ");
 	    amount.setAlignment(Pos.CENTER);
 	    h.setSpacing(20);
