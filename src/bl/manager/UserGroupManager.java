@@ -5,17 +5,11 @@
  */
 package bl.manager;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import model.dao.AbstractDAOFactory;
 import model.dao.Couple;
 import model.dao.DAO;
-import model.dao.StatsDAO;
-import model.domain.Group;
-import model.domain.GroupList;
-import model.domain.Stats;
 import model.domain.User;
 import model.domain.UserGroup;
 
@@ -25,13 +19,20 @@ import model.domain.UserGroup;
  */
 public class UserGroupManager {
 
-	private static UserGroupManager instance = null;
 
-	private User selected;
-
-	public User getSelected() {
+    private static UserGroupManager instance = null;
+    
+	private static UserGroup selected;
+	
+	public UserGroup getSelected() {
 		return selected;
-	}
+	    }
+	
+    public static void setSelected(UserGroup userGroup) {
+    		selected = userGroup;
+        }
+    
+
 
 	public static UserGroupManager getInstance() {
 		if (instance == null) {
@@ -53,6 +54,34 @@ public class UserGroupManager {
 		return dao.save(userGroup);
 	}
 
+    
+    public UserGroup getUserGroup(User user) {
+    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+    		for (UserGroup userGroup : dao.getAll()) {
+    	    if (userGroup.getIdUser() == user.getId()) {
+    	    	if(userGroup.getIdGroup() == this.getSelected().getIdGroup())
+    	    		return userGroup;
+    	    }
+    	}
+		return null;
+    }
+    
+    
+//    public List<Integer> getGroupId(int userId) {
+//    	DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
+//    	List<Integer> GroupId = new ArrayList<>();
+//    	for (UserGroup userGroup : dao.getAll()) {
+//    	    if (userGroup.getIdUser() == userId) {
+//    	    		GroupId.add(userGroup.getIdGroup());
+//    	    		return GroupId;
+//    	    }
+//    	}
+//		return GroupId;
+//    }
+    
+    	
+
+    
 	
 	/**
 	 * Get the list of UserGroup for the user
@@ -91,23 +120,19 @@ public class UserGroupManager {
 		return users;
 	}
 	
-	/**
-	 * Set the user selected in this manager
-	 * @param user
-	 */
-	public void setSelected(User user) {
-		this.selected = user;
-	}
+
 
 	/** 
 	 * TODO
 	 * Remove a member from the group
 	 * @return
 	 */
-	public static boolean removeMember() {
+	public static boolean removeUserGroup() {
 		DAO<UserGroup> dao = AbstractDAOFactory.getInstance().getUserGroupDAO();
 		// return dao.delete(selected);
 		return true;
 	}
+    
+
 
 }

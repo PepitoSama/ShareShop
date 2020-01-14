@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import bl.facade.ShareShopFacade;
+import bl.manager.UserGroupManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,14 +22,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.domain.GroupList;
 import model.domain.User;
+import model.domain.UserGroup;
 
 /**
  *
@@ -66,7 +66,7 @@ public class AfficherMembersController extends GridPane {
     }
 
     private void initList() {
-    	List<User> MemberList = facade.getUserbyGroupId() ;
+    	List<User> MemberList = facade.getUserbyGroupId();
     	memberList.getChildren().clear();
     	for (User liste : MemberList) {
     	    HBox h = new HBox();
@@ -86,7 +86,8 @@ public class AfficherMembersController extends GridPane {
     	    r.setOnAction(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent e) {
-    		    remove(liste);
+    			UserGroup userGroup = facade.getUserGroup(liste);
+    		    remove(userGroup);
     		}
     	    });
     	    h.setSpacing(20);
@@ -143,20 +144,22 @@ public class AfficherMembersController extends GridPane {
     /**
      * function to remove a member of the group
      *
-     * @param selectedList
+     * @param selectedUserGroup
      */
-    public void remove(User selectedUser) {
-	facade.getUserGroupManager().setSelected(selectedUser);
-	showConfirmation(selectedUser);
+    public void remove(UserGroup selectedUserGroup) {
+	facade.getUserGroupManager();
+	UserGroupManager.setSelected(selectedUserGroup);
+	showConfirmation(selectedUserGroup);
     }
 
     /**
      * function to update a member list
      *
-     * @param selectedList
+     * @param selectedUserGroup
      */
-    public void update(User selectedUser) {
-	facade.getUserGroupManager().setSelected(selectedUser);
+    public void update(UserGroup selectedUserGroup) {
+	facade.getUserGroupManager();
+	UserGroupManager.setSelected(selectedUserGroup);
 	try {
 	    super.getChildren().clear();
 	    super.getChildren().add(new UpdateMemberController());
@@ -171,27 +174,26 @@ public class AfficherMembersController extends GridPane {
      *
      * @param liste
      */
-    private void showConfirmation(User user) {
-
-	Alert alert = new Alert(AlertType.CONFIRMATION);
-	alert.setTitle("Delete List : " + user.getFistname());
-	alert.setHeaderText("Are you're sure you want to remove this User?");
-	alert.setContentText("This User will be definitly removed");
-
-	// option != null.
-	Optional<ButtonType> option = alert.showAndWait();
-	if (option.get() == null) {
-	} else if (option.get() == ButtonType.OK) {
-	    facade.removeSelectedMember();
-	    buttons.clear();
-	    initList();
-	    memberList.getChildren().clear();
-	    flButton = new FilteredList(buttons, p -> true);
-	    memberList.getChildren().addAll(flButton);
-	    memberList.setAlignment(Pos.CENTER);
-	    member.setContent(memberList);
-	}
-    }
+    private void showConfirmation(UserGroup selectedUserGroup) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Delete List : " + selectedUserGroup.getIdUser());
+		alert.setHeaderText("Are you're sure you want to remove this User?");
+		alert.setContentText("This User will be definitly removed");
+	
+		// option != null.
+		Optional<ButtonType> option = alert.showAndWait();
+		if (option.get() == null) {
+		} else if (option.get() == ButtonType.OK) {
+		    facade.removeSelectedMember();
+		    buttons.clear();
+		    initList();
+		    memberList.getChildren().clear();
+		    flButton = new FilteredList(buttons, p -> true);
+		    memberList.getChildren().addAll(flButton);
+		    memberList.setAlignment(Pos.CENTER);
+		    member.setContent(memberList);
+		}
+	    }
     
 
 
