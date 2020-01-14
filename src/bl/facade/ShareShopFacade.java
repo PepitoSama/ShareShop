@@ -170,6 +170,36 @@ public class ShareShopFacade {
 	userManager.setName(text);
     }
 
+	/**
+	 * Set the birthdate of the user
+	 * 
+	 * @param date
+	 */
+	public void setBirthdate(Date date) {
+		userManager.setBirthdate(date);
+	}
+	
+	/**
+	 * Get the user whose id is given in parameter
+	 * 
+	 * @param id
+	 *            the id of the user
+	 * @return The user if the id matches, null else
+	 */
+	public User getUserById(int id) {
+		return this.userManager.getUserById(id);
+	}
+	
+	/**
+	 * Get the user whose nickname is given in parameter
+	 * 
+	 * @param nickname
+	 *            the nickname of the user
+	 * @return The user if the nicknames matches, null else
+	 */
+	public User getUserByNickname(String nickname) {
+		return this.userManager.getUserByNickname(nickname);
+	}
     /**
      * Set the last name of the user
      *
@@ -206,24 +236,7 @@ public class ShareShopFacade {
 	userManager.setPassword(text);
     }
 
-    /**
-     * Set the birthdate of the user
-     *
-     * @param date
-     */
-    public void setBirthdate(Date date) {
-	userManager.setBirthdate(date);
-    }
 
-    /**
-     * Get the user whose id is given in parameter
-     *
-     * @param id the id of the user
-     * @return The user if the id matches, null else
-     */
-    public User getUserById(int id) {
-	return this.userManager.getUserById(id);
-    }
 
     // === STATS METHODS ===
     /**
@@ -260,7 +273,12 @@ public class ShareShopFacade {
 	return this.statsManager.getNumber();
     }
 
+    
+    
     // === GROUP METHODS ===
+    
+    
+    
     /**
      * Create a new group, of which the current user is a member
      *
@@ -313,13 +331,39 @@ public class ShareShopFacade {
 	return UserGroupManager.getInstance();
     }
 
+    /**
+     * 
+     * @param userId
+     * @param groupId
+     * @return the UserGroup with the userId and groupId given in parameters
+     */
+
     public UserGroup getUserGroup(int userId, int groupId) {
 	return UserGroupManager.getInstance().getUserGroup(userId, groupId);
     }
 
+    /**
+     * @return the Selected group
+     */
     public int getGroupId() {
-	return GroupManager.getInstance().getSelectedGroupId();
+    	return GroupManager.getInstance().getSelectedGroupId();
     }
+    
+    /**
+	 * Create a new UserGroup
+	 *
+	 * @param userId, groupId
+	 *            the userId of the user we want to add in the group with the groupId
+	 * @return true if the UserGroup has been created
+	 */
+	public boolean createUserGroup(int userId, int groupId) {
+		userGroupManager = UserGroupManager.getInstance();
+		return userGroupManager.createUserGroup(userId,groupId);
+	}
+	
+	
+	// === LISTS METHODS ===
+
 
     /**
      * @return the id of the currently selected group
@@ -350,8 +394,9 @@ public class ShareShopFacade {
 	return liste;
     }
 
-
     // === LISTS METHODS ===
+    
+    
     /**
      * @return the ListManager
      */
@@ -453,7 +498,12 @@ public class ShareShopFacade {
 	return messageManager.sendMessage(text, this.userManager.getUser(), getGroupManager().getSelected());
     }
 
+    
+    
     // === PRODUCTS METHODS ===
+    
+    
+    
     /**
      * @return all the products in the database
      */

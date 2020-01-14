@@ -75,7 +75,7 @@ public class AfficherMembersController extends GridPane {
     	    boutonGrid.setHgap(20);
     	    boutonGrid.setPadding(new Insets(20));
     	    h.setId(liste.getFistname());
-    	    Button b = new Button(liste.getFistname());
+    	    Button b = new Button(liste.getNickname());
     	    b.setId("b" + Integer.toString(liste.getId()));
     	    b.setStyle("-fx-font-size: 24px; ");
     	    b.setAlignment(Pos.CENTER);
