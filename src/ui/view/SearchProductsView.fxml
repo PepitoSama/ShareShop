@@ -53,7 +53,7 @@
                         </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
+                        <Button  fx:id="back" contentDisplay="CENTER" onAction="#back"  text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri" size="24.0" />
                            </font>
@@ -79,7 +79,7 @@
                      </content></ScrollPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <center>
-                        <Button id="lion" fx:id="select" mnemonicParsing="false" onAction="#select" stylesheets="@../../../ressources/css/buttons.css" text="Select" BorderPane.alignment="CENTER">
+                        <Button fx:id="select" mnemonicParsing="false" onAction="#select"  text="Select" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>

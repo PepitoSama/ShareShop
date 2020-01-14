@@ -40,7 +40,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button  fx:id="back" contentDisplay="CENTER" onAction="#back"  text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
                                 <Font name="Calibri" size="24.0" />
                             </font>
@@ -57,7 +57,7 @@
                         </ImageView>
                     </children>
                 </GridPane>
-                <Button id="lion" fx:id="button" mnemonicParsing="false" onAction="#add" stylesheets="@../../../ressources/css/buttons.css" text="➕ Add a list" textFill="#006b04" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button fx:id="button" mnemonicParsing="false" onAction="#add"  text="➕ Add a list" textFill="#006b04" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <font>
                         <Font name="Calibri" size="24.0" />
                     </font>

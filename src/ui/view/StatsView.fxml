@@ -44,10 +44,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button id="lion" mnemonicParsing="false" onAction="#day" prefHeight="26.0" prefWidth="95.0" stylesheets="@../../../ressources/css/buttons.css" text="Day" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button id="lion" mnemonicParsing="false" onAction="#week" prefWidth="113.0" stylesheets="@../../../ressources/css/buttons.css" text="Weekly" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button id="lion" mnemonicParsing="false" onAction="#month" stylesheets="@../../../ressources/css/buttons.css" text="Monthly" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <Button id="lion" mnemonicParsing="false" onAction="#year" stylesheets="@../../../ressources/css/buttons.css" text="Year" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <Button  mnemonicParsing="false" onAction="#day" prefHeight="26.0" prefWidth="95.0"  text="Day" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button  mnemonicParsing="false" onAction="#week" prefWidth="113.0"  text="Weekly" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button  mnemonicParsing="false" onAction="#month"  text="Monthly" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button  mnemonicParsing="false" onAction="#year"  text="Year" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                     </children>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -74,7 +74,7 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
+                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back"  text="◀ Back" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri" size="24.0" />
                            </font>

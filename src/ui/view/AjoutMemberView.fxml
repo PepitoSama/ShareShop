@@ -37,7 +37,7 @@
 	               <children>
 	                  <BorderPane prefHeight="200.0" prefWidth="200.0">
 	                     <center>
-	                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" BorderPane.alignment="CENTER">
+	                        <Button  fx:id="back" contentDisplay="CENTER" onAction="#back" text="◀ Back" BorderPane.alignment="CENTER">
 	                           <font>
 	                              <Font name="Calibri" size="24.0" />
 	                           </font>
@@ -75,7 +75,7 @@
 	               <children>
 	                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
 	                     <center>
-	                        <Button id="lion" mnemonicParsing="false" onAction="#addMember" prefHeight="34.0" prefWidth="127.0" stylesheets="@../../../ressources/css/buttons.css" text="Add" textFill="#00680e" BorderPane.alignment="CENTER">
+	                        <Button mnemonicParsing="false" onAction="#addMember" prefHeight="34.0" prefWidth="127.0"  text="Add" textFill="#00680e" BorderPane.alignment="CENTER">
 	                           <font>
 	                              <Font name="System Bold" size="23.0" />
 	                           </font>

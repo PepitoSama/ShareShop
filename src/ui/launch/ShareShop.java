@@ -30,7 +30,7 @@ public class ShareShop extends Application {
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);
 	    stage.show();
-	    scene.getStylesheets().add("../../../ressources/css/button.css");
+	    scene.getStylesheets().add("/ressources/css/buttons.css");
 	    stage.setTitle("ShareShop");
 	} catch (Exception e) {
 	    e.printStackTrace();

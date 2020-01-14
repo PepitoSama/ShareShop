@@ -115,7 +115,7 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <center>
-                              <Button id="lion" fx:id="log" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginb" stylesheets="@../../../ressources/css/buttons.css" text="Login" BorderPane.alignment="CENTER">
+                              <Button fx:id="log" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginb"  text="Login" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -124,7 +124,7 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                            <center>
-                              <Button id="lion" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#register" stylesheets="@../../../ressources/css/buttons.css" text="Register" BorderPane.alignment="CENTER">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#register"  text="Register" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

@@ -45,7 +45,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button id="lion" fx:id="back" contentDisplay="CENTER" onAction="#back" stylesheets="@../../../ressources/css/buttons.css" text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="back" contentDisplay="CENTER" onAction="#back"  text="◀ Back" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
                                 <Font name="Calibri" size="24.0" />
                             </font>
@@ -57,7 +57,7 @@
                         </Label>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <center>
-                        <Button id="lion" fx:id="add1" contentDisplay="CENTER" onAction="#addProduct" prefHeight="26.0" prefWidth="145.0" stylesheets="@../../../ressources/css/buttons.css" text="New Product" BorderPane.alignment="CENTER">
+                        <Button  fx:id="add1" contentDisplay="CENTER" onAction="#addProduct" prefHeight="26.0" prefWidth="145.0"  text="New Product" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
@@ -122,7 +122,7 @@
                         </ScrollPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <center>
-                              <Button id="lion" fx:id="add" contentDisplay="CENTER" onAction="#addProduct" prefHeight="26.0" prefWidth="183.0" stylesheets="@../../../ressources/css/buttons.css" text="🔎 Search product" BorderPane.alignment="CENTER">
+                              <Button  fx:id="add" contentDisplay="CENTER" onAction="#addProduct" prefHeight="26.0" prefWidth="183.0"  text="🔎 Search product" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="Calibri Bold" size="15.0" />
                                  </font>
