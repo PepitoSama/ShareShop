@@ -359,6 +359,16 @@ public class ShareShopFacade {
 	public UserGroupManager getUserGroupManager() {
 		return UserGroupManager.getInstance();
 	}
+
+
+    
+    public UserGroup getUserGroup(User user) {
+    	return UserGroupManager.getInstance().getUserGroup(user);
+    }
+    
+    public int getGroupId() {
+    	return GroupManager.getInstance().getSelectedGroupId();
+    }
 	
 	
 	/**
@@ -376,7 +386,7 @@ public class ShareShopFacade {
 	 * @return true if the user has been removed
 	 */
 	public boolean removeSelectedMember() {
-		return UserGroupManager.removeMember();
+		return UserGroupManager.removeUserGroup();
 	}
 	
 	/**
@@ -497,7 +507,7 @@ public class ShareShopFacade {
 		this.getMessageManager().setSelected(this.groupManager.getSelected());
 	}
 	
-	/**
+    /**
 	 * Send a message to the current group
 	 * 
 	 * @param text
@@ -508,10 +518,6 @@ public class ShareShopFacade {
 		return messageManager.sendMessage(text, this.userManager.getUser(), getGroupManager().getSelected());
 	}
 
-
-
-	
-	
 	
 	
 	// === PRODUCTS METHODS ===
