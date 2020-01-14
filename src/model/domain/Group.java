@@ -10,45 +10,52 @@ public class Group {
     private int id;
     private String groupName;
     private List<GeneralProduct> favoriteList;
+    private List<GeneralProduct> suggestList;
 
     public Group(int idGroup, String groupName) {
-        this.groupName = groupName;
-        this.id = idGroup;
-        setFavoriteList(new ArrayList<>());
+	this.groupName = groupName;
+	this.id = idGroup;
+	setFavoriteList(new ArrayList<>());
     }
 
     public Group(String groupName) {
-        this.groupName = groupName;
+	this.groupName = groupName;
     }
 
     public void setGroupName(String groupName) {
-        this.groupName = groupName;
+	this.groupName = groupName;
     }
 
     public String getGroupName() {
-        return this.groupName;
+	return this.groupName;
     }
 
     public void setId(int id) {
-        this.id = id;
+	this.id = id;
     }
 
     public int getId() {
-        return this.id;
+	return this.id;
     }
 
     public String toString() {
-        return "Group name : " + groupName;
+	return "Group name : " + groupName;
     }
 
-	public List<GeneralProduct> getFavoriteList() {
-		return favoriteList;
-	}
+    public List<GeneralProduct> getFavoriteList() {
+	return favoriteList;
+    }
 
-	public void setFavoriteList(List<GeneralProduct> favoriteList) {
-		this.favoriteList = favoriteList;
-	}
-    
-    
-    
+    public void setFavoriteList(List<GeneralProduct> favoriteList) {
+	this.favoriteList = favoriteList;
+    }
+
+    public void setSuggestList(List<GeneralProduct> suggest) {
+	this.suggestList = suggest;
+    }
+
+    public List<GeneralProduct> getSuggestList() {
+	return this.suggestList;
+    }
+
 }

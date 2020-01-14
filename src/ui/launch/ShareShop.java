@@ -23,28 +23,28 @@ import javafx.stage.Stage;
  */
 public class ShareShop extends Application {
 
-	@Override
-	public void start(Stage stage) throws Exception {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("../view/MainView.fxml"));
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-            stage.setTitle("ShareShop");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
+    @Override
+    public void start(Stage stage) throws Exception {
+	try {
+	    Parent root = FXMLLoader.load(getClass().getResource("../view/MainView.fxml"));
+	    Scene scene = new Scene(root);
+	    stage.setScene(scene);
+	    stage.show();
+	    scene.getStylesheets().add("../../../ressources/css/button.css");
+	    stage.setTitle("ShareShop");
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String[] args) {
+    }
 
-		launch(args);
-		
-	}
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+	launch(args);
+
+    }
 
 }

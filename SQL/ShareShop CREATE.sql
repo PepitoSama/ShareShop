@@ -13,8 +13,7 @@ DROP TABLE IF EXISTS `Product`;
 DROP TABLE IF EXISTS `User`;
 DROP TABLE IF EXISTS `Group`;
 DROP TABLE IF EXISTS `Image`;
-
-
+DROP TABLE IF EXISTS `SuggestProductList`;
 
 -- phpMyAdmin SQL Dump
 -- version 4.6.6deb5
@@ -253,6 +252,15 @@ CREATE TABLE IF NOT EXISTS `UserGroup` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Structure de la table `SuggestProductList`
+--
+CREATE TABLE `SuggestProductList` (
+  `idGroup` int(10) NOT NULL,
+  `idProduct` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
 -- Contraintes pour les tables exportées
 --
 
@@ -328,6 +336,25 @@ ALTER TABLE `UserDebt`
 ALTER TABLE `UserGroup`
   ADD CONSTRAINT `UserGroup_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`),
   ADD CONSTRAINT `UserGroup_ibfk_2` FOREIGN KEY (`idGroup`) REFERENCES `Group` (`idGroup`);
+
+  --
+-- Index pour la table `SuggestProductList`
+--
+ALTER TABLE `SuggestProductList`
+  ADD PRIMARY KEY (`idGroup`,`idProduct`),
+  ADD KEY `Fk_prod` (`idProduct`),
+  ADD KEY `idGroup` (`idGroup`);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `SuggestProductList`
+--
+ALTER TABLE `SuggestProductList`
+  ADD CONSTRAINT `SuggestProductList_ibfk_1` FOREIGN KEY (`idProduct`) REFERENCES `Product` (`idProduct`),
+  ADD CONSTRAINT `Fk_group_Suggest` FOREIGN KEY (`idGroup`) REFERENCES `Group` (`idGroup`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

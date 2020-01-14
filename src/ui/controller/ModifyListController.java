@@ -44,7 +44,11 @@ public class ModifyListController extends GridPane {
     @FXML
     private ScrollPane favoris;
 
+    @FXML
+    private ScrollPane suggest;
+
     private VBox favorits;
+    private VBox suggests;
 
     /**
      * ModifyListController constructor Display view ModifyShopListView in the
@@ -61,6 +65,7 @@ public class ModifyListController extends GridPane {
 	shopListe = new VBox();
 	initList();
 	initFavorits();
+	initSuggests();
     }
 
     private void initList() {
@@ -192,8 +197,34 @@ public class ModifyListController extends GridPane {
 	}
 	favoris.setContent(favorits);
     }
-    
-    private void add(GeneralProduct p){
+
+    private void initSuggests() {
+	List<GeneralProduct> products = facade.getSuggest();
+	suggests = new VBox();
+	for (GeneralProduct p : products) {
+	    GridPane h = new GridPane();
+
+	    ColumnConstraints column1 = new ColumnConstraints();
+	    column1.setPercentWidth(80);
+	    h.getColumnConstraints().add(column1);
+
+	    h.setId(p.getIdProduct() + "");
+
+	    Button name = new Button(p.getName());
+	    name.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+		    add(p);
+		}
+	    });
+	    h.add(name, 0, 0);
+	    h.setPrefWidth(suggests.getPrefWidth());
+	    suggests.getChildren().add(h);
+	}
+	suggest.setContent(suggests);
+    }
+
+    private void add(GeneralProduct p) {
 	List<GeneralProduct> liste = new ArrayList<>();
 	liste.add(p);
 	facade.addProductsToShopList(liste);
