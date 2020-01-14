@@ -217,10 +217,7 @@ public class ShareShopFacade {
 	public void setMessageSelected() {
 		this.getMessageManager().setSelected(this.groupManager.getSelected());
 	}
-s
-    public boolean removeSelectedList() {
-    	return listManager.removeList();
-    }
+	
     
     public boolean removeSelectedMember() {
     	return UserGroupManager.removeUserGroup();
@@ -249,16 +246,9 @@ s
 		return listManager.removeList();
 	}
 	
-    public boolean removeSelectedMember() {
-    	return UserGroupManager.removeMember();
-    }
+    
 
-	/**
-	 * @return all the products in the database
-	 */
-	public List<GeneralProduct> getAllProducts() {
-		return null;
-	}
+	
 
 	/**
 	 * Add a Custom product. This product will be linked to the currently selected
